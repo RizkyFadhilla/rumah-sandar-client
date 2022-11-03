@@ -1,5 +1,5 @@
 import './App.css';
-import { createBrowserRouter, redirect, RouterProvider} from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 import router from './route';
 
 function App() {
