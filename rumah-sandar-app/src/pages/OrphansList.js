@@ -26,11 +26,11 @@ const data = [
 ]
 
 export default function OrphansList() {
-    const [smShow, setSmShow] = useState(false);
+    const [lgShow, setLgShow] = useState(false);
     
     return (
         <Container>
-        <Table striped bordered hover size="sm">
+        <Table striped bordered hover size="sm" className='text-center mt-5'>
       <thead>
         <tr>
           <th>No</th>
@@ -47,7 +47,7 @@ export default function OrphansList() {
                     <td>{el.name}</td>
                     <td>{el.email}</td>
                     <td>
-                        <Button onClick={() => setSmShow(true)}>
+                        <Button onClick={() => setLgShow(true)}>
                             Choose
                         </Button>
                     </td>
@@ -56,7 +56,7 @@ export default function OrphansList() {
             })}
       </tbody>
     </Table>
-    <ModalChooseDate smShow={smShow}  setSmShow={setSmShow}/>
+    <ModalChooseDate lgShow={lgShow}  setLgShow={setLgShow}/>
     </Container>
     )
 }
