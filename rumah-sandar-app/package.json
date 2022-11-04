@@ -7,6 +7,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "agora-chat-uikit": "^1.0.7",
+    "agora-rtc-sdk-ng": "^4.14.2",
+    "agora-rtm-sdk": "^1.6.0-204",
     "bootstrap": "^5.2.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -16,6 +19,7 @@
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "talkjs": "^0.15.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
