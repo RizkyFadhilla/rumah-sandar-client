@@ -1,16 +1,27 @@
-import {createBrowserRouter} from 'react-router-dom'  
-import LandingPage from '../pages/LandingPages'
-import OrphansList from '../pages/OrphansList'
+import { createBrowserRouter } from 'react-router-dom';
+import LandingPage from '../pages/LandingPages';
+import Layout from '../pages/Layout';
+import Login from '../pages/Login';
+import OrphansList from '../pages/OrphansList';
 
-const router =  createBrowserRouter([
-    {
+const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    element: <Layout />,
+    children: [
+      {
         path: '/',
-        element: <LandingPage/>
-    },
-    {
+        element: <LandingPage />,
+      },
+      {
         path: '/orphansList',
-        element: <OrphansList/>
-    }
-])
+        element: <OrphansList />,
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;

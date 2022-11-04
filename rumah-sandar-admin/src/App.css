@@ -1,0 +1,58 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.form {
+  width: 700px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: #dfe6e9 ;
+}
+
+.form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color: rgb(34, 34, 34);
+  font-weight: 500;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.styled-table {
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-collapse: collapse;
+  border-radius: 0.7em;
+  overflow: hidden;
+}
+
+.styled-table thead tr {
+  background-color: #ffbe76;
+  color: #ffffff;
+  text-align: left;
+}
