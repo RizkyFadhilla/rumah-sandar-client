@@ -1,0 +1,18 @@
+import { Container, Nav, Navbar } from 'react-bootstrap';
+
+const HeaderNavbar = () => {
+  return (
+    <Navbar bg="light" variant="light">
+      <Container>
+        <Navbar.Brand href="#home">Rumah Sandar</Navbar.Brand>
+        <Nav className="">
+          <Nav.Link href="#home">Donasi</Nav.Link>
+          <Nav.Link href="#features">Register</Nav.Link>
+          <Nav.Link href="#pricing">Login</Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
+  );
+};
+
+export default HeaderNavbar;

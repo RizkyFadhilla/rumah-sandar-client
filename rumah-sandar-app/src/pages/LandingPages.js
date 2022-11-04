@@ -1,6 +1,13 @@
+import ContentLandingPage from '../components/ContentLandingPage';
+import CardContent from '../components/CardContent';
 
-export default function LandingPage() {
-    return (
-        <h1>AYOK BISA YUK BISA  --- LANDING PAGE</h1>
-    )
-}
+const LandingPage = () => {
+  return (
+    <>
+        <ContentLandingPage/>
+        <CardContent/>
+    </>
+  )
+};
+
+export default LandingPage;
