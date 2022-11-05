@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const APP_ID = "78fd29108df5426ca80b601699bb8434";
 const TOKEN =
-  "007eJxTYPCqY/K+vftf0L3mTy9ajk75sCZe6/Be5+dqpdeLjstv3DtDgcHcIi3FyNLQwCIlzdTEyCw50cIgyczA0MzSMinJwsTYZMfMlOSGQEaGXpXFLIwMEAjiszI45yQWFzMwAABU1yJC";
+  "007eJxTYCj7MDHoQfXFb28iKn/PbRfN+HBVfCJj9BXFxZsX7Jw1neeKAoO5RVqKkaWhgUVKmqmJkVlyooVBkpmBoZmlZVKShYmxyc5fqckNgYwMy+7VMTEyQCCIz8rgnJNYXMzAAABe/yLh";
 const CHANNEL = "Class";
 
 //untuk konek ke roomnya
@@ -25,17 +25,22 @@ export default function VideoRoom(props) {
   const [uid, setUid] = useState([])
 
 
-  function closeRoom(event) {
+   async function closeRoom(event) {
     event.preventDefault();
 
     for (let localTrack of localTracks) {
       localTrack.stop();
       localTrack.close();
     }
+
     client.off("user-published", handleUserJoined);
     client.off("user-left", handleUserLeft);
-    client.unpublish(tracks);
-    setJoined(false).then(() => client.leave()).then(() => navigate('/') );
+    await client.unpublish(tracks);
+    await setJoined(false)
+    await client.leave()
+    // .then(() => client.leave())
+    
+    navigate('/')
   }
 
   const handleUserJoined = async (user, mediaType) => {

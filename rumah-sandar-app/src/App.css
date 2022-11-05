@@ -3,3 +3,29 @@
   font-weight: 600;
   color: rgb(34, 34, 34);
 }
+
+.highlight {
+  font-weight: bolder;
+  color: #ffffff;
+  background: #ff5e57 !important ;
+}
+
+.react-calendar {
+  width: 1000px !important ;
+  background: #f1f2f6 !important;
+  border-radius: 20px !important;
+}
+
+.react-calendar__month-view__weekdays {
+  font-size: 1.25em !important;
+}
+
+.react-calendar__tile {
+  font-size: 1.5em !important;
+  margin-bottom: 15px !important;
+}
+
+.react-calendar__navigation button {
+  font-size: 1.25em !important;
+  font-weight: bold;
+}
