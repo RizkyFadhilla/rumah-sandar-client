@@ -26,39 +26,6 @@ const data = [
 ];
 
 export default function OrphansList() {
-<<<<<<< HEAD
-    const [lgShow, setLgShow] = useState(false);
-    
-    return (
-        <Container>
-        <Table striped bordered hover size="sm" className='text-center mt-5'>
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Nama Adik</th>
-          <th>Email</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-            {data.map((el, index) => {
-                return (
-                    <tr key={index}>
-                    <td>{index+1}</td>
-                    <td>{el.name}</td>
-                    <td>{el.email}</td>
-                    <td>
-                        <Button onClick={() => setLgShow(true)}>
-                            Choose
-                        </Button>
-                    </td>
-                    </tr>
-                )
-            })}
-      </tbody>
-    </Table>
-    <ModalChooseDate lgShow={lgShow}  setLgShow={setLgShow}/>
-=======
   const [smShow, setSmShow] = useState(false);
 
   return (
@@ -88,7 +55,6 @@ export default function OrphansList() {
         </tbody>
       </Table>
       <ModalChooseDate smShow={smShow} setSmShow={setSmShow} />
->>>>>>> Layouting-Arya
     </Container>
   );
 }
