@@ -12,7 +12,6 @@ export default function Class() {
     // const { Joined } = state
     const [Joined, setJoined] = useState(false)
     
-    // console.log(Joined , 'INI JOINED DI CLASS SETELAH DARI SCHEDULE')
     useEffect(() => {
         setJoined(true)
     }, [])
