@@ -22,28 +22,26 @@ export default function Class() {
       <div className="row mt-5">
         <div className="col-8">
             {Joined && <VideoRoom Joined={Joined} setJoined={setJoined}/>}
-
-
         </div>
         <div className="col-4">
-          <div className="p-5" style={{backgroundColor: '#FAD390', marginBottom:30, borderRadius:30}}>
-            <div style={{backgroundColor: '#F5F6FA', textAlign:'center', borderRadius:20}}>
-            <h1>Nama Kelas</h1> 
+          <div className="p-3" style={{backgroundColor: '#dfe4ea', marginBottom:20, borderRadius:15}}>
+            <div style={{backgroundColor: '#F5F6FA', textAlign:'center', borderRadius:10}}>
+            <h3>Nama Kelas</h3> 
             </div>
             <div style={{display :'flex', alignContent:'center', marginTop:20}}>
                 <div>
-                    <Image src={photoKakak} width={50} height={50} style={{borderRadius: 100}} />
+                    <Image src={photoKakak} width={40} height={40} style={{borderRadius: 100}} />
                 </div>
                 <div style={{alignSelf:'center', marginLeft: 10}}>
-                    <h4>Nama kakak</h4>
+                    <h5>Nama kakak</h5>
                 </div>
             </div>
             <div style={{display :'flex', alignContent:'center', marginTop:20}}>
                 <div>
-                    <Image src={photoAdik} width={50} height={50} style={{borderRadius: 100}} />
+                    <Image src={photoAdik} width={40} height={40} style={{borderRadius: 100}} />
                 </div>
                 <div style={{alignSelf:'center', marginLeft: 10}}>
-                    <h4>Nama Adik</h4>
+                    <h5>Nama Adik</h5>
                 </div>
             </div>
           </div>

@@ -3,6 +3,8 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 import { useNavigate } from "react-router-dom";
+import {Button} from 'react-bootstrap'
+import {XCircle} from 'react-bootstrap-icons'
 
 const APP_ID = "78fd29108df5426ca80b601699bb8434";
 const TOKEN =
@@ -105,7 +107,7 @@ export default function VideoRoom(props) {
         })}
       </div>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 15 }}>
-        <button onClick={(event) => closeRoom(event)}> Close Room</button>
+        <Button variant="danger" onClick={(event) => closeRoom(event)}>Akhiri Kelas <XCircle/></Button>
       </div>
     </>
   );

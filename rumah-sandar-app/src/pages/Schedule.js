@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import Calendar from "react-calendar";  
 import { useNavigate } from "react-router-dom";
 import VideoRoom from "./VideoRoom";
+import { ArrowBarRight } from "react-bootstrap-icons";
 
 export default function Schedule() {
   const navigate = useNavigate()
@@ -43,7 +44,7 @@ export default function Schedule() {
           />
         </div>
         <div>
-          <button onClick={() => navigate('/class')}>Go to class</button>
+          <Button onClick={() => navigate('/class')} className='mt-3'>Pergi ke kelas <ArrowBarRight/></Button>
           {Joined && <VideoRoom Joined={Joined} setJoined={setJoined}/>}
         </div>
       </Container>
