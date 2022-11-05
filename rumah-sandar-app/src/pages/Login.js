@@ -1,5 +1,5 @@
 import { Container, Form, Button, Card } from 'react-bootstrap';
-import {ArrowBarRight} from 'react-bootstrap-icons'
+// import {ArrowBarRight} from 'react-bootstrap-icons'
 
 const Login = () => {
   return (
@@ -19,7 +19,7 @@ const Login = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
             <Button variant="primary" type="submit">
-              Submit <ArrowBarRight/>
+              Submit 
             </Button>
           </Form>
         </Card.Body>

@@ -4,12 +4,17 @@ import LandingPage from '../pages/LandingPages';
 import Layout from '../pages/Layout';
 import Login from '../pages/Login';
 import OrphansList from '../pages/OrphansList';
-import Schedule from '../pages/Schedule';
+import Register from '../pages/Register';
+import Schedule from '../pages/Schedule'
 
 const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register/>
   },
   {
     element: <Layout />,
