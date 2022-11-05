@@ -1,25 +1,25 @@
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
-const CardContent = () => {
+const CardPanti = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5000/donations')
+    fetch('http://localhost:5000/orphanages')
       .then((response) => response.json())
       .then((data) => setData(data));
-  })
+  });
   return (
-    <Container className="mb-5">
-      <h2>Donasi</h2>
-      <Row>
+    <Container>
+      <h2>Panti Asuhan</h2>
+      <Row className="mt-3">
         {data.map((e) => {
           return (
             <Col>
               <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={e.imgUrl} />
+                <Card.Img variant="top" src={e.imageUrl} />
                 <Card.Body>
                   <Card.Title>{e.name}</Card.Title>
-                  <Card.Text>{e.on_demand_link}</Card.Text>
+                  <Card.Text>{e.personInCharge}</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -30,4 +30,4 @@ const CardContent = () => {
   );
 };
 
-export default CardContent;
+export default CardPanti;
