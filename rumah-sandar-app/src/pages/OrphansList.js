@@ -1,29 +1,29 @@
 import { useState } from 'react';
-import { Button, Container, Table } from 'react-bootstrap'
+import { Button, Container, Table } from 'react-bootstrap';
 import ModalChooseDate from '../components/ModalChooseDate';
 
 const data = [
-    {
-        name: 'Arya Yudha',
-        email: 'arya@gmail.com',
-    },
-    {
-        name: 'Lanny',
-        email: 'lanny@gmail.com',
-    },
-    {
-        name: 'Muhammad Fachrul',
-        email: 'fachrul@gmail.com',
-    },
-    {
-        name: 'Wandi',
-        email: 'wandi@gmail.com',
-    },
-    {
-        name: 'Rizky Fadhillah',
-        email: 'rizky@gmail.com',
-    }
-]
+  {
+    name: 'Arya Yudha',
+    email: 'arya@gmail.com',
+  },
+  {
+    name: 'Lanny',
+    email: 'lanny@gmail.com',
+  },
+  {
+    name: 'Muhammad Fachrul',
+    email: 'fachrul@gmail.com',
+  },
+  {
+    name: 'Wandi',
+    email: 'wandi@gmail.com',
+  },
+  {
+    name: 'Rizky Fadhillah',
+    email: 'rizky@gmail.com',
+  },
+];
 
 export default function OrphansList() {
     const [lgShow, setLgShow] = useState(false);
@@ -58,5 +58,5 @@ export default function OrphansList() {
     </Table>
     <ModalChooseDate lgShow={lgShow}  setLgShow={setLgShow}/>
     </Container>
-    )
+  );
 }

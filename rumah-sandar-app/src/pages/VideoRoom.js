@@ -2,6 +2,7 @@ import React from "react";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 import VideoPlayer from "./VideoPlayer";
+import { useNavigate } from "react-router-dom";
 
 const APP_ID = "78fd29108df5426ca80b601699bb8434";
 const TOKEN =
@@ -16,18 +17,13 @@ const client = AgoraRTC.createClient({
 
 export default function VideoRoom(props) {
   const { Joined, setJoined } = props;
+  const navigate = useNavigate()
 
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
   let [tracks, setTracks] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([])
   const [uid, setUid] = useState([])
 
-//   setFilteredUsers() 
-
-  function filterUser(user){
-    return user.uid !== uid
-  }
 
   function closeRoom(event) {
     event.preventDefault();
@@ -39,7 +35,7 @@ export default function VideoRoom(props) {
     client.off("user-published", handleUserJoined);
     client.off("user-left", handleUserLeft);
     client.unpublish(tracks);
-    setJoined(false).then(() => client.leave());
+    setJoined(false).then(() => client.leave()).then(() => navigate('/') );
   }
 
   const handleUserJoined = async (user, mediaType) => {
@@ -95,16 +91,17 @@ export default function VideoRoom(props) {
     console.log(uid, 'INI UID STATE')
     return (
     <>
-      <h1>ini video room</h1>
       <div style={{ display: "flex", justifyContent: "center" }}>
 
-        {users.filter(user => user.uid !== uid).map((user) => {
-            
-          return (
-            <>
-              <VideoPlayer key={user.uid} user={user} />
-            </>
-          );
+      {/* {users.filter(user => user.uid !== uid).map((user) => { */} 
+      {/* INI KALO MAU DI TAMPILIN LAYAR LAWAN BICARANYA AJA, LAYAR KITA GAK TAMPIL */}
+
+        {users.map((user) => { 
+          if(user.uid === uid) {
+            return ( <VideoPlayer key={user.uid} user={user} style={{ width: "200px", height: "300px", marginRight: '20px', borderRadius:'10px' }} /> )
+          } else {
+            return ( <VideoPlayer key={user.uid} user={user} style={{ width: "800px", height: "900px", marginRight: '20px', borderRadius:'10px' }} /> )
+          }    
         })}
       </div>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 15 }}>
