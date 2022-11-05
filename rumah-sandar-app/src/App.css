@@ -16,3 +16,9 @@
 .App-link {
   color: #61dafb;
 }
+
+.highlight {
+  font-weight: 900;
+  background-color: #82ccdd;
+  color: #0c2461;
+}
