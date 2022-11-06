@@ -8,7 +8,7 @@ import {XCircle} from 'react-bootstrap-icons'
 
 const APP_ID = "78fd29108df5426ca80b601699bb8434";
 const TOKEN =
-  "007eJxTYCj7MDHoQfXFb28iKn/PbRfN+HBVfCJj9BXFxZsX7Jw1neeKAoO5RVqKkaWhgUVKmqmJkVlyooVBkpmBoZmlZVKShYmxyc5fqckNgYwMy+7VMTEyQCCIz8rgnJNYXMzAAABe/yLh";
+  "007eJxTYODJjDHnvKFpPeHxzO5Kc3PDt1eslx2r6bT7oHdo6baeDyUKDOYWaSlGloYGFilppiZGZsmJFgZJZgaGZpaWSUkWJsYmITnpyQ2BjAwv5lcyMjJAIIjPyuCck1hczMAAAEUKH30=";
 const CHANNEL = "Class";
 
 //untuk konek ke roomnya
@@ -102,7 +102,7 @@ export default function VideoRoom(props) {
 
         {users.map((user) => { 
           if(user.uid === uid && users.length > 1) {
-            return ( <VideoPlayer key={user.uid} user={user} style={{ width: "200px", height: "300px", marginRight: '20px', borderRadius:'10px', position: 'absolute', top: 30, left : 50, zIndex:100, borderRadius: 10 }} /> )
+            return ( <VideoPlayer key={user.uid} user={user} style={{ width: "200px", height: "250px", marginRight: '20px', borderRadius:'10px', position: 'absolute', top: 30, left : 50, zIndex:100, borderRadius: 10 }} /> )
           } else {
             return ( <VideoPlayer key={user.uid} user={user} style={{ width: "800px", height: "800px", marginRight: '20px', borderRadius:'10px'}} /> )
           }    
