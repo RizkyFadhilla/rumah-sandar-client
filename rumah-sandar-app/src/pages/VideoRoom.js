@@ -100,9 +100,6 @@ export default function VideoRoom(props) {
     <>
       <div style={{ display: "flex", justifyContent: "center", position : 'relative'}}>
 
-      {/* {users.filter(user => user.uid !== uid).map((user) => { */} 
-      {/* INI KALO MAU DI TAMPILIN LAYAR LAWAN BICARANYA AJA, LAYAR KITA GAK TAMPIL */}
-
         {users.map((user) => { 
           if(user.uid === uid && users.length > 1) {
             return ( <VideoPlayer key={user.uid} user={user} style={{ width: "200px", height: "300px", marginRight: '20px', borderRadius:'10px', position: 'absolute', top: 30, left : 50, zIndex:100, borderRadius: 10 }} /> )
@@ -110,6 +107,7 @@ export default function VideoRoom(props) {
             return ( <VideoPlayer key={user.uid} user={user} style={{ width: "800px", height: "800px", marginRight: '20px', borderRadius:'10px'}} /> )
           }    
         })}
+        
       </div>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 15 }}>
         <Button variant="danger" onClick={(event) => closeRoom(event)}>Akhiri Kelas <XCircle/></Button>
