@@ -3,15 +3,14 @@ import { Container } from "react-bootstrap";
 import Calendar from "react-calendar";
 import { useNavigate } from "react-router-dom";
 import VideoRoom from "./VideoRoom";
-// import { ArrowBarRight } from "react-bootstrap-icons";
 
 export default function Schedule() {
   const navigate = useNavigate();
 
   const [value, onChange] = useState(new Date());
   const [Joined, setJoined] = useState(false);
-
-  const classSchedules = ["2022-11-04", "2022-11-11"]; //yy-mm-dd
+  const classSchedules = ["2022-11-06", "2022-11-11"]; //yy-mm-dd
+  const today = JSON.stringify(new Date()).substring(1, 11)
 
   return (
     <>
@@ -36,7 +35,7 @@ export default function Schedule() {
                   }
 
                   const realDate = date.getFullYear() + "-" + month + "-" + day;
-                  console.log(realDate, "ini real datenya");
+
                   if (
                     classSchedules.find((schedule) => schedule === realDate)
                   ) {
@@ -45,7 +44,11 @@ export default function Schedule() {
                 }}
               />
             <div>
-              <button onClick={() => navigate("/class")}>Go to class</button>
+              {classSchedules.map((schedule) => {
+                if(schedule == today) {
+                  return (<button onClick={() => navigate("/class")}>Go to class</button>)
+                }
+              })}
               {Joined && <VideoRoom Joined={Joined} setJoined={setJoined} />}
             </div>
             </div>
