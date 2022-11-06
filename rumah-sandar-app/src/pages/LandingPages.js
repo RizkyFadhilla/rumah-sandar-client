@@ -1,15 +1,17 @@
 import ContentLandingPage from '../components/ContentLandingPage';
 import CardContent from '../components/CardContent';
 import CardPanti from '../components/CardPanti';
+import HeaderNavbar from '../components/HeaderNavbar';
 
 const LandingPage = () => {
   return (
     <>
-        <ContentLandingPage/>
-        <CardContent/>
-        <CardPanti/>
+      <HeaderNavbar />
+      <ContentLandingPage />
+      <CardContent />
+      <CardPanti />
     </>
-  )
+  );
 };
 
 export default LandingPage;
