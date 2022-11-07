@@ -9,14 +9,17 @@ const initialState = {
   dataDonation: [],
   dataOrphanages: [],
   dataClassCategories: [],
+  dataOrphan: [],
 };
 
 export const submitLoginVolunteer = createAsyncThunk(
   "submitFormLoginVolunteer",
   async (input) => {
     try {
+      console.log(input)
       const response = await fetch(
-        "https://rumah-sandar.herokuapp.com/volunteer/login",
+        "http://localhost:3000/volunteer/login",
+        // "https://rumah-sandar.herokuapp.com/volunteer/login",
         {
           method: "POST",
           headers: {
@@ -35,11 +38,10 @@ export const submitLoginVolunteer = createAsyncThunk(
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("username", data.sendData.fullName);
       localStorage.setItem("role", data.sendData.role);
-      localStorage.setItem("image", data.sendData.imageUrl)
-      localStorage.setItem('isMatched', data.sendData.isMatched)
-
+      localStorage.setItem("image", data.sendData.imageUrl);
+      localStorage.setItem("isMatched", data.sendData.isMatched);
+      console.log(data);
       return data;
-
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +74,7 @@ export const submitLoginOrphan = createAsyncThunk(
   async (input) => {
     const response = await fetch(
       "https://rumah-sandar.herokuapp.com/orphan/login",
+
       {
         method: "POST",
         headers: {
@@ -158,31 +161,52 @@ export const fetchClassCategories = createAsyncThunk(
 );
 
 export const notMatchedOrphan = createAsyncThunk(
-  'notMatchedOrphan',
+  "notMatchedOrphan",
   async () => {
     try {
-      const response = await fetch("https://rumah-sandar.herokuapp.com/")
-    } catch (error) {
-      
-    }
+      const response = await fetch("https://rumah-sandar.herokuapp.com/");
+    } catch (error) {}
   }
-)
+);
+
+export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
+  try {
+    const response = await fetch(
+      // "https://rumah-sandar.herokuapp.com/payment/donations",
+      "http://localhost:3000/match",
+      {
+        method: "GET",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      }
+    );
+    if (!response.ok) {
+      throw await response.text();
+    }
+    const data = await response.json();
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   //ini di set kalau createasyncthunk yang dibuat adalah sebuah action yang sifatnya akan mengeset state di store (FETCHING/GET)
   extraReducers: {
     [classUser.pending]: (state) => {
       state.isLoading = true;
     },
-    [classUser.fulfilled]: (state, action) => {  
+    [classUser.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.userClasses = action.payload; 
+      state.userClasses = action.payload;
     },
     [classUser.rejected]: (state, action) => {
       state.isLoading = false;
@@ -215,6 +239,16 @@ export const userSlice = createSlice({
       state.dataClassCategories = action.payload;
     },
     [fetchClassCategories.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [fetchOrphan.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchOrphan.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dataOrphan = action.payload;
+    },
+    [fetchOrphan.rejected]: (state) => {
       state.isLoading = false;
     },
   },
