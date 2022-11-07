@@ -49,8 +49,8 @@ const router = createBrowserRouter([
         path: '/orphansList',
         element: <OrphansList />,
         loader: () => {
-          const match = localStorage.getItem('match')
-          if(match){
+          const isMatch = localStorage.getItem('isMatch')
+          if(isMatch){
             throw redirect('/')
           }
         }

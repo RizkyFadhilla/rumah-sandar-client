@@ -1,5 +1,34 @@
 body {
   font-family: 'Source Sans Pro', sans-serif !important;
+  background-color: #FFF8EE !important;
+}
+
+.container{
+  width: 1200px !important;
+}
+
+.content-landing{
+  /* background-color: #ffbf69; */
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px !important;
+  border: 1px silver solid;
+}
+
+.content-donasi{
+  /* background-color: #ffbf69; */
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px !important;
+  border: 1px silver solid;
+}
+
+.content-panti{
+  /* background-color: #ffbf69; */
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px !important;
+  border: 1px silver solid;
 }
 
 .navbar{

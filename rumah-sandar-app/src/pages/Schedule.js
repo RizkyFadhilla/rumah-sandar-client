@@ -9,7 +9,7 @@ export default function Schedule() {
 
   const [value, onChange] = useState(new Date());
   const [Joined, setJoined] = useState(false);
-  const classSchedules = ["2022-11-06", "2022-11-11"]; //yy-mm-dd
+  const classSchedules = ["2022-11-07", "2022-11-11"]; //yy-mm-dd
   const today = JSON.stringify(new Date()).substring(1, 11)
 
   return (
