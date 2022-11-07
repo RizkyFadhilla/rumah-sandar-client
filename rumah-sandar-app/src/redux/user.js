@@ -163,10 +163,34 @@ export const notMatchedOrphan = createAsyncThunk(
     try {
       const response = await fetch("https://rumah-sandar.herokuapp.com/")
     } catch (error) {
-      
+
     }
   }
 )
+
+export const submitRegisterOrphan = createAsyncThunk(
+  "submitFormRegisterOrphan",
+  async (input) => {
+    console.log(input, `<<<< di store`);
+    const response = await fetch(
+      "https://rumah-sandar.herokuapp.com/orphan/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      }
+    );
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+
+    const data = await response.json();
+    return data;
+  }
+);
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
@@ -180,9 +204,9 @@ export const userSlice = createSlice({
     [classUser.pending]: (state) => {
       state.isLoading = true;
     },
-    [classUser.fulfilled]: (state, action) => {  
+    [classUser.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.userClasses = action.payload; 
+      state.userClasses = action.payload;
     },
     [classUser.rejected]: (state, action) => {
       state.isLoading = false;
@@ -222,6 +246,6 @@ export const userSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 //ini nama2 actionya, otomatis sama dengan nama reducernya
-export const {} = userSlice.actions;
+export const { } = userSlice.actions;
 
 export default userSlice.reducer;
