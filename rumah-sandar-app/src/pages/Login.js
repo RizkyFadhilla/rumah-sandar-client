@@ -55,8 +55,11 @@ const Login = () => {
               <Form.Control type="password" placeholder="Password" name='password' value={loginForm.password} onChange={changeHandler} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
-            <Button variant="primary" type="submit"  >
+            <Button variant="primary" type="submit" className='me-3'>
               Submit 
+            </Button>
+            <Button variant="secondary" type="submit" onClick={() => navigate('/')}>
+              Back 
             </Button>
           </Form>
         </Card.Body>
