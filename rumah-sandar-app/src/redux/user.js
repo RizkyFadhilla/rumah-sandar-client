@@ -161,6 +161,17 @@ export const fetchClassCategories = createAsyncThunk(
   }
 );
 
+export const notMatchedOrphan = createAsyncThunk(
+  'notMatchedOrphan',
+  async () => {
+    try {
+      const response = await fetch("https://rumah-sandar.herokuapp.com/")
+    } catch (error) {
+      
+    }
+  }
+)
+
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
 export const userSlice = createSlice({

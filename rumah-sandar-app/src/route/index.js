@@ -3,6 +3,7 @@ import Class from '../pages/Class';
 import LandingPage from '../pages/LandingPages';
 import Layout from '../pages/Layout';
 import Login from '../pages/Login';
+import LoginVolunteer from '../pages/LoginVolunteer';
 import OrphansList from '../pages/OrphansList';
 import PagePanti from '../pages/PagePanti';
 import Register from '../pages/Register';
@@ -16,11 +17,21 @@ const router = createBrowserRouter([
   },
   {
     path: '/orphanages',
-    element: <PagePanti/>,
+    element: <PagePanti />,
   },
   {
     path: '/login',
     element: <Login />,
+    loader: () => {
+      const token = localStorage.getItem('access_token');
+      if (token) {
+        throw redirect('/');
+      }
+    },
+  },
+  {
+    path: '/loginVolunteer',
+    element: <LoginVolunteer />,
     loader: () => {
       const token = localStorage.getItem('access_token');
       if (token) {
@@ -34,26 +45,26 @@ const router = createBrowserRouter([
   },
   {
     path: '/register-adik',
-    element: <RegisterAdik/>,
+    element: <RegisterAdik />,
   },
   {
     element: <Layout />,
     loader: () => {
-      const token = localStorage.getItem('access_token')
-      if(!token){
-          throw redirect("/login")
+      const token = localStorage.getItem('access_token');
+      if (!token) {
+        throw redirect('/login');
       }
-  },
+    },
     children: [
       {
         path: '/orphansList',
         element: <OrphansList />,
         loader: () => {
-          const isMatch = localStorage.getItem('isMatch')
-          if(isMatch){
-            throw redirect('/')
+          const isMatch = localStorage.getItem('isMatch');
+          if (isMatch) {
+            throw redirect('/');
           }
-        }
+        },
       },
       {
         path: '/schedule',
