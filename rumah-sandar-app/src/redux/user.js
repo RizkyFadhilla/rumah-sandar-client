@@ -143,9 +143,13 @@ export const fetchClassCategories = createAsyncThunk(
         "https://rumah-sandar.herokuapp.com/categories",
         {
           method: "GET",
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          }
         }
       );
 
+      console.log(response, 'ini di store')
       if (!response.ok) {
         throw await response.text();
       }
