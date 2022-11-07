@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Container, Nav, Navbar, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import LogoProfile from '../assets/ex-photo-kakak.jpg'
@@ -5,6 +6,10 @@ import LogoRumahSandar from '../assets/logo-rumah-sandar.png'
 
 const HeaderNavbar = () => {
   const navigate = useNavigate()
+  
+  useEffect(() => {
+
+  }, [])
 
   const access_token = localStorage.getItem('access_token')
   const role = localStorage.getItem('role')

@@ -12,6 +12,7 @@ const CardContent = () => {
   const { dataClassCategories } = useSelector((state) => {
     return state.user;
   });
+  
   useEffect(() => {
     dispatch(fetchDonation());
     dispatch(fetchClassCategories());

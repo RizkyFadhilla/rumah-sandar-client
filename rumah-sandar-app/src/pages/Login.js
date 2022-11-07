@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Container, Form, Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { submitLogin } from '../redux/user';
+import { submitLogin, submitLoginOrphan, submitLoginVolunteer } from '../redux/user';
 
 
 const Login = () => {
@@ -30,13 +30,15 @@ const Login = () => {
   }
 
   async function submitHandler(e) {
-    e.preventDefault()
+    try {
+      e.preventDefault()
+      
+      dispatch(submitLoginOrphan(loginForm))
 
-    dispatch(submitLogin(loginForm))
-    .then((data) => {
       navigate('/')
-    })
-    
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

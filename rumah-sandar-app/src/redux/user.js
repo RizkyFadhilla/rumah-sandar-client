@@ -35,8 +35,11 @@ export const submitLoginVolunteer = createAsyncThunk(
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("username", data.sendData.fullName);
       localStorage.setItem("role", data.sendData.role);
+      localStorage.setItem("image", data.sendData.imageUrl)
+      localStorage.setItem('isMatched', data.sendData.isMatched)
 
       return data;
+
     } catch (error) {
       console.log(error);
     }
@@ -154,17 +157,21 @@ export const fetchClassCategories = createAsyncThunk(
   }
 );
 
+// ini sama seperti reducer yang nanti bantuin set datanya ke storenya
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+  },
+  //ini di set kalau createasyncthunk yang dibuat adalah sebuah action yang sifatnya akan mengeset state di store (FETCHING/GET)
   extraReducers: {
     [classUser.pending]: (state) => {
       state.isLoading = true;
     },
-    [classUser.fulfilled]: (state, action) => {
+    [classUser.fulfilled]: (state, action) => {  
       state.isLoading = false;
-      state.userClasses = action.payload;
+      state.userClasses = action.payload; 
     },
     [classUser.rejected]: (state, action) => {
       state.isLoading = false;
