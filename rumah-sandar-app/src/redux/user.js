@@ -16,7 +16,7 @@ export const submitLoginVolunteer = createAsyncThunk(
   "submitFormLoginVolunteer",
   async (input) => {
     try {
-      console.log(input)
+      console.log(input);
       const response = await fetch(
         "http://localhost:3000/volunteer/login",
         // "https://rumah-sandar.herokuapp.com/volunteer/login",
@@ -192,6 +192,30 @@ export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
     console.log(error);
   }
 });
+
+export const submitRegisterOrphan = createAsyncThunk(
+  "submitFormRegisterOrphan",
+  async (input) => {
+    console.log(input, `<<<< di store`);
+    const response = await fetch(
+      "https://rumah-sandar.herokuapp.com/orphan/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      }
+    );
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+
+    const data = await response.json();
+    return data;
+  }
+);
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
