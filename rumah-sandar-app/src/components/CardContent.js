@@ -21,7 +21,7 @@ const CardContent = () => {
 
   return (
     <Container>
-      <h2> Multiple items </h2>
+      <h2>Donasi</h2>
       <Row>
         <Slider {...settings}>
           {data.map((e) => {

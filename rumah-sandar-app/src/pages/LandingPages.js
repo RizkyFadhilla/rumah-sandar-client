@@ -1,6 +1,5 @@
 import ContentLandingPage from '../components/ContentLandingPage';
 import CardContent from '../components/CardContent';
-import CardPanti from '../components/CardPanti';
 import HeaderNavbar from '../components/HeaderNavbar';
 
 const LandingPage = () => {
@@ -9,7 +8,6 @@ const LandingPage = () => {
       <HeaderNavbar />
       <ContentLandingPage />
       <CardContent />
-      <CardPanti />
     </>
   );
 };
