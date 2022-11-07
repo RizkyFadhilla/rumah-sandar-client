@@ -4,13 +4,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 //ini initial state untuk store datanya
 const initialState = {
-  value: 0,
   userClasses: [],
   isLoading: true,
+  dataDonation: [],
+  dataOrphanages: [],
+  dataClassCategories: [],
 };
 
-export const submitLogin = createAsyncThunk(
-  "submitFormLogin",
+export const submitLoginVolunteer = createAsyncThunk(
+  "submitFormLoginVolunteer",
   async (input) => {
     try {
       const response = await fetch(
@@ -41,7 +43,7 @@ export const submitLogin = createAsyncThunk(
   }
 );
 
-export const classUser = createAsyncThunk("getUserClass",async () => {
+export const classUser = createAsyncThunk("getUserClass", async () => {
   try {
     const response = await fetch("https://rumah-sandar.herokuapp.com/classes", {
       method: "GET",
@@ -56,12 +58,101 @@ export const classUser = createAsyncThunk("getUserClass",async () => {
 
     const data = await response.json();
 
-    return data
-
+    return data;
   } catch (error) {
     console.log(error);
   }
 });
+
+export const submitLoginOrphan = createAsyncThunk(
+  "submitFormLogin",
+  async (input) => {
+    const response = await fetch(
+      "https://rumah-sandar.herokuapp.com/orphan/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      }
+    );
+
+    console.log(response, "ini response login adik");
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+
+    const data = await response.json();
+    console.log(data, "response login");
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("username", data.sendData.fullName);
+    localStorage.setItem("role", data.sendData.role);
+
+    return data;
+  }
+);
+
+export const fetchDonation = createAsyncThunk("fetchDonation", async () => {
+  try {
+    const response = await fetch(
+      "https://rumah-sandar.herokuapp.com/payment/donations",
+      {
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw await response.text();
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const fetchOrphanages = createAsyncThunk("fetchOrphanages", async () => {
+  try {
+    const response = await fetch(
+      "https://rumah-sandar.herokuapp.com/orphanages",
+      {
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw await response.text();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const fetchClassCategories = createAsyncThunk(
+  "fetchClassCategories",
+  async () => {
+    try {
+      const response = await fetch(
+        "https://rumah-sandar.herokuapp.com/categories",
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",
@@ -72,10 +163,40 @@ export const userSlice = createSlice({
       state.isLoading = true;
     },
     [classUser.fulfilled]: (state, action) => {
-      state.isLoading = false 
+      state.isLoading = false;
       state.userClasses = action.payload;
     },
     [classUser.rejected]: (state, action) => {
+      state.isLoading = false;
+    },
+    [fetchDonation.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchDonation.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dataDonation = action.payload;
+    },
+    [fetchDonation.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [fetchOrphanages.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchOrphanages.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dataOrphanages = action.payload;
+    },
+    [fetchOrphanages.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [fetchClassCategories.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchClassCategories.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dataClassCategories = action.payload;
+    },
+    [fetchClassCategories.rejected]: (state) => {
       state.isLoading = false;
     },
   },

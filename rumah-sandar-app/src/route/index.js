@@ -4,13 +4,19 @@ import LandingPage from '../pages/LandingPages';
 import Layout from '../pages/Layout';
 import Login from '../pages/Login';
 import OrphansList from '../pages/OrphansList';
+import PagePanti from '../pages/PagePanti';
 import Register from '../pages/Register';
+import RegisterAdik from '../pages/RegisterAdik';
 import Schedule from '../pages/Schedule';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LandingPage />,
+  },
+  {
+    path: '/orphanages',
+    element: <PagePanti/>,
   },
   {
     path: '/login',
@@ -27,6 +33,10 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
+    path: '/register-adik',
+    element: <RegisterAdik/>,
+  },
+  {
     element: <Layout />,
     loader: () => {
       const token = localStorage.getItem('access_token')
@@ -38,6 +48,12 @@ const router = createBrowserRouter([
       {
         path: '/orphansList',
         element: <OrphansList />,
+        loader: () => {
+          const isMatch = localStorage.getItem('isMatch')
+          if(isMatch){
+            throw redirect('/')
+          }
+        }
       },
       {
         path: '/schedule',
