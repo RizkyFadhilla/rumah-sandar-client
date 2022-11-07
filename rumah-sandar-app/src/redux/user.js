@@ -73,8 +73,8 @@ export const submitLoginOrphan = createAsyncThunk(
   "submitFormLogin",
   async (input) => {
     const response = await fetch(
-      "https://rumah-sandar.herokuapp.com/orphan/login",
-
+      // "https://rumah-sandar.herokuapp.com/orphan/login",
+      "http://localhost:3000/orphan/login",
       {
         method: "POST",
         headers: {
@@ -169,6 +169,57 @@ export const notMatchedOrphan = createAsyncThunk(
   }
 );
 
+export const submitRegisterOrphan = createAsyncThunk(
+  "submitFormRegisterOrphan",
+  async (input) => {
+    console.log(input, `<<<< di store`);
+    const response = await fetch(
+      // "https://rumah-sandar.herokuapp.com/orphan/register",
+      "http://localhost:3000/orphan/register",
+      {
+        method: "POST",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: input,
+      }
+    );
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+
+    const data = await response.json();
+    return data;
+  }
+);
+
+export const submitRegisterVolunteer = createAsyncThunk(
+  "submitFormRegisterVolunteer",
+  async (input) => {
+    console.log(input, `<<<< di store`);
+    const response = await fetch(
+      // "https://rumah-sandar.herokuapp.com/volunteer/register",
+      "http://localhost:3000/volunteer/register",
+      {
+        method: "POST",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: input,
+      }
+    );
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+
+    const data = await response.json();
+    return data;
+  }
+);
+
+
 export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
   try {
     const response = await fetch(
@@ -192,30 +243,6 @@ export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
     console.log(error);
   }
 });
-
-export const submitRegisterOrphan = createAsyncThunk(
-  "submitFormRegisterOrphan",
-  async (input) => {
-    console.log(input, `<<<< di store`);
-    const response = await fetch(
-      "https://rumah-sandar.herokuapp.com/orphan/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(input),
-      }
-    );
-
-    if (!response.ok) {
-      throw await response.text();
-    }
-
-    const data = await response.json();
-    return data;
-  }
-);
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
