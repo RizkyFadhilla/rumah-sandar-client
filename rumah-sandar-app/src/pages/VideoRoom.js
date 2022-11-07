@@ -18,7 +18,7 @@ const client = AgoraRTC.createClient({
 });
 
 export default function VideoRoom(props) {
-  const { Joined, setJoined } = props;
+  const { setJoined } = props;
   const navigate = useNavigate()
 
   const [users, setUsers] = useState([]);
@@ -95,14 +95,14 @@ export default function VideoRoom(props) {
         client.publish(tracks);
       });
   }, []);
-    console.log(uid, 'INI UID STATE')
+ 
     return (
     <>
       <div style={{ display: "flex", justifyContent: "center", position : 'relative'}}>
 
         {users.map((user) => { 
           if(user.uid === uid && users.length > 1) {
-            return ( <VideoPlayer key={user.uid} user={user} style={{ width: "200px", height: "250px", marginRight: '20px', borderRadius:'10px', position: 'absolute', top: 30, left : 50, zIndex:100, borderRadius: 10 }} /> )
+            return ( <VideoPlayer key={user.uid} user={user} style={{ width: "200px", height: "250px", marginRight: '20px', borderRadius:'10px', position: 'absolute', top: 30, left : 50, zIndex:100 }} /> )
           } else {
             return ( <VideoPlayer key={user.uid} user={user} style={{ width: "800px", height: "800px", marginRight: '20px', borderRadius:'10px'}} /> )
           }    

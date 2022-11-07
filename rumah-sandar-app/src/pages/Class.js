@@ -2,14 +2,11 @@ import { Container, Image } from "react-bootstrap";
 import MyChatComponent from "../components/VideoChatUI";
 import photoKakak from '../assets/ex-photo-kakak.jpg'
 import photoAdik from '../assets/ex-photo-adik.jpg'
-import { useLocation } from "react-router-dom";
 import VideoRoom from "./VideoRoom";
 import { useEffect, useState } from "react";
 
 export default function Class() {
 
-    // const {state} = useLocation()
-    // const { Joined } = state
     const [Joined, setJoined] = useState(false)
     
     useEffect(() => {
