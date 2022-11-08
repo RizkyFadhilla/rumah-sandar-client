@@ -57,6 +57,7 @@ export default function Class() {
           </div>
         </div>
       </div>
+  
     </Container>
   );
 }
