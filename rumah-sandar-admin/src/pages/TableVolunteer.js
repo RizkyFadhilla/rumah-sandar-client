@@ -19,7 +19,7 @@ const TableVolunteer = () => {
   return (
     <>
       <Container className="mt-5">
-        <h3>Table Volunteer</h3>
+        <h3>Table Pengajar</h3>
         <Table striped hover className="styled-table">
           <thead>
             <tr>

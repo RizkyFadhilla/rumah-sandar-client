@@ -31,9 +31,11 @@ const LoginVolunteer = () => {
     try {
       e.preventDefault();
 
-      dispatch(submitLoginVolunteer(loginForm));
+      dispatch(submitLoginVolunteer(loginForm))
+      .then(() => {
+        navigate('/')
+      })
 
-      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +43,7 @@ const LoginVolunteer = () => {
 
   return (
     <Container className="mt-5">
-      <Card>
+      <Card className='shadow'>
         <Card.Body>
           <h3 className="text-center">Login</h3>
           <Form onSubmit={submitHandler}>
