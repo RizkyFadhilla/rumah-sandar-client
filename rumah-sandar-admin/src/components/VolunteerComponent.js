@@ -1,12 +1,12 @@
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { fetchVolunteer, patchOrphan } from "../redux/user";
+import { fetchVolunteer, patchVolunteer } from "../redux/user";
 
 const VolunteerComponent = (data) => {
   let dispatch = useDispatch();
   function clickHandler(e, id) {
     e.preventDefault();
-    dispatch(patchOrphan(id)).then(() => {
+    dispatch(patchVolunteer(id)).then(() => {
       dispatch(fetchVolunteer());
     });
   }

@@ -32,18 +32,9 @@ const ContentLandingPage = () => {
     <>
       <Container className="content-landing mt-5 shadow">
         <Row>
-<<<<<<< HEAD
-          <Col className="col-8">
-            <h3>Selamat Datang di Rumah Sandar</h3>
-            <h6>
-              Tempat belajar untuk adik-adik yang berada di bawah naungan
-              yayasan panti asuhan di seluruh Indonesia.
-            </h6>
-=======
           <Col className='col-8 mt-5'>
             <h3><b>Selamat Datang di Rumah Sandar</b></h3>
             <h6><em>Tempat belajar untuk adik-adik yang berada di bawah naungan yayasan panti asuhan di seluruh Indonesia.</em></h6>
->>>>>>> a07ed13294389afb53512a22730198830e9353c1
             <br></br>
             <p>
               Rumah Sandar adalah komunitas e-learning nirlaba untuk anak-anak
