@@ -26,7 +26,7 @@ const TableVolunteer = () => {
               <th>No</th>
               <th>Name</th>
               <th>Email</th>
-              <th>status</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
