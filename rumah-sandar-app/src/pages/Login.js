@@ -31,8 +31,8 @@ const Login = () => {
     try {
       e.preventDefault();
 
-      dispatch(submitLoginOrphan(loginForm)).then(()=>  navigate('/'))
-
+      dispatch(submitLoginOrphan(loginForm))
+      .then(()=>  navigate('/'))
     
     } catch (error) {
       console.log(error);

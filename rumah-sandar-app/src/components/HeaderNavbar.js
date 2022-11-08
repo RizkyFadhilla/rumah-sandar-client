@@ -1,23 +1,36 @@
 import { useEffect } from 'react';
 import { Container, Nav, Navbar, Image, NavDropdown } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import LogoProfile from '../assets/ex-photo-kakak.jpg';
 import LogoRumahSandar from '../assets/logo-rumah-sandar.png';
+import { fetchClassCategories, requestMatchOrphan } from '../redux/user';
 
 const HeaderNavbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const{ loginUser } = useSelector((state) => {
     return state.user
   })
 
+
   function logoutHandler(e) {
     e.preventDefault();
 
     localStorage.clear()
+    dispatch(fetchClassCategories())
     navigate('/')
     
+  }
+
+  function requestMatch(e) {
+    e.preventDefault();
+    
+    dispatch(requestMatchOrphan()).then(() => {
+      //swal disini kalo request matchnya udah disampaikan
+      console.log('match requested')
+
+    })
   }
 
   // const access_token = loginUser?.access_token
@@ -27,7 +40,7 @@ const HeaderNavbar = () => {
   // const imageProfile = loginUser.sendData?.imageUrl
   const access_token = localStorage.access_token
   const role = localStorage.role
-  const isMacthed = localStorage.isMacthed
+  const isMatched = localStorage.isMatched
   const username = localStorage.username
   const imageProfile = localStorage.image
   
@@ -45,28 +58,28 @@ const HeaderNavbar = () => {
           <Nav.Link onClick={() => navigate('/orphanages')}>Daftar Panti</Nav.Link>
           {!access_token && (
             <NavDropdown title="Daftar" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3" onClick={() => navigate('/register')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/register')}>
                 Relawan
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action4" onClick={() => navigate('/register-adik')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/register-adik')}>
                 Adik Asuh
               </NavDropdown.Item>
             </NavDropdown>
           )}
           {!access_token && (
             <NavDropdown title="Masuk" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3" onClick={() => navigate('/loginVolunteer')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/loginVolunteer')}>
                 Relawan
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action4" onClick={() => navigate('/login')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/login')}>
                 Adik Asuh
               </NavDropdown.Item>
             </NavDropdown>
           )}
 
-          {access_token && role === 'volunteer' && <Nav.Link onClick={() => navigate('/orphansList')}>Daftar Adik</Nav.Link>}
-          {access_token && !isMacthed && <Nav.Link onClick={() => navigate('/orphansList')}>Daftar Adik</Nav.Link>}
-          {access_token && <Nav.Link onClick={() => navigate('/schedule')}>Jadwal Kelas</Nav.Link>}
+          {access_token && role === 'volunteer' && isMatched === 'notMatch' && <Nav.Link onClick={() => navigate('/orphansList')}>Daftar Adik</Nav.Link>}
+          {access_token && isMatched === 'alreadyMatch' && <Nav.Link onClick={() => navigate('/schedule')}>Jadwal Kelas</Nav.Link>}
+          {access_token && isMatched === 'notMatch' && role === 'orphan' && <Nav.Link onClick={requestMatch}>Minta Pengajar</Nav.Link>}
           {access_token && (
             <Nav.Link className="ms-2" onClick={logoutHandler}>
               Keluar
