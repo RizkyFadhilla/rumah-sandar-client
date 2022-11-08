@@ -91,6 +91,28 @@ export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
   }
 });
 
+export const patchOrphan = createAsyncThunk("patchOrphan", async (id) => {
+  try {
+    const response = await fetch(
+      // / `https://rumah-sandar.herokuapp.com/admin/volunteer/${id}`,
+      `http://localhost:3000/admin/volunteer/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      }
+    );
+    if (!response.ok) {
+      throw await response.text();
+    }
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
 export const userSlice = createSlice({

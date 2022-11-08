@@ -31,7 +31,7 @@ const TableVolunteer = () => {
             </tr>
           </thead>
           <tbody>
-            {dataVolunteer.map((el, index) => {
+            {dataVolunteer?.map((el, index) => {
               return (
                 <VolunteerComponent
                   data={el}
