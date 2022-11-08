@@ -1,29 +1,4 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
-import {
-  EmailShareButton,
-  EmailIcon,
-  FacebookShareButton,
-  FacebookIcon,
-  HatenaShareButton,
-  InstapaperShareButton,
-  LineShareButton,
-  LinkedinShareButton,
-  LivejournalShareButton,
-  MailruShareButton,
-  OKShareButton,
-  PinterestShareButton,
-  PocketShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  ViberShareButton,
-  VKShareButton,
-  WhatsappShareButton,
-  WhatsappIcon,
-  WorkplaceShareButton,
-} from "react-share";
 import Logo from "../assets/content.png";
 
 const ContentLandingPage = () => {

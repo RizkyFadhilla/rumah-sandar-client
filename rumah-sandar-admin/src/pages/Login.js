@@ -5,6 +5,7 @@ import Logo from "../assets/logo-rumah-sandar.png";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { submitLoginAdmin } from "../redux/user";
+import {toast} from 'react-toastify'
 const Login = () => {
   let [loginForm, setLoginForm] = useState({
     email: "",
@@ -15,7 +16,18 @@ const Login = () => {
   function submitHandler(e) {
     e.preventDefault();
     dispatch(submitLoginAdmin(loginForm)).then(() => {
-      navigate("/table-volunteer");
+      navigate("/table-volunteer")
+
+      toast('Kamu berhasil login!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     });
   }
 

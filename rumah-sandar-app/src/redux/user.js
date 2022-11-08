@@ -6,7 +6,7 @@ import { URL } from "../url";
 //ini initial state untuk store datanya
 
 const initialState = {
-  userClasses: [],
+  userSchedule: [],
   isLoading: true,
   dataDonation: [],
   dataOrphanages: [],
@@ -75,6 +75,7 @@ export const classUser = createAsyncThunk("getUserClass", async () => {
     }
 
     const data = await response.json();
+    console.log(data, "INI DATA CLASS USER DI STORE");
 
     return data;
   } catch (error) {
@@ -85,33 +86,37 @@ export const classUser = createAsyncThunk("getUserClass", async () => {
 export const submitLoginOrphan = createAsyncThunk(
   "submitFormLogin",
   async (input) => {
-    const response = await fetch(
-      `${URL}/orphan/login`,
-      // "http://localhost:3000/orphan/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(input),
+    try {
+      const response = await fetch(
+        `${URL}/orphan/login`,
+        // "http://localhost:3000/orphan/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(input),
+        }
+      );
+
+      console.log(response, "ini response login adik");
+
+      if (!response.ok) {
+        throw await response.text();
       }
-    );
 
-    console.log(response, "ini response login adik");
+      const data = await response.json();
+      console.log(data, "response login");
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("username", data.sendData.fullName);
+      localStorage.setItem("role", data.sendData.role);
+      localStorage.setItem("image", data.sendData.imageUrl);
+      localStorage.setItem("isMatched", data.sendData.matchStatus);
 
-    if (!response.ok) {
-      throw await response.text();
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    const data = await response.json();
-    console.log(data, "response login");
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("username", data.sendData.fullName);
-    localStorage.setItem("role", data.sendData.role);
-    localStorage.setItem("image", data.sendData.imageUrl);
-    localStorage.setItem("isMatched", data.sendData.matchStatus);
-
-    return data;
   }
 );
 
@@ -207,50 +212,58 @@ export const notMatchedOrphan = createAsyncThunk(
 export const submitRegisterOrphan = createAsyncThunk(
   "submitFormRegisterOrphan",
   async (input) => {
-    console.log(input, `<<<< di store`);
-    const response = await fetch(
-      `${URL}/orphan/register`,
-      // "http://localhost:3000/orphan/register",
-      {
-        method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        body: input,
+    try {
+      console.log(input, `<<<< di store`);
+      const response = await fetch(
+        `${URL}/orphan/register`,
+        // "http://localhost:3000/orphan/register",
+        {
+          method: "POST",
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
+          body: input,
+        }
+      );
+
+      if (!response.ok) {
+        throw await response.text();
       }
-    );
 
-    if (!response.ok) {
-      throw await response.text();
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    const data = await response.json();
-    return data;
   }
 );
 
 export const submitRegisterVolunteer = createAsyncThunk(
   "submitFormRegisterVolunteer",
   async (input) => {
-    console.log(input, `<<<< di store`);
-    const response = await fetch(
-      `${URL}/volunteer/register`,
-      // "http://localhost:3000/volunteer/register",
-      {
-        method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        body: input,
+    try {
+      console.log(input, `<<<< di store`);
+      const response = await fetch(
+        `${URL}/volunteer/register`,
+        // "http://localhost:3000/volunteer/register",
+        {
+          method: "POST",
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
+          body: input,
+        }
+      );
+
+      if (!response.ok) {
+        throw await response.text();
       }
-    );
 
-    if (!response.ok) {
-      throw await response.text();
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    const data = await response.json();
-    return data;
   }
 );
 
@@ -301,37 +314,40 @@ export const requestMatchOrphan = createAsyncThunk("requestMatch", async () => {
   } catch (error) {
     console.log(error);
   }
-})
+});
 
-export const setDateMatch = createAsyncThunk('setDateMatch', async ({newDate, id}) => {
-  try {
-    let input = newDate
-    
-    console.log(input, id , 'INI DI STORE')
+export const setDateMatch = createAsyncThunk(
+  "setDateMatch",
+  async ({ newDate, id }) => {
+    try {
+      let input = newDate;
 
-    const response = await fetch(`https://rumah-sandar.herokuapp.com/match/${id}`, {
-      method: 'PUT',
-      headers: {
-        "Content-Type": "application/json",
-        access_token: localStorage.getItem('access_token')
-      },
-      body: JSON.stringify(input),
-    })
+      console.log(input, id, "INI DI STORE");
 
-    if (!response.ok) {
-      throw await response.text();
+      const response = await fetch(
+        `https://rumah-sandar.herokuapp.com/match/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            access_token: localStorage.getItem("access_token"),
+          },
+          body: JSON.stringify(input),
+        }
+      );
+
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      console.log(data, "<<<< ini di store ");
+
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-    const data = await response.json();
-    console.log(data, '<<<< ini di store ');
-
-    return data;
-    
-  } catch (error) {
-    console.log(error)
   }
-}
-)
-
+);
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
@@ -346,7 +362,7 @@ export const userSlice = createSlice({
     },
     [classUser.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.userClasses = action.payload;
+      state.userSchedule = action.payload;
     },
     [classUser.rejected]: (state, action) => {
       state.isLoading = false;
