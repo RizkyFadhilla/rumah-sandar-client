@@ -1,6 +1,25 @@
 import { Container, Table, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import OrphanComponent from '../components/OrphanComponent';
+import { fetchOrphan } from "../redux/user";
 
-const TableAdik = () => {
+
+
+
+const TableAdik = () => { 
+  let { dataOrphan, isLoading } = useSelector((state) => {
+  return state.user;
+});
+console.log(dataOrphan, 'ini ditabel adik');
+let dispatch = useDispatch();
+useEffect(() => {
+  dispatch(fetchOrphan());
+}, []);
+if (isLoading) {
+  <h1>Please Wait</h1>;
+}
+
   return (
     <>
       <Container className="mt-5">
@@ -15,22 +34,14 @@ const TableAdik = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>
-                <Button variant="danger">Approve</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>
-                <Button variant="danger">Approve</Button>
-              </td>
-            </tr>
+            {dataOrphan.map((el, index) => {
+              return <OrphanComponent 
+              data={el}
+              index={index}
+              status={el.verified}
+              key={el.id}
+              />
+            })}
           </tbody>
         </Table>
       </Container>
