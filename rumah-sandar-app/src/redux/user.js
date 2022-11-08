@@ -291,6 +291,7 @@ export const requestMatchOrphan = createAsyncThunk('requestMatch', async () => {
     const response = await fetch("https://rumah-sandar.herokuapp.com/match", {
       method: 'POST',
       headers: {
+        "Content-Type": "application/json",
         access_token: localStorage.getItem('access_token')
       }
     })
@@ -307,6 +308,35 @@ export const requestMatchOrphan = createAsyncThunk('requestMatch', async () => {
     console.log(error)
   }
 })
+
+export const setDateMatch = createAsyncThunk('setDateMatch', async ({newDate, id}) => {
+  try {
+    let input = newDate
+    
+    console.log(input, id , 'INI DI STORE')
+
+    const response = await fetch(`https://rumah-sandar.herokuapp.com/match/${id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.getItem('access_token')
+      },
+      body: JSON.stringify(input),
+    })
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+    const data = await response.json();
+    console.log(data, '<<<< ini di store ');
+
+    return data;
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+)
 
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
