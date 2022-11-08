@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Container, Nav, Navbar, Image, NavDropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import LogoProfile from '../assets/ex-photo-kakak.jpg';
 import LogoRumahSandar from '../assets/logo-rumah-sandar.png';
 
 const HeaderNavbar = () => {
@@ -45,20 +44,20 @@ const HeaderNavbar = () => {
           <Nav.Link onClick={() => navigate('/orphanages')}>Daftar Panti</Nav.Link>
           {!access_token && (
             <NavDropdown title="Daftar" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3" onClick={() => navigate('/register')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/register')}>
                 Relawan
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action4" onClick={() => navigate('/register-adik')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/register-adik')}>
                 Adik Asuh
               </NavDropdown.Item>
             </NavDropdown>
           )}
           {!access_token && (
             <NavDropdown title="Masuk" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3" onClick={() => navigate('/loginVolunteer')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/loginVolunteer')}>
                 Relawan
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action4" onClick={() => navigate('/login')}>
+              <NavDropdown.Item href="" onClick={() => navigate('/login')}>
                 Adik Asuh
               </NavDropdown.Item>
             </NavDropdown>
