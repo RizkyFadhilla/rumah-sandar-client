@@ -2,8 +2,10 @@ import ContentLandingPage from '../components/ContentLandingPage';
 import CardContent from '../components/CardContent';
 import HeaderNavbar from '../components/HeaderNavbar';
 import CardMaterial from '../components/CardMaterial';
+
 import { useEffect } from 'react';
 
+import Footer from '../components/Footer';
 
 const LandingPage = () => {
 
@@ -17,6 +19,7 @@ const LandingPage = () => {
       {localStorage.getItem('role') === 'orphan' && (
       <CardMaterial/>)}
       <CardContent /> 
+      <Footer/>
     </>
   );
 };
