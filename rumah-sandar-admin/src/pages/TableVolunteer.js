@@ -12,6 +12,7 @@ const TableVolunteer = () => {
   useEffect(() => {
     dispatch(fetchVolunteer());
   }, []);
+  
   if (isLoading) {
     <h1>Please Wait</h1>;
   }
