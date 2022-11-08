@@ -31,8 +31,8 @@ const CardContent = () => {
   // }
   return (
     <>
-      <Container className="content-donasi mt-5">
-        <h2>Donasi</h2>
+      <Container className="content-donasi mt-5 shadow">
+        <h2><b>Donasi</b></h2>
         <Row>
           <Slider {...settings}>
             {dataDonation.map((e) => {
