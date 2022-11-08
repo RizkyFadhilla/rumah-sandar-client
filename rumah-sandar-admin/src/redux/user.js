@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import { URL } from "../url";
 //create slice -> kita bisa define state, reducers, dan actions di satu tempat
 
 //ini initial state untuk store datanya
@@ -17,7 +17,7 @@ export const submitLoginAdmin = createAsyncThunk(
       // console.log(input);r
       const response = await fetch(
         // "http://localhost:3000/admin/login",
-        "https://rumah-sandar.herokuapp.com/admin/login",
+        `${URL}/admin/login`,
         {
           method: "POST",
           headers: {
@@ -45,16 +45,12 @@ export const submitLoginAdmin = createAsyncThunk(
 );
 export const fetchVolunteer = createAsyncThunk("fetchVolunteer", async () => {
   try {
-    const response = await fetch(
-      "https://rumah-sandar.herokuapp.com/admin/volunteers",
-      // "http://localhost:3000/admin/volunteers",
-      {
-        method: "GET",
-        headers: {
-          access_token: localStorage.getItem("access_token"),
-        },
-      }
-    );
+    const response = await fetch(`${URL}/admin/volunteers`, {
+      method: "GET",
+      headers: {
+        access_token: localStorage.getItem("access_token"),
+      },
+    });
     if (!response.ok) {
       throw await response.text();
     }
@@ -70,7 +66,7 @@ export const fetchVolunteer = createAsyncThunk("fetchVolunteer", async () => {
 export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
   try {
     const response = await fetch(
-      "https://rumah-sandar.herokuapp.com/admin/orphans",
+      `${URL}/admin/orphans`,
       // "http://localhost:3000/admin/volunteers",
       {
         method: "GET",
@@ -93,16 +89,12 @@ export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
 
 export const patchVolunteer = createAsyncThunk("patchVolunteer", async (id) => {
   try {
-    const response = await fetch(
-      `https://rumah-sandar.herokuapp.com/admin/volunteer/${id}`,
-      // `http://localhost:3000/admin/volunteer/${id}`,
-      {
-        method: "PATCH",
-        headers: {
-          access_token: localStorage.getItem("access_token"),
-        },
-      }
-    );
+    const response = await fetch(`${URL}/admin/volunteer/${id}`, {
+      method: "PATCH",
+      headers: {
+        access_token: localStorage.getItem("access_token"),
+      },
+    });
     if (!response.ok) {
       throw await response.text();
     }
@@ -112,12 +104,11 @@ export const patchVolunteer = createAsyncThunk("patchVolunteer", async (id) => {
     console.log(error);
   }
 });
-
 
 export const patchOrphan = createAsyncThunk("patchOrphan", async (id) => {
   try {
     const response = await fetch(
-      `https://rumah-sandar.herokuapp.com/admin/orphan/${id}`,
+      `${URL}/admin/orphan/${id}`,
       // `http://localhost:3000/admin/volunteer/${id}`,
       {
         method: "PATCH",
@@ -135,9 +126,6 @@ export const patchOrphan = createAsyncThunk("patchOrphan", async (id) => {
     console.log(error);
   }
 });
-
-
-
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
@@ -167,7 +155,6 @@ export const userSlice = createSlice({
     [fetchOrphan.rejected]: (state, action) => {
       state.isLoading = false;
     },
-    
   },
 });
 
