@@ -11,6 +11,7 @@ const TableAdik = () => {
   let { dataOrphan, isLoading } = useSelector((state) => {
   return state.user;
 });
+console.log(dataOrphan, 'ini ditabel adik');
 let dispatch = useDispatch();
 useEffect(() => {
   dispatch(fetchOrphan());
