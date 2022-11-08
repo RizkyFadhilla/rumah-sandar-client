@@ -22,8 +22,8 @@ const CardPanti = () => {
   };
 
   return (
-    <Container className='content-panti mt-5'>
-      <h2>Panti Asuhan</h2>
+    <Container className='content-panti mt-5 shadow'>
+      <h2><b>Panti Asuhan</b></h2>
       <Row className="mt-3">
         <Slider {...settings}>
           {dataOrphanages.map((e) => {

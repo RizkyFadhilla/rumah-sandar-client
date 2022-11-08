@@ -43,7 +43,7 @@ const LoginVolunteer = () => {
 
   return (
     <Container className="mt-5">
-      <Card>
+      <Card className='shadow'>
         <Card.Body>
           <h3 className="text-center">Login</h3>
           <Form onSubmit={submitHandler}>

@@ -3,6 +3,7 @@ import { Container, Form, Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { submitLoginOrphan } from '../redux/user';
+import { ArrowRightSquare, ArrowLeftSquare } from 'react-bootstrap-icons';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Login = () => {
 
   return (
     <Container className="mt-5">
-      <Card>
+      <Card className='shadow'>
         <Card.Body>
           <h3 className="text-center">Login</h3>
           <Form onSubmit={submitHandler}>
@@ -56,10 +57,10 @@ const Login = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
             <Button variant="primary" type="submit" className="me-3">
-              Submit
+              Login <ArrowRightSquare/>
             </Button>
             <Button variant="secondary" type="submit" onClick={() => navigate('/')}>
-              Back
+              Back <ArrowLeftSquare/>
             </Button>
           </Form>
         </Card.Body>
