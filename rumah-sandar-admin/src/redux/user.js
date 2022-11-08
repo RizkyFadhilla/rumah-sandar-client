@@ -14,7 +14,7 @@ export const submitLoginAdmin = createAsyncThunk(
   "submitFormLoginAdmin",
   async (input) => {
     try {
-      console.log(input);
+      // console.log(input);r
       const response = await fetch(
         // "http://localhost:3000/admin/login",
         "https://rumah-sandar.herokuapp.com/admin/login",
@@ -67,7 +67,31 @@ export const fetchVolunteer = createAsyncThunk("fetchVolunteer", async () => {
   }
 });
 
-export const patchOrphan = createAsyncThunk("patchOrphan", async (id) => {
+export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
+  try {
+    const response = await fetch(
+      "https://rumah-sandar.herokuapp.com/admin/orphans",
+      // "http://localhost:3000/admin/volunteers",
+      {
+        method: "GET",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      }
+    );
+    if (!response.ok) {
+      throw await response.text();
+    }
+    const data = await response.json();
+    // console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const patchVolunteer = createAsyncThunk("patchVolunteer", async (id) => {
   try {
     const response = await fetch(
       `https://rumah-sandar.herokuapp.com/admin/volunteer/${id}`,
@@ -89,6 +113,32 @@ export const patchOrphan = createAsyncThunk("patchOrphan", async (id) => {
   }
 });
 
+
+export const patchOrphan = createAsyncThunk("patchOrphan", async (id) => {
+  try {
+    const response = await fetch(
+      `https://rumah-sandar.herokuapp.com/admin/orphan/${id}`,
+      // `http://localhost:3000/admin/volunteer/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      }
+    );
+    if (!response.ok) {
+      throw await response.text();
+    }
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
+
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
 export const userSlice = createSlice({
@@ -107,6 +157,17 @@ export const userSlice = createSlice({
     [fetchVolunteer.rejected]: (state, action) => {
       state.isLoading = false;
     },
+    [fetchOrphan.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchOrphan.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dataOrphan = action.payload;
+    },
+    [fetchOrphan.rejected]: (state, action) => {
+      state.isLoading = false;
+    },
+    
   },
 });
 
