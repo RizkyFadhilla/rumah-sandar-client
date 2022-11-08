@@ -13,10 +13,13 @@ const OrphanComponent = (data) => {
       dispatch(fetchOrphan())
     })
   }
+
+  let number = 1 + data.index
+
   if (data.data.verified) {
     return (
       <tr>
-        <td>{data.index}</td>
+        <td>{number}</td>
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
         <td>Verified</td>
@@ -26,7 +29,7 @@ const OrphanComponent = (data) => {
   } else {
     return (
       <tr>
-        <td>{data.index + 1}</td>
+        <td>{number}</td>
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
         <td>Not Verified</td>
