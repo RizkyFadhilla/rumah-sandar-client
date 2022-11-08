@@ -18,8 +18,8 @@ export const submitLoginVolunteer = createAsyncThunk(
     try {
       console.log(input);
       const response = await fetch(
-        "http://localhost:3000/volunteer/login",
-        // "https://rumah-sandar.herokuapp.com/volunteer/login",
+        // "http://localhost:3000/volunteer/login",
+        "https://rumah-sandar.herokuapp.com/volunteer/login",
         {
           method: "POST",
           headers: {
@@ -73,8 +73,8 @@ export const submitLoginOrphan = createAsyncThunk(
   "submitFormLogin",
   async (input) => {
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/orphan/login",
-      "http://localhost:3000/orphan/login",
+      "https://rumah-sandar.herokuapp.com/orphan/login",
+      // "http://localhost:3000/orphan/login",
       {
         method: "POST",
         headers: {
@@ -149,11 +149,11 @@ export const fetchClassCategories = createAsyncThunk(
           method: "GET",
           headers: {
             access_token: localStorage.getItem("access_token"),
-          }
+          },
         }
       );
 
-      console.log(response, 'ini di store')
+      console.log(response, "ini di store");
       if (!response.ok) {
         throw await response.text();
       }
@@ -179,8 +179,8 @@ export const submitRegisterOrphan = createAsyncThunk(
   async (input) => {
     console.log(input, `<<<< di store`);
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/orphan/register",
-      "http://localhost:3000/orphan/register",
+      "https://rumah-sandar.herokuapp.com/orphan/register",
+      // "http://localhost:3000/orphan/register",
       {
         method: "POST",
         // headers: {
@@ -204,8 +204,8 @@ export const submitRegisterVolunteer = createAsyncThunk(
   async (input) => {
     console.log(input, `<<<< di store`);
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/volunteer/register",
-      "http://localhost:3000/volunteer/register",
+      "https://rumah-sandar.herokuapp.com/volunteer/register",
+      // "http://localhost:3000/volunteer/register",
       {
         method: "POST",
         // headers: {
@@ -224,12 +224,11 @@ export const submitRegisterVolunteer = createAsyncThunk(
   }
 );
 
-
-export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
+export const fetchMatch = createAsyncThunk("fetchMatch", async () => {
   try {
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/payment/donations",
-      "http://localhost:3000/match",
+      "https://rumah-sandar.herokuapp.com/match",
+      // "http://localhost:3000/match",
       {
         method: "GET",
         headers: {
@@ -297,14 +296,14 @@ export const userSlice = createSlice({
     [fetchClassCategories.rejected]: (state) => {
       state.isLoading = false;
     },
-    [fetchOrphan.pending]: (state) => {
+    [fetchMatch.pending]: (state) => {
       state.isLoading = true;
     },
-    [fetchOrphan.fulfilled]: (state, action) => {
+    [fetchMatch.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.dataOrphan = action.payload;
     },
-    [fetchOrphan.rejected]: (state) => {
+    [fetchMatch.rejected]: (state) => {
       state.isLoading = false;
     },
   },
