@@ -46,8 +46,8 @@ export const submitLoginAdmin = createAsyncThunk(
 export const fetchVolunteer = createAsyncThunk("fetchVolunteer", async () => {
   try {
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/payment/donations",
-      "http://localhost:3000/match",
+      // "https://rumah-sandar.herokuapp.com/admin/volunteers",
+      "http://localhost:3000/admin/volunteers",
       {
         method: "GET",
         headers: {
