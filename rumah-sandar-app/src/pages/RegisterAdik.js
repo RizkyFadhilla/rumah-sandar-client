@@ -1,53 +1,184 @@
-import { Container, Form, Button, Card, Modal, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { ArrowBarRight, ArrowBarLeft } from 'react-bootstrap-icons';
+import { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Container,
+  Form,
+  Button,
+  Card,
+  Modal,
+  Row,
+  Col,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { ArrowBarRight, ArrowBarLeft } from "react-bootstrap-icons";
+import { fetchOrphanages, submitRegisterOrphan } from "../redux/user";
 
 const RegisterAdik = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //! Fetch data orphanages untuk select option
+  const { dataOrphanages } = useSelector((state) => {
+    return state.user;
+  });
+
+  //! Biar langsung render data orphanages kalo page kebuka
+  useEffect(() => {
+    dispatch(fetchOrphanages());
+  }, []);
+
+  //! initial state input type form biasa
+  const [registerForm, setRegisterForm] = useState({
+    email: "",
+    password: "",
+    fullName: "",
+    // imageUrl: "",
+    OrphanageId: 1,
+  });
+  // console.log(registerForm);
+
+  //! initial state input type file
+  const [imageUrl, setImageUrl] = useState("");
+  // console.log(imageUrl);
+
+  //! handlechange buat ambil value di form
+  function handleChange(e) {
+    e.preventDefault();
+    // console.log(e.target.files)
+    let data = e.target.name;
+    let value = e.target.value;
+
+    let newRegisterForm = {
+      ...registerForm,
+    };
+    newRegisterForm[data] = value;
+    setRegisterForm(newRegisterForm);
+  }
+
+  // const FileUploader = ({ onFileSelect }) => {
+  //   const fileInput = useRef(null);
+
+  //   const handleFileInput = (e) => {
+  //     // handle validations
+  //     onFileSelect(e.target.files[0]);
+  //   };
+  // };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("email", registerForm.email);
+    formData.append("password", registerForm.password);
+    formData.append("fullName", registerForm.fullName);
+    formData.append("OrphanageId", registerForm.OrphanageId);
+    formData.append("imageUrl", imageUrl);
+    dispatch(submitRegisterOrphan(formData)).then(() => navigate("/"));
+  }
+
+  // console.log(registerForm);
+
   return (
     <Container className="mt-5">
       <Card>
         <Card.Body>
-          <h3 className="text-center">Register as Orphans</h3>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+          <h3 className="text-center">Daftar sebagai adik asuh</h3>
+          <Form onSubmit={handleSubmit}>
+            {/* EMAIL ADDRESS */}
+            <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control
+                // value={registerForm.email}
+                // onChange={handleChange}
+                onChange={(e) => {
+                  setRegisterForm({ ...registerForm, email: e.target.value });
+                }}
+                name="email"
+                type="email"
+                placeholder="Enter email"
+              />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            {/* USERNAME*/}
+            <Form.Group className="mb-3">
               <Form.Label>Fullname</Form.Label>
-              <Form.Control type="text" placeholder="Enter username" />
+              <Form.Control
+                // value={registerForm.fullName}
+                // onChange={handleChange}
+                onChange={(e) => {
+                  setRegisterForm({
+                    ...registerForm,
+                    fullName: e.target.value,
+                  });
+                }}
+                name="fullName"
+                type="text"
+                placeholder="Enter username"
+              />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            {/* PASSWORD */}
+            <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter password" />
+              <Form.Control
+                // value={registerForm.password}
+                // onChange={handleChange}
+                onChange={(e) => {
+                  setRegisterForm({
+                    ...registerForm,
+                    password: e.target.value,
+                  });
+                }}
+                name="password"
+                type="password"
+                placeholder="Enter password"
+              />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            {/* IMAGE URL */}
+            <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control
+                // value={imageUrl}
+                // onChange={handleChange}
+                // onChange={(file) => setImageUrl(file)}
+                onChange={(e) => setImageUrl(e.target.files[0])}
+                name="imageUrl"
+                type="file"
+              />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3">
               <Form.Label>Oprhanages</Form.Label>
-              <Form.Select aria-label="Default select example">
-                <option selected disabled>
-                  Select
-                </option>
-                <option value="1">Panti Asuhan YAI</option>
-                <option value="2">Panti Asuhan Dorkas</option>
-                <option value="3">Panti Asuhan Al-Aqsha</option>
-                <option value="3">Panti Yatim Indonesia</option>
-                <option value="3">DLL</option>
+              <Form.Select
+                // onChange={handleChange}
+                // value={registerForm.OrphanageId}
+                onChange={(e) => {
+                  setRegisterForm({
+                    ...registerForm,
+                    OrphanageId: e.target.value,
+                  });
+                }}
+                name="OrphanageId"
+                aria-label="Default select example"
+              >
+                {dataOrphanages?.map((orphanage) => {
+                  return (
+                    <option value={orphanage.id} key={orphanage.id}>
+                      {orphanage.name}
+                    </option>
+                  );
+                })}
               </Form.Select>
             </Form.Group>
 
             <Button variant="primary" type="submit" className="me-3">
               Submit <ArrowBarRight />
             </Button>
-            <Button variant="secondary" type="submit" onClick={() => navigate('/')}>
+            <Button
+              variant="secondary"
+              type="submit"
+              onClick={() => navigate("/")}
+            >
               Back <ArrowBarLeft />
             </Button>
           </Form>

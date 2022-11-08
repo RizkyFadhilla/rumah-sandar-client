@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Container, Form, Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { submitLoginOrphan } from '../redux/user';
+import { submitLoginVolunteer } from '../redux/user';
 
-const Login = () => {
+const LoginVolunteer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const Login = () => {
     try {
       e.preventDefault();
 
-      dispatch(submitLoginOrphan(loginForm));
+      dispatch(submitLoginVolunteer(loginForm));
 
       navigate('/');
     } catch (error) {
@@ -68,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginVolunteer;

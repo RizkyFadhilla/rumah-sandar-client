@@ -40,12 +40,14 @@ body {
 .highlight {
   font-weight: bolder;
   color: #ffffff;
-  background: #ff5e57 !important ;
+  background: #55efc4 !important ;
+  border-radius: 20px !important;
 }
 
 .react-calendar {
+  padding: 5px;
   width: 1000px !important ;
-  background: #f1f2f6 !important;
+  background: #ffffff !important;
   border-radius: 20px !important;
 }
 
@@ -56,6 +58,12 @@ body {
 .react-calendar__tile {
   font-size: 1.5em !important;
   margin-bottom: 15px !important;
+}
+
+.react-calendar__tile--active {
+  background: #74b9ff !important;
+  color: white !important;
+  border-radius: 20px;
 }
 
 .react-calendar__navigation button {
