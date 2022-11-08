@@ -6,7 +6,7 @@ import { URL } from "../url";
 //ini initial state untuk store datanya
 
 const initialState = {
-  userClasses: [],
+  userSchedule: [],
   isLoading: true,
   dataDonation: [],
   dataOrphanages: [],
@@ -63,6 +63,7 @@ export const submitLoginVolunteer = createAsyncThunk(
 //UNTUK NAMPILIN DATA DAFTAR SCHEDULE/KELAS-KELASNYA DI HALAMAN SCHEDULE
 export const classUser = createAsyncThunk("getUserClass", async () => {
   try {
+
     const response = await fetch(`${URL}/classes`, {
       method: "GET",
       headers: {
@@ -75,6 +76,7 @@ export const classUser = createAsyncThunk("getUserClass", async () => {
     }
 
     const data = await response.json();
+    console.log(data, 'INI DATA CLASS USER DI STORE')
 
     return data;
   } catch (error) {
@@ -346,7 +348,7 @@ export const userSlice = createSlice({
     },
     [classUser.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.userClasses = action.payload;
+      state.userSchedule = action.payload;
     },
     [classUser.rejected]: (state, action) => {
       state.isLoading = false;
