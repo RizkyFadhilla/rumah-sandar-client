@@ -113,19 +113,19 @@ const HeaderNavbar = () => {
         <Row style={{ flex: 6 }}>
           <Nav className="">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-            <Nav.Link onClick={() => navigate("/orphanages")}>
+            {role !== 'orphan' && <Nav.Link onClick={() => navigate("/orphanages")}>
               Daftar Panti
-            </Nav.Link>
+            </Nav.Link>}
             {!access_token && (
               <NavDropdown title="Daftar" id="navbarScrollingDropdown">
                 <NavDropdown.Item
-                  href="#action3"
+                  href=""
                   onClick={() => navigate("/register")}
                 >
                   Relawan
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  href="#action4"
+                  href=""
                   onClick={() => navigate("/register-adik")}
                 >
                   Adik Asuh
@@ -135,13 +135,13 @@ const HeaderNavbar = () => {
             {!access_token && (
               <NavDropdown title="Masuk" id="navbarScrollingDropdown">
                 <NavDropdown.Item
-                  href="#action3"
+                  href=""
                   onClick={() => navigate("/loginVolunteer")}
                 >
                   Relawan
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  href="#action4"
+                  href=""
                   onClick={() => navigate("/login")}
                 >
                   Adik Asuh
