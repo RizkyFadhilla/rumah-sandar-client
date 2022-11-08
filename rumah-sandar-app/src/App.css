@@ -60,6 +60,12 @@ body {
   margin-bottom: 15px !important;
 }
 
+.react-calendar__tile:hover {
+  border-radius: 20px !important;
+  background-color: pink I !important;
+}
+
+
 .react-calendar__tile--active {
   background: #74b9ff !important;
   color: white !important;

@@ -4,8 +4,19 @@ import photoKakak from '../assets/ex-photo-kakak.jpg'
 import photoAdik from '../assets/ex-photo-adik.jpg'
 import VideoRoom from "./VideoRoom";
 import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function Class() {
+ 
+  const location = useLocation()
+  console.log(location, 'ini apa datanya si location')
+
+
+  // console.log(todayClass, 'INI TODAY CLASS DI CLASS')
+
+  // console.log(route, 'kalo route doang masuk gak')
+  //   console.log(route.params, 'ini param di ruang class')
+
 
     const [Joined, setJoined] = useState(false)
     
@@ -22,7 +33,7 @@ export default function Class() {
         <div className="col-4">
           <div className="p-3" style={{backgroundColor: '#dfe4ea', marginBottom:20, borderRadius:15}}>
             <div style={{backgroundColor: '#F5F6FA', textAlign:'center', borderRadius:10}}>
-            <h3>Nama Kelas</h3> 
+            <h3>{location.state.ClassCategory.name}</h3> 
             </div>
             <div style={{display :'flex', alignContent:'center', marginTop:20}}>
                 <div>
