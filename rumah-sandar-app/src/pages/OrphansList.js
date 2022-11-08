@@ -68,7 +68,7 @@ export default function OrphansList() {
                 <td>{el.Orphan.email}</td>
                 <td>
                   {/* <Button onClick={() => setLgShow(true)}>Pilih</Button> */}
-                  <Button onClick={() => patchOrphan(el.Orphan?.id)}>Pilih</Button>
+                  <Button onClick={() => patchOrphan(el.id)}>Pilih</Button>
                 </td>
               </tr>
             );
@@ -77,5 +77,5 @@ export default function OrphansList() {
       </Table>
       <ModalChooseDate lgShow={lgShow} setLgShow={setLgShow} id={idOrphan} />
     </Container>
-  );
+  ); 
 }

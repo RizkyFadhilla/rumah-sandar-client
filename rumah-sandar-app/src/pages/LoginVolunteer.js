@@ -31,9 +31,11 @@ const LoginVolunteer = () => {
     try {
       e.preventDefault();
 
-      dispatch(submitLoginVolunteer(loginForm));
+      dispatch(submitLoginVolunteer(loginForm))
+      .then(() => {
+        navigate('/')
+      })
 
-      navigate('/');
     } catch (error) {
       console.log(error);
     }
