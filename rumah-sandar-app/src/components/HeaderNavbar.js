@@ -7,8 +7,6 @@ import {
   Navbar,
   Image,
   NavDropdown,
-  Row,
-  Col,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import LogoProfile from "../assets/ex-photo-kakak.jpg";
@@ -39,6 +37,7 @@ import {
   WorkplaceShareButton,
 } from "react-share";
 import Logo from "../assets/content.png";
+import { toast } from 'react-toastify'
 
 const HeaderNavbar = () => {
   const navigate = useNavigate();
@@ -53,7 +52,18 @@ const HeaderNavbar = () => {
 
     localStorage.clear();
     dispatch(fetchClassCategories());
-    navigate("/");
+    navigate("/")
+
+    toast('Akun kamu berhasil keluar!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
 
   function requestMatch(e) {
@@ -83,8 +93,7 @@ const HeaderNavbar = () => {
   return (
     <Navbar bg="light" variant="light" className="navbar" sticky="top">
       <Container>
-        <Row style={{ flex: 6 }}>
-          <Col style={{ flex: 2 }}>
+
             <Navbar.Brand href="#home">
               <img
                 src={LogoRumahSandar}
@@ -94,8 +103,7 @@ const HeaderNavbar = () => {
                 alt="React Bootstrap logo"
               />
             </Navbar.Brand>
-          </Col>
-          <Col style={{ flex: 10 }}>
+
             <FacebookShareButton url={shareUrl} quote={title}>
               <FacebookIcon size={30} round />
             </FacebookShareButton>
@@ -108,9 +116,8 @@ const HeaderNavbar = () => {
             <TwitterShareButton url={shareUrl} quote={title}>
               <TwitterIcon size={30} round />
             </TwitterShareButton>
-          </Col>
-        </Row>
-        <Row style={{ flex: 6 }}>
+       
+       
           <Nav className="">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate("/orphanages")}>
@@ -163,14 +170,24 @@ const HeaderNavbar = () => {
             {access_token && isMatched === "notMatch" && role === "orphan" && (
               <Nav.Link onClick={requestMatch}>Minta Pengajar</Nav.Link>
             )}
-            {access_token && (
+            {/* {access_token && (
               <Nav.Link className="ms-2" onClick={logoutHandler}>
                 Keluar
               </Nav.Link>
-            )}
-            {access_token && (
+            )} */}
+            {/* {access_token && (
               <Nav.Link className="ms-2">Hello, {username}!</Nav.Link>
-            )}
+            )} */}
+                {access_token && (
+                <NavDropdown title={username} id="navbarScrollingDropdown">
+                <NavDropdown.Item
+                  href=""
+                  onClick={logoutHandler}
+                >
+                  Keluar
+                </NavDropdown.Item>
+              </NavDropdown>
+              )}
             {access_token && (
               <Image
                 src={imageProfile}
@@ -180,7 +197,7 @@ const HeaderNavbar = () => {
               />
             )}
           </Nav>
-        </Row>
+      
       </Container>
     </Navbar>
   );

@@ -72,7 +72,9 @@ const RegisterAdik = () => {
     formData.append("fullName", registerForm.fullName);
     formData.append("OrphanageId", registerForm.OrphanageId);
     formData.append("imageUrl", imageUrl);
-    dispatch(submitRegisterOrphan(formData)).then(() => navigate("/"));
+    dispatch(submitRegisterOrphan(formData)).unwrap().then(() => navigate("/")).catch((error) => {
+      console.log(error)
+    })
   }
 
   // console.log(registerForm);
