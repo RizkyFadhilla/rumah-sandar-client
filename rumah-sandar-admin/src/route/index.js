@@ -1,4 +1,4 @@
-import {createBrowserRouter} from 'react-router-dom'
+import {createBrowserRouter, redirect} from 'react-router-dom'
 import Login from '../pages/Login'
 import Layout from '../pages/Layout'
 import TableVolunteer from '../pages/TableVolunteer'
@@ -7,10 +7,22 @@ import TableAdik from '../pages/TableAdik'
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Login/>
+        element: <Login/>,
+        loader: () => {
+            const token = localStorage.getItem('access_token');
+            if (token) {
+              throw redirect('/');
+            }
+          },
     },
     {
         element: <Layout/>,
+        loader: () => {
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+              throw redirect('/');
+            }
+          },
         children: [
             {
                 path: "/table-volunteer",
