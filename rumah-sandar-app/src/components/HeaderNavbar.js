@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Container, Nav, Navbar, Image, NavDropdown } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LogoProfile from '../assets/ex-photo-kakak.jpg';
 import LogoRumahSandar from '../assets/logo-rumah-sandar.png';
@@ -7,19 +8,32 @@ import LogoRumahSandar from '../assets/logo-rumah-sandar.png';
 const HeaderNavbar = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  const{ loginUser } = useSelector((state) => {
+    return state.user
+  })
 
   function logoutHandler(e) {
     e.preventDefault();
 
-    localStorage.clear();
-    navigate('/');
+    localStorage.clear()
+    navigate('/')
+    
   }
 
-  const access_token = localStorage.getItem('access_token');
-  const role = localStorage.getItem('role');
-  const isMacthed = localStorage.getItem('isMatch');
-
+  // const access_token = loginUser?.access_token
+  // const role = loginUser.sendData?.role
+  // const isMacthed = loginUser.sendData?.matchStatus
+  // const username = loginUser.sendData?.fullName
+  // const imageProfile = loginUser.sendData?.imageUrl
+  const access_token = localStorage.access_token
+  const role = localStorage.role
+  const isMacthed = localStorage.isMacthed
+  const username = localStorage.username
+  const imageProfile = localStorage.image
+  
+  // if(!access_token){
+  //   <Navbar bg="light" variant="light" className="navbar" sticky="top"></Navbar>  
+  // }
   return (
     <Navbar bg="light" variant="light" className="navbar" sticky="top">
       <Container>
@@ -52,14 +66,14 @@ const HeaderNavbar = () => {
 
           {access_token && role === 'volunteer' && <Nav.Link onClick={() => navigate('/orphansList')}>Daftar Adik</Nav.Link>}
           {access_token && !isMacthed && <Nav.Link onClick={() => navigate('/orphansList')}>Daftar Adik</Nav.Link>}
-          {access_token && <Nav.Link onClick={() => navigate('/schedule')}>Schedule</Nav.Link>}
+          {access_token && <Nav.Link onClick={() => navigate('/schedule')}>Jadwal Kelas</Nav.Link>}
           {access_token && (
             <Nav.Link className="ms-2" onClick={logoutHandler}>
               Keluar
             </Nav.Link>
           )}
-          {access_token && <Nav.Link className="ms-2">Hello, Arya!</Nav.Link>}
-          {access_token && <Image src={LogoProfile} width={'40'} height={'40'} roundedCircle={true} />}
+          {access_token && <Nav.Link className="ms-2">Hello, {username}!</Nav.Link>}
+          {access_token && <Image src={imageProfile} width={'40'} height={'40'} roundedCircle={true} />}
         </Nav>
       </Container>
     </Navbar>

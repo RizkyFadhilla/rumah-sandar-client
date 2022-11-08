@@ -16,8 +16,8 @@ export const submitLoginAdmin = createAsyncThunk(
     try {
       // console.log(input);r
       const response = await fetch(
-        "http://localhost:3000/admin/login",
-        // "https://rumah-sandar.herokuapp.com/admin/login",
+        // "http://localhost:3000/admin/login",
+        "https://rumah-sandar.herokuapp.com/admin/login",
         {
           method: "POST",
           headers: {
@@ -46,8 +46,8 @@ export const submitLoginAdmin = createAsyncThunk(
 export const fetchVolunteer = createAsyncThunk("fetchVolunteer", async () => {
   try {
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/admin/volunteers",
-      "http://localhost:3000/admin/volunteers",
+      "https://rumah-sandar.herokuapp.com/admin/volunteers",
+      // "http://localhost:3000/admin/volunteers",
       {
         method: "GET",
         headers: {
@@ -67,13 +67,13 @@ export const fetchVolunteer = createAsyncThunk("fetchVolunteer", async () => {
   }
 });
 
-export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
+export const patchOrphan = createAsyncThunk("patchOrphan", async (id) => {
   try {
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/payment/donations",
-      "http://localhost:3000/match",
+      `https://rumah-sandar.herokuapp.com/admin/volunteer/${id}`,
+      // `http://localhost:3000/admin/volunteer/${id}`,
       {
-        method: "GET",
+        method: "PATCH",
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
@@ -82,9 +82,7 @@ export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
     if (!response.ok) {
       throw await response.text();
     }
-    const data = await response.json();
-    console.log(data);
-
+    const data = response.json();
     return data;
   } catch (error) {
     console.log(error);

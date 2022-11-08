@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ModalChooseDate from "../components/ModalChooseDate";
-import { fetchOrphan } from "../redux/user";
+import { fetchMatch } from "../redux/user";
 
 const data = [
   {
@@ -34,8 +34,9 @@ export default function OrphansList() {
     return state.user;
   });
   useEffect(() => {
-    dispatch(fetchOrphan());
+    dispatch(fetchMatch());
   }, []);
+  
   if (isLoading) {
     return <h1>Please Wait</h1>;
   }
@@ -52,7 +53,7 @@ export default function OrphansList() {
           </tr>
         </thead>
         <tbody>
-          {dataOrphan.map((el, index) => {
+          {dataOrphan?.map((el, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>

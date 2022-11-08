@@ -9,6 +9,10 @@ import { useEffect, useState, useRef } from 'react';
   Talk.ready.then(() => markTalkLoaded(true));
 
   useEffect(() => {
+    
+  }, [])
+
+  useEffect(() => {
     if (talkLoaded) {
       const currentUser = new Talk.User({
         id: '2',

@@ -25,35 +25,11 @@ const CardContent = () => {
     slidesToShow: 2,
     slidesToScroll: 1,
   };
-
+  // if(!dataClassCategories){
+  //   <h1>Loading</h1>
+  // }
   return (
     <>
-      {localStorage.getItem('role') === 'orphan' && (
-        <Container className="content-donasi mt-5">
-          <h2>Materi</h2>
-          <Row>
-            <Slider {...settings}>
-              {dataClassCategories.map((e) => {
-                return (
-                  <div>
-                    <Col>
-                      <Card style={{ width: '18rem' }} className="text-center">
-                        <Card.Img variant="top" src={e.imgUrl} />
-                        <Card.Body>
-                          <Card.Title>{e.name}</Card.Title>
-                          <Button variant="primary" href={e.link}>
-                            Download Materi
-                          </Button>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  </div>
-                );
-              })}
-            </Slider>
-          </Row>
-        </Container>
-      )}
       <Container className="content-donasi mt-5">
         <h2>Donasi</h2>
         <Row>

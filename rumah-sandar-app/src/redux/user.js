@@ -10,6 +10,11 @@ const initialState = {
   dataOrphanages: [],
   dataClassCategories: [],
   dataOrphan: [],
+  matchUser: [],
+  loginUser:{access_token :localStorage.access_token, sendData :{
+    role:localStorage.role,isMacthed:localStorage.isMacthed, imageUrl:localStorage.image, fullName:localStorage.username
+  }
+  }
 };
 
 export const submitLoginVolunteer = createAsyncThunk(
@@ -18,8 +23,8 @@ export const submitLoginVolunteer = createAsyncThunk(
     try {
       console.log(input);
       const response = await fetch(
-        "http://localhost:3000/volunteer/login",
-        // "https://rumah-sandar.herokuapp.com/volunteer/login",
+        // "http://localhost:3000/volunteer/login",
+        "https://rumah-sandar.herokuapp.com/volunteer/login",
         {
           method: "POST",
           headers: {
@@ -36,11 +41,11 @@ export const submitLoginVolunteer = createAsyncThunk(
       const data = await response.json();
 
       localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("username", data.sendData.fullName);
-      localStorage.setItem("role", data.sendData.role);
-      localStorage.setItem("image", data.sendData.imageUrl);
-      localStorage.setItem("isMatched", data.sendData.isMatched);
-      console.log(data);
+      localStorage.setItem("username", data.sendData?.fullName);
+      localStorage.setItem("isMatched", data.sendData?.matchStatus)
+      localStorage.setItem("role", data.sendData?.role);
+      localStorage.setItem("image", data.sendData?.imageUrl);
+      console.log(data, 'ini data response login');
       return data;
     } catch (error) {
       console.log(error);
@@ -48,6 +53,7 @@ export const submitLoginVolunteer = createAsyncThunk(
   }
 );
 
+//UNTUK NAMPILIN DATA DAFTAR SCHEDULE/KELAS-KELASNYA DI HALAMAN SCHEDULE
 export const classUser = createAsyncThunk("getUserClass", async () => {
   try {
     const response = await fetch("https://rumah-sandar.herokuapp.com/classes", {
@@ -73,8 +79,8 @@ export const submitLoginOrphan = createAsyncThunk(
   "submitFormLogin",
   async (input) => {
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/orphan/login",
-      "http://localhost:3000/orphan/login",
+      "https://rumah-sandar.herokuapp.com/orphan/login",
+      // "http://localhost:3000/orphan/login",
       {
         method: "POST",
         headers: {
@@ -95,6 +101,8 @@ export const submitLoginOrphan = createAsyncThunk(
     localStorage.setItem("access_token", data.access_token);
     localStorage.setItem("username", data.sendData.fullName);
     localStorage.setItem("role", data.sendData.role);
+    localStorage.setItem("image", data.sendData.imageUrl);
+    localStorage.setItem("isMatched", data.sendData.matchStatus);
 
     return data;
   }
@@ -138,17 +146,51 @@ export const fetchOrphanages = createAsyncThunk("fetchOrphanages", async () => {
   }
 });
 
+export const fetchMatchById = createAsyncThunk(
+  'fetchMatchById',
+  async (id) => {
+    try {
+      const response = await fetch(
+        `https://rumah-sandar.herokuapp.com/match/${id}`,
+        // "http://localhost:3000/match",
+        {
+          method: "GET",
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        }
+      );
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      console.log(data);
+  
+      return data;
+
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)
+
 export const fetchClassCategories = createAsyncThunk(
   "fetchClassCategories",
   async () => {
     try {
+      // console.log(localStorage.getItem('access_token'), 'ini di storeeeeeeeeeeeeeeee')
       const response = await fetch(
         "https://rumah-sandar.herokuapp.com/categories",
         {
           method: "GET",
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
         }
       );
 
+      console.log(response, "ini di store");
       if (!response.ok) {
         throw await response.text();
       }
@@ -174,8 +216,8 @@ export const submitRegisterOrphan = createAsyncThunk(
   async (input) => {
     console.log(input, `<<<< di store`);
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/orphan/register",
-      "http://localhost:3000/orphan/register",
+      "https://rumah-sandar.herokuapp.com/orphan/register",
+      // "http://localhost:3000/orphan/register",
       {
         method: "POST",
         // headers: {
@@ -199,8 +241,8 @@ export const submitRegisterVolunteer = createAsyncThunk(
   async (input) => {
     console.log(input, `<<<< di store`);
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/volunteer/register",
-      "http://localhost:3000/volunteer/register",
+      "https://rumah-sandar.herokuapp.com/volunteer/register",
+      // "http://localhost:3000/volunteer/register",
       {
         method: "POST",
         // headers: {
@@ -219,12 +261,11 @@ export const submitRegisterVolunteer = createAsyncThunk(
   }
 );
 
-
-export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
+export const fetchMatch = createAsyncThunk("fetchMatch", async () => {
   try {
     const response = await fetch(
-      // "https://rumah-sandar.herokuapp.com/payment/donations",
-      "http://localhost:3000/match",
+      "https://rumah-sandar.herokuapp.com/match",
+      // "http://localhost:3000/match",
       {
         method: "GET",
         headers: {
@@ -243,6 +284,7 @@ export const fetchOrphan = createAsyncThunk("fetchOrphan", async () => {
     console.log(error);
   }
 });
+
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
@@ -292,16 +334,37 @@ export const userSlice = createSlice({
     [fetchClassCategories.rejected]: (state) => {
       state.isLoading = false;
     },
-    [fetchOrphan.pending]: (state) => {
+    [fetchMatch.pending]: (state) => {
       state.isLoading = true;
     },
-    [fetchOrphan.fulfilled]: (state, action) => {
+    [fetchMatch.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.dataOrphan = action.payload;
     },
-    [fetchOrphan.rejected]: (state) => {
+    [fetchMatch.rejected]: (state) => {
       state.isLoading = false;
     },
+    [fetchMatchById.pending]: (state) => {
+      state.isLoading = false;
+    },
+    [fetchMatchById.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.matchUser = action.payload;
+    },
+    [fetchMatchById.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [submitLoginOrphan.pending]: (state) => {
+      state.isLoading = false;
+    },
+    [submitLoginOrphan.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.loginUser.access_token = action.payload.access_token;
+      state.loginUser.sendData = action.payload.sendData;
+    },
+    [submitLoginOrphan.rejected]: (state) => {
+      state.isLoading = false;
+    }
   },
 });
 
