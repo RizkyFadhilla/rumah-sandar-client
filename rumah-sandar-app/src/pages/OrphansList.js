@@ -30,9 +30,16 @@ const data = [
 export default function OrphansList() {
   const [lgShow, setLgShow] = useState(false);
   const dispatch = useDispatch();
+  const [idOrphan, setIdOrphan] = useState()
   const { dataOrphan, isLoading } = useSelector((state) => {
     return state.user;
   });
+
+  function patchOrphan(id) {
+    setLgShow(true)
+    setIdOrphan(id)
+  }
+
   useEffect(() => {
     dispatch(fetchMatch());
   }, []);
@@ -60,14 +67,15 @@ export default function OrphansList() {
                 <td>{el.Orphan.fullName}</td>
                 <td>{el.Orphan.email}</td>
                 <td>
-                  <Button onClick={() => setLgShow(true)}>Choose</Button>
+                  {/* <Button onClick={() => setLgShow(true)}>Pilih</Button> */}
+                  <Button onClick={() => patchOrphan(el.Orphan?.id)}>Pilih</Button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </Table>
-      <ModalChooseDate lgShow={lgShow} setLgShow={setLgShow} />
+      <ModalChooseDate lgShow={lgShow} setLgShow={setLgShow} id={idOrphan} />
     </Container>
   );
 }

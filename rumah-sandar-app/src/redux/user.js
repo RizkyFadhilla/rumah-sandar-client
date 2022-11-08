@@ -285,6 +285,29 @@ export const fetchMatch = createAsyncThunk("fetchMatch", async () => {
   }
 });
 
+export const requestMatchOrphan = createAsyncThunk('requestMatch', async () => {
+  try {
+
+    const response = await fetch("https://rumah-sandar.herokuapp.com/match", {
+      method: 'POST',
+      headers: {
+        access_token: localStorage.getItem('access_token')
+      }
+    })
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+    const data = await response.json();
+    console.log(data);
+
+    return data;
+    
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 

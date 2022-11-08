@@ -4,6 +4,7 @@ import HeaderNavbar from '../components/HeaderNavbar';
 import CardMaterial from '../components/CardMaterial';
 
 const LandingPage = () => {
+  console.info("open landing pages")
   return (
     <>
       <HeaderNavbar />

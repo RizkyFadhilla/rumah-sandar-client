@@ -15,7 +15,8 @@ const CardContent = () => {
   
   useEffect(() => {
     dispatch(fetchDonation());
-    dispatch(fetchClassCategories());
+    //cardcontent
+    dispatch(fetchClassCategories()).unwrap().then(data => console.log(data, "===="))
   }, []);
 
   const settings = {

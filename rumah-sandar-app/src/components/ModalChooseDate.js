@@ -5,7 +5,7 @@ import DateTimePicker from 'react-datetime-picker';
 
 export default function ModalChooseDate(props) {
 
-    const { setLgShow, lgShow } = props
+    const { setLgShow, lgShow, id } = props
     const [value, onChange] = useState(new Date());
 
     return (
@@ -18,7 +18,7 @@ export default function ModalChooseDate(props) {
       >
         <Modal.Header>
           <Modal.Title id="example-modal-sizes-title-lg" className='text-center'>
-            Tentukan waktu untuk memulai mengajar adik
+            Tentukan tanggal untuk memulai mengajar adik
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -27,7 +27,7 @@ export default function ModalChooseDate(props) {
         </div>
         <div className='text-center mt-3'>
         <Button onClick={() => console.log(value)}>
-            Submit
+            Setuju
         </Button>
         </div>
         </Modal.Body>
