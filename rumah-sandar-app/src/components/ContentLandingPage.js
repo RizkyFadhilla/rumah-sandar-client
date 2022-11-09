@@ -2,14 +2,22 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import Logo from "../assets/content.png";
 
 const ContentLandingPage = () => {
-
+ 
+  
   return (
     <>
       <Container className="content-landing mt-5 shadow">
         <Row>
-          <Col className='col-8 mt-5'>
-            <h3><b>Selamat Datang di Rumah Sandar</b></h3>
-            <h6><em>Tempat belajar untuk adik-adik yang berada di bawah naungan yayasan panti asuhan di seluruh Indonesia.</em></h6>
+          <Col className="col-8 mt-5">
+            <h3>
+              <b>Selamat Datang di Rumah Sandar</b>
+            </h3>
+            <h6>
+              <em>
+                Tempat belajar untuk adik-adik yang berada di bawah naungan
+                yayasan panti asuhan di seluruh Indonesia.
+              </em>
+            </h6>
             <br></br>
             <p>
               Rumah Sandar adalah komunitas e-learning nirlaba untuk anak-anak

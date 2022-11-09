@@ -8,6 +8,8 @@ import { URL } from "../url";
 const initialState = {
   userSchedule: [],
   isLoading: true,
+  checkLoginUserLoading: true,
+  checkLoginUserDataLoading: true,
   dataDonation: [],
   dataOrphanages: [],
   dataClassCategories: [],
@@ -22,6 +24,8 @@ const initialState = {
       fullName: localStorage.username,
     },
   },
+  checkLoginUserMatchData: {},
+  loginUserDataNow: {},
 };
 
 export const submitLoginVolunteer = createAsyncThunk(
@@ -112,7 +116,7 @@ export const submitLoginOrphan = createAsyncThunk(
       localStorage.setItem("role", data.sendData.role);
       localStorage.setItem("image", data.sendData.imageUrl);
       localStorage.setItem("isMatched", data.sendData.matchStatus);
-
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -349,6 +353,51 @@ export const setDateMatch = createAsyncThunk(
   }
 );
 
+export const checkLoginUserMatch = createAsyncThunk(
+  "checkLoginUserMatch",
+  async () => {
+    try {
+      let response = await fetch(`${URL}/checkUser/studypair`, {
+        method: "GET",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      console.log(data, "ini data store check");
+
+      return data;
+    } catch (error) {
+      console.log(error, "ini error di store check");
+    }
+  }
+);
+export const checkLoginUserData = createAsyncThunk(
+  "checkLoginUserData",
+  async () => {
+    try {
+      let response = await fetch(`${URL}/checkUser/`, {
+        method: "GET",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      console.log(data, "ini data store check");
+
+      return data;
+    } catch (error) {
+      console.log(error, "ini error di store check");
+    }
+  }
+);
+
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
 export const userSlice = createSlice({
@@ -428,9 +477,30 @@ export const userSlice = createSlice({
     [submitLoginOrphan.rejected]: (state) => {
       state.isLoading = false;
     },
+    [checkLoginUserMatch.pending]: (state) => {
+      state.checkLoginUserLoading = true;
+    },
+    [checkLoginUserMatch.fulfilled]: (state, action) => {
+      state.checkLoginUserLoading = false;
+      state.checkLoginUserMatchData = action.payload;
+    },
+    [checkLoginUserMatch.rejected]: (state) => {
+      state.checkLoginUserLoading = false;
+    },
+    [checkLoginUserData.pending]: (state) => {
+      state.checkLoginUserDataLoading = true;
+    },
+    [checkLoginUserData.fulfilled]: (state, action) => {
+      state.checkLoginUserDataLoading = false;
+      state.loginUserDataNow = action.payload;
+    },
+    [checkLoginUserData.rejected]: (state) => {
+      state.checkLoginUserDataLoading = false;
+    },
   },
 });
-
+// checkLoginUserData
+// loginUserDataNow
 // Action creators are generated for each case reducer function
 //ini nama2 actionya, otomatis sama dengan nama reducernya
 export const {} = userSlice.actions;

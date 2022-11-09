@@ -1,17 +1,16 @@
-import { Container, Card, Button, Row, Col } from 'react-bootstrap';
-import { useEffect } from 'react';
-import Slider from 'react-slick';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchDonation, fetchClassCategories } from '../redux/user';
+import { Container, Card, Button, Row, Col } from "react-bootstrap";
+import { useEffect } from "react";
+import Slider from "react-slick";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDonation, fetchClassCategories } from "../redux/user";
 
 export default function CardMaterial() {
-
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { dataClassCategories } = useSelector((state) => {
     return state.user;
   });
-  
+
   useEffect(() => {
     dispatch(fetchClassCategories());
   }, []);
@@ -23,10 +22,10 @@ export default function CardMaterial() {
     slidesToShow: 2,
     slidesToScroll: 1,
   };
-  
-    return (
-        <>
-         {localStorage.getItem('role') === 'orphan' && (
+
+  return (
+    <>
+      {localStorage.getItem("role") === "orphan" && (
         <Container className="content-donasi mt-5">
           <h2>Materi</h2>
           <Row>
@@ -35,7 +34,7 @@ export default function CardMaterial() {
                 return (
                   <div>
                     <Col>
-                      <Card style={{ width: '18rem' }} className="text-center">
+                      <Card style={{ width: "18rem" }} className="text-center">
                         <Card.Img variant="top" src={e.imgUrl} />
                         <Card.Body>
                           <Card.Title>{e.name}</Card.Title>
@@ -52,8 +51,6 @@ export default function CardMaterial() {
           </Row>
         </Container>
       )}
-        
-        
-        </>
-    )
+    </>
+  );
 }
