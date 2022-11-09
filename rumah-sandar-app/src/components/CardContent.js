@@ -1,4 +1,4 @@
-import { Container, Card, Button, Row, Col, Image } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
 import { useEffect } from 'react';
 import Slider from 'react-slick';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import { fetchDonation, fetchClassCategories } from '../redux/user';
 
 const CardContent = () => {
   const dispatch = useDispatch();
-  const { dataDonation, dataClassCategories } = useSelector((state) => {
+  const { dataDonation } = useSelector((state) => {
     return state.user;
   });
 
@@ -17,6 +17,10 @@ const CardContent = () => {
       .then((data) => console.log(data, '===='));
   }, []);
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("id-ID", { year: 'numeric', month: 'short', day: 'numeric' })
+  }
+
   const settings = {
     dots: true,
     infinite: true,
@@ -25,14 +29,15 @@ const CardContent = () => {
     slidesToScroll: 3,
   };
   if (!dataDonation) {
-    <h1>Loading</h1>;
+    <h1>Loading</h1>
   }
   return (
     <>
       {localStorage.getItem('role') !== 'orphan' && (
         <Container className="content-donasi mt-5 shadow">
-          <h2 className='text-center'>
-            <b>Donasi</b>
+          <h2 className='text-center mb-4'>
+            <b
+            >Donasi</b>
           </h2>
           <Slider {...settings} className='ms-3 me-5'>
             {dataDonation?.map((e) => {
@@ -43,10 +48,16 @@ const CardContent = () => {
                     <Card.Img variant="top" src={e.imgUrl} style={{ objectFit: "cover", height: "250px" }} />
                     <Card.Body className=''>
                       <Card.Title>{e.name}</Card.Title>
-                      <Card.Text>{e.on_demand_link}</Card.Text>
-                      <Button variant="primary" href={linkDonation}>
-                        Donate
-                      </Button>
+                      <Row>
+                        <Col>
+                          <Card.Text>Total: Rp.5000 {e.totalAmount}</Card.Text>
+                        </Col>
+                        <Col>
+                          <p>{formatDate(e.validUntil)}</p>
+                        </Col>
+                      </Row>
+                      <Card.Link href={linkDonation}>Donasi</Card.Link>
+                      <Card.Link href="#">Lihat detail</Card.Link>
                     </Card.Body>
                   </Card>
                 </div>

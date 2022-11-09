@@ -38,7 +38,7 @@ const Register = () => {
     formData.append('imageUrl', imageUrl);
     formData.append('curriculumVitae', curriculumVitae);
     formData.append('lastEducation', registerForm.lastEducation);
-    console.log(formData);
+    // console.log(formData);
     toast('Akunmu sudah terdaftar, silahkan tunggu verifikasi ya!', {
       position: "top-center",
       autoClose: 3000,
