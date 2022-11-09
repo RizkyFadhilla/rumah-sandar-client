@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { submitLoginOrphan } from '../redux/user';
 import { ArrowRightSquare, ArrowLeftSquare } from 'react-bootstrap-icons';
+import {toast} from 'react-toastify'
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,21 @@ const Login = () => {
 
       dispatch(submitLoginOrphan(loginForm))
       .then(()=>  navigate('/'))
+      .then(() => {
+        toast('Akun kamu berhasil masuk!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+      })
+
+      
     
     } catch (error) {
       console.log(error);
@@ -56,11 +72,11 @@ const Login = () => {
               <Form.Control type="password" placeholder="Password" name="password" value={loginForm.password} onChange={changeHandler} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
-            <Button variant="primary" type="submit" className="me-3">
-              Login <ArrowRightSquare/>
+            <Button className="me-3" variant="secondary" type="submit" onClick={() => navigate('/')}>
+              Back 
             </Button>
-            <Button variant="secondary" type="submit" onClick={() => navigate('/')}>
-              Back <ArrowLeftSquare/>
+            <Button variant="primary" type="submit" >
+              Login 
             </Button>
           </Form>
         </Card.Body>

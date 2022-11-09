@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-toastify'
 
 const HeaderNavbar = () => {
   const navigate = useNavigate()
@@ -8,7 +9,19 @@ const HeaderNavbar = () => {
     e.preventDefault();
 
     localStorage.clear()
-    navigate('/')
+    
+    navigate('/') 
+    
+    toast('Akun kamu berhasil keluar!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
     
   }
 
