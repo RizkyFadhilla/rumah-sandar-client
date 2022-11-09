@@ -3,6 +3,8 @@ import { Container, Form, Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { submitLoginVolunteer } from '../redux/user';
+import {toast} from 'react-toastify'
+import {unwrapResult} from '@reduxjs/toolkit'
 
 const LoginVolunteer = () => {
   const dispatch = useDispatch();
@@ -32,12 +34,24 @@ const LoginVolunteer = () => {
       e.preventDefault();
 
       dispatch(submitLoginVolunteer(loginForm))
+      // .then(unwrapResult)
       .then(() => {
         navigate('/')
+      }).then(() => {
+        toast('Akun kamu berhasil masuk!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       })
 
     } catch (error) {
-      console.log(error);
+      console.log(error, 'ini catchnyaa');
     }
   }
 
@@ -57,12 +71,13 @@ const LoginVolunteer = () => {
               <Form.Control type="password" placeholder="Password" name="password" value={loginForm.password} onChange={changeHandler} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
-            <Button variant="primary" type="submit" className="me-3">
-              Submit
-            </Button>
-            <Button variant="secondary" type="submit" onClick={() => navigate('/')}>
+            <Button className="me-3" variant="secondary" type="submit" onClick={() => navigate('/')}>
               Back
             </Button>
+            <Button variant="primary" type="submit" >
+              Submit
+            </Button>
+
           </Form>
         </Card.Body>
       </Card>

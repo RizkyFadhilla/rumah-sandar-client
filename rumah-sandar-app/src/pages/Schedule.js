@@ -14,24 +14,35 @@ export default function Schedule() {
   
   const [value, onChange] = useState(new Date());
   const [Joined, setJoined] = useState(false);
-  const classSchedules = ["2022-11-08", "2022-11-11"]; //yy-mm-dd
   const today = JSON.stringify(new Date()).substring(1, 11);
-  
+  // let classSchedules = []
+
   const { userSchedule } = useSelector((state) => {
     return state.user
   })
+
+  // dapetin jadwal match dari user yang login 
+  // userSchedule[0]?.Classes?.forEach((el) => {
+  //   classSchedules.push(el.date)
+  // })
+
+  // console.log(classSchedules, 'INI JADWAL SCHEDULENYA SETELAH DI PUSH FOR EACH')
+
+  //data ini bakal dapet dari userSchedule.Classes.date kan
+  const classSchedules = ["2022-11-05", "2022-11-09"]; //yy-mm-dd
+
+
+  
+
+  console.log(userSchedule, 'INI SCHEDULE DARI SELECTOR')
+
   useEffect(()=>{
-    dispatch(classUser)
+    console.log('useeffect kepanggil')
+  dispatch(classUser())
   },[])
   
 
   
-  // useEffect(() => {
-  //   dispatch(classUser());
-  // }, []);
-  
-  console.log(userSchedule, 'INI DI HALAMAN SCHEDULE')
-
   const userClasses = [
     {
       id: 1,
@@ -66,7 +77,7 @@ export default function Schedule() {
           id: 2,
           MatchId: 1,
           description: "This is Matemathic Class",
-          date: "2022-11-08T00:00:00.000Z",
+          date: "2022-11-09T00:00:00.000Z",
           ClassCategoryId: 2,
           verifiedByOrphan: null,
           verifiedByVolunteer: null,
@@ -236,18 +247,23 @@ export default function Schedule() {
       ],
     },
   ];
+
+  // const editedUserClasses = userClasses[0].Classes.map((el) => {
+  //   return el.date = el.date.substring(0, 10);
+  // });
+
+
   userClasses[0].Classes.forEach((el) => {
     el.date = el.date.substring(0, 10);
   });
 
-  console.log(userClasses[0], 'ini kelas2nya')
+  // const todayClass = editedUserClasses[0].Classes.find((el) => el.date === today)
+  console.log(userClasses, 'INI SETELA DI FOREACH')
 
   const todayClass = userClasses[0].Classes.find((el) => el.date === today)
 
-  console.log(todayClass, 'KELAS HARI ININYA BENER GAK')
-
-  
-
+  console.log(todayClass, 'INI TODAY CLASSNYA ADA GAK')
+  console.log(today, 'ini today format')
 
   return (
     <>
@@ -264,10 +280,10 @@ export default function Schedule() {
               overflowY: 'scroll'
             }}
           >
-            {userClasses[0]?.Classes?.map((el) => {
+            {userClasses[0]?.Classes?.map((el, index) => {
               if (el.date > today) {
                 return (
-                  <Card className="mt-2">
+                  <Card key={index} className="mt-2">
                     <Card.Body className="mt-2">
                       <div>Kelas : {el.ClassCategory?.name}</div>
                       <div>Deskripsi : {el.description}</div>

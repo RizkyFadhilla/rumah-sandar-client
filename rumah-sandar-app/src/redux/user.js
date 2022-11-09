@@ -22,6 +22,7 @@ const initialState = {
       fullName: localStorage.username,
     },
   },
+  talkUser: []
 };
 
 export const submitLoginVolunteer = createAsyncThunk(
@@ -63,6 +64,7 @@ export const submitLoginVolunteer = createAsyncThunk(
 //UNTUK NAMPILIN DATA DAFTAR SCHEDULE/KELAS-KELASNYA DI HALAMAN SCHEDULE
 export const classUser = createAsyncThunk("getUserClass", async () => {
   try {
+    console.log('masuk class user store gak')
     const response = await fetch(`${URL}/classes`, {
       method: "GET",
       headers: {
@@ -322,8 +324,6 @@ export const setDateMatch = createAsyncThunk(
     try {
       let input = newDate;
 
-      console.log(input, id, "INI DI STORE");
-
       const response = await fetch(
         `https://rumah-sandar.herokuapp.com/match/${id}`,
         {
@@ -348,6 +348,27 @@ export const setDateMatch = createAsyncThunk(
     }
   }
 );
+
+export const getTalkUser = createAsyncThunk('getTalkUser',
+async() => {
+  try {
+    console.log('masuk gettalkuser actionya')
+    let response = await fetch(`${URL}/checkUser/studypair`, {
+      method : 'GET',
+      headers: {
+        access_token: localStorage.getItem("access_token"),
+      }
+    })
+    if (!response.ok) {
+      throw await response.text();
+    }   
+    const data = await response.json();
+    console.log(data, 'ini return data action get talknya')
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
@@ -426,6 +447,16 @@ export const userSlice = createSlice({
       state.loginUser.sendData = action.payload.sendData;
     },
     [submitLoginOrphan.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [getTalkUser.pending]: (state) => {
+      state.isLoading = false;
+    },
+    [getTalkUser.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.talkUser = action.payload;
+    },
+    [getTalkUser.rejected]: (state) => {
       state.isLoading = false;
     },
   },
