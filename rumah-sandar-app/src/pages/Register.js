@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { submitRegisterVolunteer } from '../redux/user';
 import { useDispatch } from 'react-redux';
+import {toast} from 'react-toastify'
 
 const Register = () => {
   const [isChecked, setChecked] = useState(false);
@@ -38,6 +39,16 @@ const Register = () => {
     formData.append('curriculumVitae', curriculumVitae);
     formData.append('lastEducation', registerForm.lastEducation);
     console.log(formData);
+    toast('Akunmu sudah terdaftar, silahkan tunggu verifikasi ya!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
     dispatch(submitRegisterVolunteer(formData)).then(() => navigate('/'));
   }
 
@@ -145,7 +156,7 @@ const Register = () => {
             <Form>
               {['checkbox'].map((type) => (
                 <div key={`default-${type}`} className="mb-3">
-                  <Form.Check type={type} id={`default-${type}`} label={`Saya Setuju`} value={isChecked} onChange={handleChange} />
+                  <Form.Check type={type} id={`default-${type}`} label={`Saya Setuju dengan S&K`} value={isChecked} onChange={handleChange} />
                 </div>
               ))}
             </Form>
@@ -160,7 +171,7 @@ const Register = () => {
       </Card>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Terms and Condition</Modal.Title>
+          <Modal.Title>Syarat dan Ketentuan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type

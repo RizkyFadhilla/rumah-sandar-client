@@ -87,7 +87,7 @@ const RegisterAdik = () => {
           <Form onSubmit={handleSubmit}>
             {/* EMAIL ADDRESS */}
             <Form.Group className="mb-3">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Alamat Email</Form.Label>
               <Form.Control
                 // value={registerForm.email}
                 // onChange={handleChange}
@@ -96,13 +96,13 @@ const RegisterAdik = () => {
                 }}
                 name="email"
                 type="email"
-                placeholder="Enter email"
+                placeholder="Masukan email"
               />
             </Form.Group>
 
             {/* USERNAME*/}
             <Form.Group className="mb-3">
-              <Form.Label>Fullname</Form.Label>
+              <Form.Label>Nama Lengkap</Form.Label>
               <Form.Control
                 // value={registerForm.fullName}
                 // onChange={handleChange}
@@ -114,7 +114,7 @@ const RegisterAdik = () => {
                 }}
                 name="fullName"
                 type="text"
-                placeholder="Enter username"
+                placeholder="Masukan Nama Lengkap"
               />
             </Form.Group>
 
@@ -132,7 +132,7 @@ const RegisterAdik = () => {
                 }}
                 name="password"
                 type="password"
-                placeholder="Enter password"
+                placeholder="Masukan password"
               />
             </Form.Group>
 
@@ -150,7 +150,7 @@ const RegisterAdik = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Oprhanages</Form.Label>
+              <Form.Label>Panti</Form.Label>
               <Form.Select
                 // onChange={handleChange}
                 // value={registerForm.OrphanageId}
@@ -172,16 +172,16 @@ const RegisterAdik = () => {
                 })}
               </Form.Select>
             </Form.Group>
-
-            <Button variant="primary" type="submit" className="me-3">
-              Submit <ArrowBarRight />
-            </Button>
             <Button
               variant="secondary"
               type="submit"
+              className="me-3"
               onClick={() => navigate("/")}
             >
-              Back <ArrowBarLeft />
+              Kembali
+            </Button>
+            <Button variant="primary" type="submit">
+              Daftar
             </Button>
           </Form>
         </Card.Body>
