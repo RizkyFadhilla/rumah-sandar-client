@@ -5,29 +5,6 @@ import CardNarasi from "../components/CardNarasi";
 import ModalChooseDate from "../components/ModalChooseDate";
 import { fetchMatch } from "../redux/user";
 
-const data = [
-  {
-    name: "Arya Yudha",
-    email: "arya@gmail.com",
-  },
-  {
-    name: "Lanny",
-    email: "lanny@gmail.com",
-  },
-  {
-    name: "Muhammad Fachrul",
-    email: "fachrul@gmail.com",
-  },
-  {
-    name: "Wandi",
-    email: "wandi@gmail.com",
-  },
-  {
-    name: "Rizky Fadhillah",
-    email: "rizky@gmail.com",
-  },
-];
-
 export default function OrphansList() {
   const [lgShow, setLgShow] = useState(false);
   const dispatch = useDispatch();
@@ -68,17 +45,17 @@ export default function OrphansList() {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{el.Orphan.fullName}</td>
-                <td>{el.Orphan.email}</td>
+                <td>{el.Orphan?.fullName}</td>
+                <td>{el.Orphan?.email}</td>
                 <td> <Image
-                src={el.Orphan.imageUrl}
+                src={el.Orphan?.imageUrl}
                 width={"60"}
                 height={"60"}
                 roundedCircle={true}
-                alt={el.Orphan.name}
+                alt={el.Orphan?.name}
               />
                 </td>
-                <td>{el.Orphan.Orphanage.address}</td>
+                <td>{el.Orphan?.Orphanage?.address}</td>
 
 
 
