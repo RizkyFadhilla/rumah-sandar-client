@@ -11,48 +11,47 @@ import { Container, Nav, Navbar, Image, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import LogoProfile from "../assets/ex-photo-kakak.jpg";
 import LogoRumahSandar from "../assets/logo-rumah-sandar.png";
-import {
-  EmailShareButton,
-  EmailIcon,
-  FacebookShareButton,
-  FacebookIcon,
-  HatenaShareButton,
-  InstapaperShareButton,
-  LineShareButton,
-  LinkedinShareButton,
-  LivejournalShareButton,
-  MailruShareButton,
-  OKShareButton,
-  PinterestShareButton,
-  PocketShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  ViberShareButton,
-  VKShareButton,
-  WhatsappShareButton,
-  WhatsappIcon,
-  WorkplaceShareButton,
-} from "react-share";
+// import {
+//   EmailShareButton,
+//   EmailIcon,
+//   FacebookShareButton,
+//   FacebookIcon,
+//   HatenaShareButton,
+//   InstapaperShareButton,
+//   LineShareButton,
+//   LinkedinShareButton,
+//   LivejournalShareButton,
+//   MailruShareButton,
+//   OKShareButton,
+//   PinterestShareButton,
+//   PocketShareButton,
+//   RedditShareButton,
+//   TelegramShareButton,
+//   TumblrShareButton,
+//   TwitterIcon,
+//   TwitterShareButton,
+//   ViberShareButton,
+//   VKShareButton,
+//   WhatsappShareButton,
+//   WhatsappIcon,
+//   WorkplaceShareButton,
+// } from "react-share";
 import Logo from "../assets/content.png";
 
 const HeaderNavbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   function logoutHandler(e) {
     e.preventDefault();
 
     localStorage.clear()
     dispatch(fetchClassCategories())
-    .then(()=>{
-      return dispatch(checkLoginUserData())
-    }).then(()=>{
-      return navigate("/");
-    })
+      .then(() => {
+        return dispatch(checkLoginUserData())
+      }).then(() => {
+        return navigate("/");
+      })
 
     toast("Akun kamu berhasil keluar!", {
       position: "top-center",
@@ -66,28 +65,21 @@ const HeaderNavbar = () => {
     });
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(checkLoginUserData())
-  },[])
-  // const access_token = loginUser?.access_token
-  // const role = loginUser.sendData?.role
-  // const isMacthed = loginUser.sendData?.matchStatus
-  // const username = loginUser.sendData?.fullName
-  // const imageProfile = loginUser.sendData?.imageUrl
+  }, [])
   const access_token = localStorage.access_token;
   const role = localStorage.role;
   const isMatched = localStorage.isMatched;
   const username = localStorage.username;
   const imageProfile = localStorage.image;
-  const shareUrl = "https://rumah-sandar.web.app/";
-  const title = "Rumah Sandar";
-  
-  // console.log(noMatch, "ini no matchnya");
-  // console.log(checkLoginUserMatchData, "ini datanya");
+  // const shareUrl = "https://rumah-sandar.web.app/";
+  // const title = "Rumah Sandar";
+
   return (
     <Navbar bg="light" variant="light" className="navbar" sticky="top">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img
             src={LogoRumahSandar}
             width="50"
@@ -97,7 +89,7 @@ const HeaderNavbar = () => {
           />
         </Navbar.Brand>
 
-        <FacebookShareButton url={shareUrl} quote={title}>
+        {/* <FacebookShareButton url={shareUrl} quote={title}>
           <FacebookIcon size={30} round />
         </FacebookShareButton>
         <WhatsappShareButton url={shareUrl} quote={title} separator=":: ">
@@ -108,7 +100,7 @@ const HeaderNavbar = () => {
         </EmailShareButton>
         <TwitterShareButton url={shareUrl} quote={title}>
           <TwitterIcon size={30} round />
-        </TwitterShareButton>
+        </TwitterShareButton> */}
 
         <Nav className="">
           <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
@@ -153,15 +145,6 @@ const HeaderNavbar = () => {
               Jadwal Kelas
             </Nav.Link>
           )}
-          
-          {/* {access_token && (
-              <Nav.Link className="ms-2" onClick={logoutHandler}>
-                Keluar
-              </Nav.Link>
-            )} */}
-          {/* {access_token && (
-              <Nav.Link className="ms-2">Hello, {username}!</Nav.Link>
-            )} */}
           {access_token && (
             <NavDropdown title={username} id="navbarScrollingDropdown">
               <NavDropdown.Item href="" onClick={logoutHandler}>
