@@ -1,9 +1,13 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import Logo from "../assets/content.png";
+import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon, WhatsappShareButton, WhatsappIcon } from "react-share"
+// const shareUrl = "https://rumah-sandar.web.app/";
+const shareUrl = "https://153e-202-165-46-22.ap.ngrok.io";
+
 
 const ContentLandingPage = () => {
- 
-  
+
+
   return (
     <>
       <Container className="content-landing mt-5 shadow">
@@ -33,6 +37,27 @@ const ContentLandingPage = () => {
           <Col className="col-4">
             <Image src={Logo} width={"350"} />
           </Col>
+          <div>
+            Ajak teman untuk jadi relawan, bagikan Informasi tentang Rumah Sandar:<br></br>
+            <TwitterShareButton url={shareUrl}>
+              <TwitterIcon size={30} round />
+            </TwitterShareButton>
+
+            <FacebookShareButton url={shareUrl}>
+              <FacebookIcon size={30} round />
+            </FacebookShareButton>
+
+            <WhatsappShareButton url={shareUrl}
+              // quote={title} 
+              separator=":: ">
+              <WhatsappIcon size={30} round />
+            </WhatsappShareButton>
+
+
+
+
+
+          </div>
         </Row>
       </Container>
     </>
