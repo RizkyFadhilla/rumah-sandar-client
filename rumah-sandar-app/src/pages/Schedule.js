@@ -1,5 +1,6 @@
+import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { Container, Card } from "react-bootstrap";
+import { Container, Card, Button, Alert } from "react-bootstrap";
 import Calendar from "react-calendar";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,247 +8,56 @@ import { classUser } from "../redux/user";
 import VideoRoom from "./VideoRoom";
 
 export default function Schedule() {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
-  const [value, onChange] = useState(new Date());
-  const [Joined, setJoined] = useState(false);
-  const classSchedules = ["2022-11-08", "2022-11-11"]; //yy-mm-dd
-  const today = JSON.stringify(new Date()).substring(1, 11);
-  
   const { userSchedule } = useSelector((state) => {
-    return state.user
-  })
-  useEffect(()=>{
-    dispatch(classUser)
-  },[])
-  
-
-  
-  // useEffect(() => {
-  //   dispatch(classUser());
-  // }, []);
-  
-  console.log(userSchedule, 'INI DI HALAMAN SCHEDULE')
-
-  const userClasses = [
-    {
-      id: 1,
-      VolunteerId: 1,
-      OrphanId: 1,
-      startDate: "2022-11-05T00:00:00.000Z",
-      hour: "13:00:00",
-      endDate: "2023-01-21T00:00:00.000Z",
-      createdAt: "2022-11-04T20:24:28.884Z",
-      updatedAt: "2022-11-04T20:48:20.798Z",
-      Classes: [
-        {
-          id: 1,
-          MatchId: 1,
-          description: "This is Bahasa Indonesia Class",
-          date: "2022-11-05T00:00:00.000Z",
-          ClassCategoryId: 1,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 1,
-            name: "Bahasa Indonesia",
-            link: "https://drive.google.com/drive/folders/1CtSmvwDWkYJ-hYehnvp7MNXx6eXu9LV_?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 2,
-          MatchId: 1,
-          description: "This is Matemathic Class",
-          date: "2022-11-08T00:00:00.000Z",
-          ClassCategoryId: 2,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 2,
-            name: "Matematika",
-            link: "https://drive.google.com/drive/folders/1xE33PkAEM0mLljAKd4wuk3pL0Yxg9xxb?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 3,
-          MatchId: 1,
-          description: "This is Physic Class",
-          date: "2022-11-19T00:00:00.000Z",
-          ClassCategoryId: 3,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 3,
-            name: "Pendidikan Jasmani",
-            link: "https://drive.google.com/drive/folders/1B_OADX0v31QHyaPPL6J5nsfJ3xbxftB4?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 4,
-          MatchId: 1,
-          description: "This is Pancasila Class",
-          date: "2022-11-26T00:00:00.000Z",
-          ClassCategoryId: 4,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 4,
-            name: "Pendidikan Pancasila",
-            link: "https://drive.google.com/drive/folders/1dUKWBe1atPP6T_HjxaJDKPQZoG4rOUA0?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 4,
-          MatchId: 1,
-          description: "This is Pancasila Class",
-          date: "2022-11-26T00:00:00.000Z",
-          ClassCategoryId: 4,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 4,
-            name: "Pendidikan Pancasila",
-            link: "https://drive.google.com/drive/folders/1dUKWBe1atPP6T_HjxaJDKPQZoG4rOUA0?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 4,
-          MatchId: 1,
-          description: "This is Pancasila Class",
-          date: "2022-11-26T00:00:00.000Z",
-          ClassCategoryId: 4,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 4,
-            name: "Pendidikan Pancasila",
-            link: "https://drive.google.com/drive/folders/1dUKWBe1atPP6T_HjxaJDKPQZoG4rOUA0?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 4,
-          MatchId: 1,
-          description: "This is Pancasila Class",
-          date: "2022-11-26T00:00:00.000Z",
-          ClassCategoryId: 4,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 4,
-            name: "Pendidikan Pancasila",
-            link: "https://drive.google.com/drive/folders/1dUKWBe1atPP6T_HjxaJDKPQZoG4rOUA0?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 4,
-          MatchId: 1,
-          description: "This is Pancasila Class",
-          date: "2022-11-26T00:00:00.000Z",
-          ClassCategoryId: 4,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 4,
-            name: "Pendidikan Pancasila",
-            link: "https://drive.google.com/drive/folders/1dUKWBe1atPP6T_HjxaJDKPQZoG4rOUA0?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 4,
-          MatchId: 1,
-          description: "This is Pancasila Class",
-          date: "2022-11-26T00:00:00.000Z",
-          ClassCategoryId: 4,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 4,
-            name: "Pendidikan Pancasila",
-            link: "https://drive.google.com/drive/folders/1dUKWBe1atPP6T_HjxaJDKPQZoG4rOUA0?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-        {
-          id: 4,
-          MatchId: 1,
-          description: "This is Pancasila Class",
-          date: "2022-11-26T00:00:00.000Z",
-          ClassCategoryId: 4,
-          verifiedByOrphan: null,
-          verifiedByVolunteer: null,
-          createdAt: "2022-11-04T20:48:20.846Z",
-          updatedAt: "2022-11-04T20:48:20.846Z",
-          ClassCategory: {
-            id: 4,
-            name: "Pendidikan Pancasila",
-            link: "https://drive.google.com/drive/folders/1dUKWBe1atPP6T_HjxaJDKPQZoG4rOUA0?usp=share_link",
-            imgUrl: "https://bit.ly/3WtIFkx",
-            createdAt: "2022-11-04T19:42:59.876Z",
-            updatedAt: "2022-11-04T19:42:59.876Z",
-          },
-        },
-      ],
-    },
-  ];
-  userClasses[0].Classes.forEach((el) => {
-    el.date = el.date.substring(0, 10);
+    return state.user;
   });
 
-  console.log(userClasses[0], 'ini kelas2nya')
+  console.log(userSchedule, "ini data dari store");
 
-  const todayClass = userClasses[0].Classes.find((el) => el.date === today)
+  const [value, onChange] = useState(new Date());
+  const [Joined, setJoined] = useState(false);
+  const today = JSON.stringify(new Date()).substring(1, 11);
+  const todayDate = new Date();
 
-  console.log(todayClass, 'KELAS HARI ININYA BENER GAK')
+  let classSchedules = [];
 
-  
+  userSchedule[0]?.Classes?.forEach((el) => {
+    classSchedules.push(el.date);
+  });
 
+  let classSchedulesFormatted = classSchedules.map((el) => {
+    return el.substring(0, 10);
+  });
+
+  useEffect(() => {
+    dispatch(classUser());
+  }, []);
+
+  // CONTOH KALO DITARO DI USE EFFECT
+  // useEffect(() => {
+  //   const todayClass = userSchedule[0]?.Classes.filter((el) => {
+  //     console.log(el.date.substring(0, 10), 'ini dalem loopingan')
+  //     console.log(today,'sama kaya ini gak')
+  //     if(el.date.substring(0, 10) == today) {
+  //       return el
+  //     } else {
+  //       return
+  //     }
+  //   })
+  // },[userSchedule])
+
+  const todayClass = userSchedule[0]?.Classes.filter((el) => {
+    if (el.date.substring(0, 10) == today) {
+      return el;
+    } else {
+      return;
+    }
+  });
+
+  console.log(todayClass, "INI TODAY CLASS");
 
   return (
     <>
@@ -261,19 +71,40 @@ export default function Schedule() {
               alignItems: "center",
               backgroundColor: "white",
               maxHeight: 590,
-              overflowY: 'scroll'
+              overflowY: "scroll",
             }}
           >
-            {userClasses[0]?.Classes?.map((el) => {
+            <div>
+              <h2 style={{ textAlign: "center" }}>DETAIL JADWAL KELAS</h2>
+            </div>
+            {userSchedule[0]?.Classes?.map((el, index) => {
               if (el.date > today) {
                 return (
-                  <Card className="mt-2">
-                    <Card.Body className="mt-2">
-                      <div>Kelas : {el.ClassCategory?.name}</div>
-                      <div>Deskripsi : {el.description}</div>
-                      <div>Jam : {userClasses[0]?.hour}</div>
-                      <div>
-                        <img />
+                  <Card key={index} className="mt-2">
+                    <Card.Body style={{ backgroundColor: "#e3f2fd" }}>
+                      <div style={{ padding: 10 }}>
+                        <div style={{ border: "solid", borderColor: "silver" }}>
+                          <div style={{ textAlign: "center", fontSize: 24 }}>
+                            Kelas
+                          </div>
+                          <div style={{ textAlign: "center", fontSize: 20 }}>
+                            {el.ClassCategory?.name}
+                          </div>
+                          <div style={{ textAlign: "center", fontSize: 16 }}>
+                            {el.description}
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            textAlign: "center",
+                            marginTop: 10,
+                            backgroundColor: "#1a237e",
+                            color: "#ffffff",
+                          }}
+                        >
+                          Tanggal : {el.date.substring(0, 10)}
+                        </div>
+                        <div></div>
                       </div>
                     </Card.Body>
                   </Card>
@@ -285,9 +116,7 @@ export default function Schedule() {
             className="col-8 schedule"
             style={{
               marginTop: 30,
-              alignSelf: 'center'
-     
- 
+              alignSelf: "center",
             }}
           >
             <Calendar
@@ -307,18 +136,33 @@ export default function Schedule() {
 
                 const realDate = date.getFullYear() + "-" + month + "-" + day;
 
-                if (classSchedules.find((schedule) => schedule === realDate)) {
+                if (
+                  classSchedulesFormatted.find(
+                    (schedule) => schedule === realDate
+                  )
+                ) {
                   return "highlight";
                 }
               }}
             />
-            <div style={{marginTop: 20, textAlign:'center'}}>
-              {classSchedules.map((schedule) => {
+            <div style={{ marginTop: 20, textAlign: "center" }}>
+              {classSchedulesFormatted.map((schedule) => {
                 if (schedule == today) {
                   return (
-                    <button  onClick={() => navigate("/class", {state: todayClass })}>
-                      Masuk Kelas
-                    </button>
+                    <>
+                      <Alert variant="primary" style={{ margin: 10 }}>
+                        Hari ini kamu ada jadwal kelas, silahkan masuk melalu
+                        tombol dibawah ini!
+                      </Alert>
+                      <Button
+                        className="btn btn-outline-primary mt-2"
+                        onClick={() =>
+                          navigate("/class", { state: todayClass })
+                        }
+                      >
+                        Masuk Kelas
+                      </Button>
+                    </>
                   );
                 }
               })}

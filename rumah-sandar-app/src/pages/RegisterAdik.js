@@ -102,7 +102,6 @@ const RegisterAdik = () => {
         theme: "light",
         });
 
-
     })
   }
 
@@ -143,7 +142,8 @@ const RegisterAdik = () => {
                 }}
                 name="fullName"
                 type="text"
-                placeholder="Masukan nama"
+
+                placeholder="Nama Lengkap"
               />
             </Form.Group>
 
@@ -202,16 +202,16 @@ const RegisterAdik = () => {
                 })}
               </Form.Select>
             </Form.Group>
-
-            <Button variant="primary" type="submit" className="me-3">
-              Submit <ArrowBarRight />
-            </Button>
             <Button
               variant="secondary"
               type="submit"
+              className="me-3"
               onClick={() => navigate("/")}
             >
-              Back <ArrowBarLeft />
+              Kembali
+            </Button>
+            <Button variant="primary" type="submit">
+              Daftar
             </Button>
           </Form>
         </Card.Body>

@@ -10,6 +10,8 @@ import {toast} from 'react-toastify'
 const initialState = {
   userSchedule: [],
   isLoading: true,
+  checkLoginUserLoading: true,
+  checkLoginUserDataLoading: true,
   dataDonation: [],
   dataOrphanages: [],
   dataClassCategories: [],
@@ -24,6 +26,9 @@ const initialState = {
       fullName: localStorage.username,
     },
   },
+  talkUser: [],
+  checkLoginUserMatchData: {},
+  loginUserDataNow: {},
 };
 
 export const submitLoginVolunteer = createAsyncThunk(
@@ -66,7 +71,7 @@ export const submitLoginVolunteer = createAsyncThunk(
 //UNTUK NAMPILIN DATA DAFTAR SCHEDULE/KELAS-KELASNYA DI HALAMAN SCHEDULE
 export const classUser = createAsyncThunk("getUserClass", async () => {
   try {
-
+    console.log('masuk class user store gak')
     const response = await fetch(`${URL}/classes`, {
       method: "GET",
       headers: {
@@ -79,7 +84,7 @@ export const classUser = createAsyncThunk("getUserClass", async () => {
     }
 
     const data = await response.json();
-    console.log(data, 'INI DATA CLASS USER DI STORE')
+    console.log(data, "INI DATA CLASS USER DI STORE");
 
     return data;
   } catch (error) {
@@ -90,33 +95,37 @@ export const classUser = createAsyncThunk("getUserClass", async () => {
 export const submitLoginOrphan = createAsyncThunk(
   "submitFormLogin",
   async (input) => {
-    const response = await fetch(
-      `${URL}/orphan/login`,
-      // "http://localhost:3000/orphan/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(input),
+    try {
+      const response = await fetch(
+        `${URL}/orphan/login`,
+        // "http://localhost:3000/orphan/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(input),
+        }
+      );
+
+      console.log(response, "ini response login adik");
+
+      if (!response.ok) {
+        throw await response.text();
       }
-    );
 
-    console.log(response, "ini response login adik");
-
-    if (!response.ok) {
-      throw await response.text();
+      const data = await response.json();
+      console.log(data, "response login");
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("username", data.sendData.fullName);
+      localStorage.setItem("role", data.sendData.role);
+      localStorage.setItem("image", data.sendData.imageUrl);
+      localStorage.setItem("isMatched", data.sendData.matchStatus);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    const data = await response.json();
-    console.log(data, "response login");
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("username", data.sendData.fullName);
-    localStorage.setItem("role", data.sendData.role);
-    localStorage.setItem("image", data.sendData.imageUrl);
-    localStorage.setItem("isMatched", data.sendData.matchStatus);
-
-    return data;
   }
 );
 
@@ -212,8 +221,10 @@ export const notMatchedOrphan = createAsyncThunk(
 export const submitRegisterOrphan = createAsyncThunk(
   "submitFormRegisterOrphan",
   async (input) => {
-    console.log(input, `<<<< di store`);
+
     try {
+      console.log(input, `<<<< di store`);
+
       const response = await fetch(
         `${URL}/orphan/register`,
         // "http://localhost:3000/orphan/register",
@@ -225,6 +236,7 @@ export const submitRegisterOrphan = createAsyncThunk(
           body: input,
         }
       );
+
   
       if (!response.ok) {
         throw await response.json();
@@ -239,31 +251,36 @@ export const submitRegisterOrphan = createAsyncThunk(
 
     }
     
+
   }
 );
 
 export const submitRegisterVolunteer = createAsyncThunk(
   "submitFormRegisterVolunteer",
   async (input) => {
-    console.log(input, `<<<< di store`);
-    const response = await fetch(
-      `${URL}/volunteer/register`,
-      // "http://localhost:3000/volunteer/register",
-      {
-        method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        body: input,
+    try {
+      console.log(input, `<<<< di store`);
+      const response = await fetch(
+        `${URL}/volunteer/register`,
+        // "http://localhost:3000/volunteer/register",
+        {
+          method: "POST",
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
+          body: input,
+        }
+      );
+
+      if (!response.ok) {
+        throw await response.text();
       }
-    );
 
-    if (!response.ok) {
-      throw await response.text();
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    const data = await response.json();
-    return data;
   }
 );
 
@@ -314,37 +331,104 @@ export const requestMatchOrphan = createAsyncThunk("requestMatch", async () => {
   } catch (error) {
     console.log(error);
   }
-})
+});
 
-export const setDateMatch = createAsyncThunk('setDateMatch', async ({newDate, id}) => {
+export const setDateMatch = createAsyncThunk(
+  "setDateMatch",
+  async ({ newDate, id }) => {
+    try {
+      let input = newDate;
+
+      const response = await fetch(
+        `https://rumah-sandar.herokuapp.com/match/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            access_token: localStorage.getItem("access_token"),
+          },
+          body: JSON.stringify(input),
+        }
+      );
+
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      console.log(data, "<<<< ini di store ");
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getTalkUser = createAsyncThunk('getTalkUser',
+async() => {
   try {
-    let input = newDate
-    
-    console.log(input, id , 'INI DI STORE')
-
-    const response = await fetch(`https://rumah-sandar.herokuapp.com/match/${id}`, {
-      method: 'PUT',
+    console.log('masuk gettalkuser actionya')
+    let response = await fetch(`${URL}/checkUser/studypair`, {
+      method : 'GET',
       headers: {
-        "Content-Type": "application/json",
-        access_token: localStorage.getItem('access_token')
-      },
-      body: JSON.stringify(input),
+        access_token: localStorage.getItem("access_token"),
+      }
     })
-
     if (!response.ok) {
       throw await response.text();
-    }
+    }   
     const data = await response.json();
-    console.log(data, '<<<< ini di store ');
-
+    console.log(data, 'ini return data action get talknya')
     return data;
-    
   } catch (error) {
     console.log(error)
   }
-}
-)
+})
 
+export const checkLoginUserMatch = createAsyncThunk(
+  "checkLoginUserMatch",
+  async () => {
+    try {
+      let response = await fetch(`${URL}/checkUser/studypair`, {
+        method: "GET",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      console.log(data, "ini data store check");
+
+      return data;
+    } catch (error) {
+      console.log(error, "ini error di store check");
+    }
+  }
+);
+export const checkLoginUserData = createAsyncThunk(
+  "checkLoginUserData",
+  async () => {
+    try {
+      let response = await fetch(`${URL}/checkUser/`, {
+        method: "GET",
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      if (!response.ok) {
+        throw await response.text();
+      }
+      const data = await response.json();
+      console.log(data, "ini data store check");
+
+      return data;
+    } catch (error) {
+      console.log(error, "ini error di store check");
+    }
+  }
+);
 
 // ini sama seperti reducer yang nanti bantuin set datanya ke storenya
 
@@ -425,9 +509,40 @@ export const userSlice = createSlice({
     [submitLoginOrphan.rejected]: (state) => {
       state.isLoading = false;
     },
+    [getTalkUser.pending]: (state) => {
+      state.isLoading = false;
+    },
+    [getTalkUser.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.talkUser = action.payload;
+    },
+    [getTalkUser.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [checkLoginUserMatch.pending]: (state) => {
+      state.checkLoginUserLoading = true;
+    },
+    [checkLoginUserMatch.fulfilled]: (state, action) => {
+      state.checkLoginUserLoading = false;
+      state.checkLoginUserMatchData = action.payload;
+    },
+    [checkLoginUserMatch.rejected]: (state) => {
+      state.checkLoginUserLoading = false;
+    },
+    [checkLoginUserData.pending]: (state) => {
+      state.checkLoginUserDataLoading = true;
+    },
+    [checkLoginUserData.fulfilled]: (state, action) => {
+      state.checkLoginUserDataLoading = false;
+      state.loginUserDataNow = action.payload;
+    },
+    [checkLoginUserData.rejected]: (state) => {
+      state.checkLoginUserDataLoading = false;
+    },
   },
 });
-
+// checkLoginUserData
+// loginUserDataNow
 // Action creators are generated for each case reducer function
 //ini nama2 actionya, otomatis sama dengan nama reducernya
 export const {} = userSlice.actions;

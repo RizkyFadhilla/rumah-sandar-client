@@ -1,8 +1,10 @@
-import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { fetchVolunteer, patchVolunteer } from "../redux/user";
+import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchVolunteer, patchVolunteer } from '../redux/user';
 
 const VolunteerComponent = (data) => {
+  const navigate = useNavigate();
   let dispatch = useDispatch();
   function clickHandler(e, id) {
     e.preventDefault();
@@ -20,6 +22,14 @@ const VolunteerComponent = (data) => {
         <td>Verified</td>
         <td></td>
         <td>{data.data.matchStatus}</td>
+        <td>
+          <Button onClick={() => navigate(`/detail-volunteer/` + data.data.id)} variant="warning">
+            Detail
+          </Button>
+        </td>
+        <td>
+          Approved
+        </td>
       </tr>
     );
   } else {
@@ -30,10 +40,12 @@ const VolunteerComponent = (data) => {
         <td>{data.data.email}</td>
         <td>Not Verified</td>
         <td>
-          <Button
-            onClick={(e) => clickHandler(e, data.data.id)}
-            variant="primary"
-          >
+          <Button onClick={() => navigate(`/detail-volunteer/` + data.data.id)} variant="warning" className="me-3">
+            Detail
+          </Button>
+        </td>
+        <td>
+          <Button onClick={(e) => clickHandler(e, data.data.id)} variant="primary">
             Approve
           </Button>
         </td>

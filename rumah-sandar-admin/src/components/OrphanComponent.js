@@ -3,8 +3,6 @@ import {Button} from "react-bootstrap"
 import { useDispatch } from "react-redux";
 import {fetchOrphan, patchOrphan } from "../redux/user"
 
-
-
 const OrphanComponent = (data) => {
   let dispatch = useDispatch()
   function clickHandler(e, id){
@@ -23,7 +21,7 @@ const OrphanComponent = (data) => {
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
         <td>Verified</td>
-        <td></td>
+        <td>Approved</td>
       </tr>
     );
   } else {

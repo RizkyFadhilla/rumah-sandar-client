@@ -12,10 +12,10 @@ const TableVolunteer = () => {
   useEffect(() => {
     dispatch(fetchVolunteer());
   }, []);
+  
   if (isLoading) {
     <h1>Please Wait</h1>;
   }
-  // console.log(dataVolunteer);
   return (
     <>
       <Container className="mt-5">
@@ -29,6 +29,8 @@ const TableVolunteer = () => {
               <th>Status</th>
               <th>Aksi</th>
               <th>Status Match</th>
+              <th>Detail</th>
+              <th>Approve</th>
             </tr>
           </thead>
           <tbody>
