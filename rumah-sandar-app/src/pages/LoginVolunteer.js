@@ -56,19 +56,19 @@ const LoginVolunteer = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <Card className='shadow'>
+    <Container>
+      <Card className='shadow' style={{ marginTop: "150px", borderRadius: "20px" }}>
         <Card.Body>
-          <h3 className="text-center">Login</h3>
-          <Form onSubmit={submitHandler}>
+          <h3 className="text-center">Masuk</h3>
+          <Form onSubmit={submitHandler} style={{ paddingLeft: "30px", paddingRight: "30px" }}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" name="email" value={loginForm.email} onChange={changeHandler} />
+              <Form.Label>Alamat Email</Form.Label>
+              <Form.Control type="email" placeholder="Masukan alamat email" name="email" value={loginForm.email} onChange={changeHandler} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" name="password" value={loginForm.password} onChange={changeHandler} />
+              <Form.Label>Kata Sandi</Form.Label>
+              <Form.Control type="password" placeholder="Masukan kata sandi" name="password" value={loginForm.password} onChange={changeHandler} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
             <Button className="me-3" variant="secondary" type="submit" onClick={() => navigate('/')}>
@@ -77,7 +77,6 @@ const LoginVolunteer = () => {
             <Button variant="primary" type="submit" >
               Submit
             </Button>
-
           </Form>
         </Card.Body>
       </Card>

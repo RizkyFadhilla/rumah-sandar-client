@@ -56,8 +56,8 @@ const Register = () => {
     <Container className="mt-5">
       <Card>
         <Card.Body>
-          <h3 className="text-center">Daftar sebagai Pengajar</h3>
-          <Form onSubmit={handleSubmit}>
+          <h3 className="text-center">Daftar sebagai Relawan</h3>
+          <Form onSubmit={handleSubmit} style={{ paddingLeft: "30px", paddingRight: "30px" }}>
             <Form.Group className="mb-3">
               <Form.Label>Alamat Email</Form.Label>
               <Form.Control
@@ -67,6 +67,7 @@ const Register = () => {
                 name="email"
                 type="email"
                 placeholder="Masukan email"
+                required
               />
             </Form.Group>
 
@@ -82,11 +83,12 @@ const Register = () => {
                 }}
                 name="fullName"
                 placeholder="Masukan nama lengkap"
+                required
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Kata Sandi</Form.Label>
               <Form.Control
                 onChange={(e) => {
                   setRegisterForm({
@@ -96,13 +98,14 @@ const Register = () => {
                 }}
                 name="password"
                 type="password"
-                placeholder="Masukan password"
+                placeholder="Masukan kata sandi"
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>linkedinUrl</Form.Label>
+              <Form.Label>Alamat LinkedIn</Form.Label>
               <Form.Control
-                type="url"
+                type="text"
                 onChange={(e) => {
                   setRegisterForm({
                     ...registerForm,
@@ -110,18 +113,19 @@ const Register = () => {
                   });
                 }}
                 name="linkedinUrl"
-                placeholder="Masukan linkedin Url"
+                placeholder="Masukan alamat linkedin"
+                required
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Image</Form.Label>
-              <Form.Control name="imageUrl" type="file" onChange={(e) => setImageUrl(e.target.files[0])} />
+              <Form.Label>Foto Profil</Form.Label>
+              <Form.Control name="imageUrl" type="file" onChange={(e) => setImageUrl(e.target.files[0])} required />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>CV</Form.Label>
-              <Form.Control name="curriculumVitae" type="file" onChange={(e) => setCurriculumVitae(e.target.files[0])} />
+              <Form.Control name="curriculumVitae" type="file" onChange={(e) => setCurriculumVitae(e.target.files[0])} required />
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -135,7 +139,8 @@ const Register = () => {
                   });
                 }}
                 name="lastEducation"
-                placeholder="Masukan Pendidikan Terakhir"
+                placeholder="Masukan pendidikan terakhir"
+                required
               >
                 <option selected disabled>
                   Select

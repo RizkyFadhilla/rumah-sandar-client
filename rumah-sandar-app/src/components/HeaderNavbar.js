@@ -180,6 +180,20 @@ const HeaderNavbar = () => {
             )} */}
                 {access_token && (
                 <NavDropdown title={username} id="navbarScrollingDropdown">
+                  {role === "orphan" &&
+                  <NavDropdown.Item
+                  href=""
+                  onClick={() => navigate('/detail-orphan/:id')}
+                >
+                  Profil Orphan
+                </NavDropdown.Item>}
+                  {role === "volunteer" &&
+                  <NavDropdown.Item
+                  href=""
+                  onClick={() => navigate('/detail-volunteer/:id')}
+                >
+                  Profil Relawan
+                </NavDropdown.Item>}
                 <NavDropdown.Item
                   href=""
                   onClick={logoutHandler}

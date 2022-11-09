@@ -9,6 +9,8 @@ import PagePanti from '../pages/PagePanti';
 import Register from '../pages/Register';
 import RegisterAdik from '../pages/RegisterAdik';
 import Schedule from '../pages/Schedule';
+import DetailOrphan from '../pages/DetailOrphan'
+import DetailVolunteer from '../pages/DetailVolunteer';
 
 const router = createBrowserRouter([
   {
@@ -74,6 +76,14 @@ const router = createBrowserRouter([
         path: '/class',
         element: <Class />,
       },
+      {
+        path: "/detail-orphan/:id",
+        element: <DetailOrphan/>
+      },
+      {
+        path: "/detail-volunteer/:id",
+        element: <DetailVolunteer/>
+      }
     ],
   },
 ]);

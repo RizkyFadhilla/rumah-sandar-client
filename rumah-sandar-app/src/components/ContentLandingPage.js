@@ -7,7 +7,7 @@ const ContentLandingPage = () => {
     <>
       <Container className="content-landing mt-5 shadow">
         <Row>
-          <Col className='col-8 mt-5'>
+          <Col className='col-8 mt-5' style={{ paddingLeft: "40px", paddingRight: "10px" }}>
             <h3><b>Selamat Datang di Rumah Sandar</b></h3>
             <h6><em>Tempat belajar untuk adik-adik yang berada di bawah naungan yayasan panti asuhan di seluruh Indonesia.</em></h6>
             <br></br>
@@ -22,7 +22,7 @@ const ContentLandingPage = () => {
               dari situasi mereka.
             </p>
           </Col>
-          <Col className="col-4">
+          <Col className="col-4" style={{ paddingRight: "20px" }}>
             <Image src={Logo} width={"350"} />
           </Col>
         </Row>
