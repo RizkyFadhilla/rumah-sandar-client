@@ -4,24 +4,22 @@ import photoKakak from '../assets/ex-photo-kakak.jpg'
 import photoAdik from '../assets/ex-photo-adik.jpg'
 import VideoRoom from "./VideoRoom";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getTalkUser } from "../redux/user";
 
 export default function Class() {
- 
+  const dispatch = useDispatch()
   const location = useLocation()
-  console.log(location, 'ini apa datanya si location')
-
-
-  // console.log(todayClass, 'INI TODAY CLASS DI CLASS')
-
-  // console.log(route, 'kalo route doang masuk gak')
-  //   console.log(route.params, 'ini param di ruang class')
-
+  const { talkUser } = useSelector((state) => {
+    return  state.user
+  })
 
     const [Joined, setJoined] = useState(false)
     
     useEffect(() => {
         setJoined(true)
+        dispatch(getTalkUser())
     }, [])
 
   return (
@@ -37,23 +35,24 @@ export default function Class() {
             </div>
             <div style={{display :'flex', alignContent:'center', marginTop:20}}>
                 <div>
-                    <Image src={photoKakak} width={40} height={40} style={{borderRadius: 100}} />
+                    <Image src={talkUser[0]?.Volunteer.imageUrl}  width={40} height={40} style={{borderRadius: 100}} />
                 </div>
                 <div style={{alignSelf:'center', marginLeft: 10}}>
-                    <h5>Nama kakak</h5>
+                    <h5>{talkUser[0]?.Volunteer.fullName}</h5>
                 </div>
             </div>
             <div style={{display :'flex', alignContent:'center', marginTop:20}}>
                 <div>
-                    <Image src={photoAdik} width={40} height={40} style={{borderRadius: 100}} />
+                    <Image src={talkUser[0]?.Orphan.imageUrl} width={40} height={40} style={{borderRadius: 100}} />
                 </div>
                 <div style={{alignSelf:'center', marginLeft: 10}}>
-                    <h5>Nama Adik</h5>
+                    <h5>{talkUser[0]?.Orphan.fullName}</h5>
                 </div>
             </div>
           </div>
           <div>
-            <MyChatComponent />
+            {talkUser.length !== 0 && 
+            <MyChatComponent talkUser={talkUser}/>}
           </div>
         </div>
       </div>
