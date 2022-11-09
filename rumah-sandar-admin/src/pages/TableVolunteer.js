@@ -16,11 +16,10 @@ const TableVolunteer = () => {
   if (isLoading) {
     <h1>Please Wait</h1>;
   }
-  // console.log(dataVolunteer);
   return (
     <>
-      <Container className="mt-5">
-        <h3>Table Pengajar</h3>
+      <Container className="mt-4">
+        <h3 className="text-center">Table Pengajar</h3>
         <Table striped hover className="styled-table">
           <thead>
             <tr>
@@ -28,7 +27,8 @@ const TableVolunteer = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Status</th>
-              <th>Action</th>
+              <th>Detail</th>
+              <th>Approve</th>
             </tr>
           </thead>
           <tbody>
