@@ -235,25 +235,13 @@ export const submitRegisterOrphan = createAsyncThunk(
       );
 
       if (!response.ok) {
-        throw await response.text();
+        throw await response.json();
       }
 
       const data = await response.json();
       return data;
     } catch (error) {
-      const err = JSON.parse(error);
-      toast(`${err.message}`, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      return error;
+      throw error;
     }
   }
 );
@@ -276,13 +264,13 @@ export const submitRegisterVolunteer = createAsyncThunk(
       );
 
       if (!response.ok) {
-        throw await response.text();
+        throw await response.json();
       }
 
       const data = await response.json();
       return data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 );
@@ -325,7 +313,7 @@ export const requestMatchOrphan = createAsyncThunk("requestMatch", async () => {
     );
     console.log();
     if (!response.ok) {
-      throw await response.json()
+      throw await response.json();
     }
     const data = await response.json();
     console.log(data);
@@ -341,21 +329,18 @@ export const setDateMatch = createAsyncThunk(
   async ({ newDate, id }) => {
     try {
       let input = newDate;
-
-      const response = await fetch(
-        `https://rumah-sandar.herokuapp.com/match/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            access_token: localStorage.getItem("access_token"),
-          },
-          body: JSON.stringify(input),
-        }
-      );
-
+      console.log(input);
+      const response = await fetch(`${URL}/match/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(input),
+      });
+      console.log(response);
       if (!response.ok) {
-        throw await response.text();
+        throw await response.json();
       }
       const data = await response.json();
       console.log(data, "<<<< ini di store ");

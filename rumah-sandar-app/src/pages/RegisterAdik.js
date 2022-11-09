@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 import {
   Container,
   Form,
@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ArrowBarRight, ArrowBarLeft } from "react-bootstrap-icons";
 import { fetchOrphanages, submitRegisterOrphan } from "../redux/user";
-import {unwrapResult} from '@reduxjs/toolkit'
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const RegisterAdik = () => {
   const dispatch = useDispatch();
@@ -75,23 +75,32 @@ const RegisterAdik = () => {
     formData.append("OrphanageId", registerForm.OrphanageId);
     formData.append("imageUrl", imageUrl);
     dispatch(submitRegisterOrphan(formData))
-    .then(unwrapResult)
-    .then(() => {
-      navigate("/")
-      toast('Kamu berhasil Register!, Tunggu Konfirmasi admin yaa', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+      .unwrap()
+      .then((result) => {
+        return toast("Akunmu sudah terdaftar, silahkan tunggu verifikasi ya!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
         });
-    })
-    .catch((err) => {
-      console.log(err + 'dikomponen');
-    })
+      })
+      .then(() => navigate("/"))
+      .catch((error) => {
+        return toast.error(`${error.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   }
 
   // console.log(registerForm);
@@ -131,7 +140,6 @@ const RegisterAdik = () => {
                 }}
                 name="fullName"
                 type="text"
-
                 placeholder="Nama Lengkap"
               />
             </Form.Group>
@@ -181,7 +189,9 @@ const RegisterAdik = () => {
                 name="OrphanageId"
                 aria-label="Default select example"
               >
-                <option disabled selected >Pilih Satu</option>
+                <option disabled selected>
+                  Pilih Satu
+                </option>
                 {dataOrphanages?.map((orphanage) => {
                   return (
                     <option value={orphanage.id} key={orphanage.id}>

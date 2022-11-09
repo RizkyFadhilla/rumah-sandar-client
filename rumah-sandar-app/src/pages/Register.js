@@ -1,17 +1,25 @@
-import { Container, Form, Button, Card, Modal, Row, Col } from 'react-bootstrap';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { submitRegisterVolunteer } from '../redux/user';
-import { useDispatch } from 'react-redux';
-import {toast} from 'react-toastify'
+import {
+  Container,
+  Form,
+  Button,
+  Card,
+  Modal,
+  Row,
+  Col,
+} from "react-bootstrap";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { submitRegisterVolunteer } from "../redux/user";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [isChecked, setChecked] = useState(false);
   const handleChange = (event) => {
     if (event.target.checked) {
-      setChecked(true)
+      setChecked(true);
     } else {
-      setChecked(false)
+      setChecked(false);
     }
   };
   const [show, setShow] = useState(false);
@@ -20,36 +28,51 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [registerForm, setRegisterForm] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    linkedinUrl: '',
-    lastEducation: '',
+    fullName: "",
+    email: "",
+    password: "",
+    linkedinUrl: "",
+    lastEducation: "",
   });
-  const [imageUrl, setImageUrl] = useState('');
-  const [curriculumVitae, setCurriculumVitae] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
+  const [curriculumVitae, setCurriculumVitae] = useState("");
   async function handleSubmit(e) {
     e.preventDefault();
     let formData = new FormData();
-    formData.append('email', registerForm.email);
-    formData.append('password', registerForm.password);
-    formData.append('fullName', registerForm.fullName);
-    formData.append('linkedinUrl', registerForm.linkedinUrl);
-    formData.append('imageUrl', imageUrl);
-    formData.append('curriculumVitae', curriculumVitae);
-    formData.append('lastEducation', registerForm.lastEducation);
-    console.log(formData);
-    toast('Akunmu sudah terdaftar, silahkan tunggu verifikasi ya!', {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+    formData.append("email", registerForm.email);
+    formData.append("password", registerForm.password);
+    formData.append("fullName", registerForm.fullName);
+    formData.append("linkedinUrl", registerForm.linkedinUrl);
+    formData.append("imageUrl", imageUrl);
+    formData.append("curriculumVitae", curriculumVitae);
+    formData.append("lastEducation", registerForm.lastEducation);
+    dispatch(submitRegisterVolunteer(formData))
+      .unwrap()
+      .then((result) => {
+        return toast("Akunmu sudah terdaftar, silahkan tunggu verifikasi ya!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .then(() => navigate("/"))
+      .catch((error) => {
+        return toast.error(`${error.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
-    dispatch(submitRegisterVolunteer(formData)).then(() => navigate('/'));
   }
 
   return (
@@ -116,12 +139,20 @@ const Register = () => {
 
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
-              <Form.Control name="imageUrl" type="file" onChange={(e) => setImageUrl(e.target.files[0])} />
+              <Form.Control
+                name="imageUrl"
+                type="file"
+                onChange={(e) => setImageUrl(e.target.files[0])}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>CV</Form.Label>
-              <Form.Control name="curriculumVitae" type="file" onChange={(e) => setCurriculumVitae(e.target.files[0])} />
+              <Form.Control
+                name="curriculumVitae"
+                type="file"
+                onChange={(e) => setCurriculumVitae(e.target.files[0])}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -154,13 +185,24 @@ const Register = () => {
               </a>
             </p>
             <Form>
-              {['checkbox'].map((type) => (
+              {["checkbox"].map((type) => (
                 <div key={`default-${type}`} className="mb-3">
-                  <Form.Check type={type} id={`default-${type}`} label={`Saya Setuju dengan S&K`} value={isChecked} onChange={handleChange} />
+                  <Form.Check
+                    type={type}
+                    id={`default-${type}`}
+                    label={`Saya Setuju dengan S&K`}
+                    value={isChecked}
+                    onChange={handleChange}
+                  />
                 </div>
               ))}
             </Form>
-            <Button variant="secondary" type="submit" className="me-3" onClick={() => navigate('/')}>
+            <Button
+              variant="secondary"
+              type="submit"
+              className="me-3"
+              onClick={() => navigate("/")}
+            >
               Kembali
             </Button>
             <Button variant="primary" type="submit" disabled={!isChecked}>
@@ -174,11 +216,17 @@ const Register = () => {
           <Modal.Title>Syarat dan Ketentuan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-          specimen book.
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
           <p>
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-            more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was
+            popularised in the 1960s with the release of Letraset sheets
+            containing Lorem Ipsum passages, and more recently with desktop
+            publishing software like Aldus PageMaker including versions of Lorem
+            Ipsum.
           </p>
           <h5>S&K</h5>
           <ul>
