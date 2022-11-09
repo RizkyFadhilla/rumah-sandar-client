@@ -19,6 +19,7 @@ const VolunteerComponent = (data) => {
         <td>{data.data.email}</td>
         <td>Verified</td>
         <td></td>
+        <td>{data.data.matchStatus}</td>
       </tr>
     );
   } else {
@@ -36,6 +37,7 @@ const VolunteerComponent = (data) => {
             Approve
           </Button>
         </td>
+        <td>{data.data.matchStatus}</td>
       </tr>
     );
   }

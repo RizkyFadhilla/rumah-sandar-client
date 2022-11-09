@@ -13,7 +13,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ArrowBarRight, ArrowBarLeft } from "react-bootstrap-icons";
 import { fetchOrphanages, submitRegisterOrphan } from "../redux/user";
-import {unwrapResult} from '@reduxjs/toolkit'
 
 const RegisterAdik = () => {
   const dispatch = useDispatch();
@@ -75,7 +74,7 @@ const RegisterAdik = () => {
     formData.append("OrphanageId", registerForm.OrphanageId);
     formData.append("imageUrl", imageUrl);
     dispatch(submitRegisterOrphan(formData))
-    .then(unwrapResult)
+    .unwrap()
     .then(() => {
       navigate("/")
       toast('Kamu berhasil Register!, Tunggu Konfirmasi admin yaa', {
@@ -90,12 +89,24 @@ const RegisterAdik = () => {
         });
     })
     .catch((err) => {
-      console.log(err + 'dikomponen');
+      // console.log(err + 'dikomponen');
+      // throw err
+      toast(`${err.message}`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
 
     })
   }
 
-  // console.log(registerForm);
+  console.log(dataOrphanages);
 
   return (
     <Container className="mt-5">
