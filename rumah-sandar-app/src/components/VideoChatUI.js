@@ -12,8 +12,8 @@ import { useEffect, useState, useRef } from 'react';
   useEffect(() => {
     if (talkLoaded) {
       if(localStorage.getItem('role') === 'volunteer') {
-        const otherUser = new Talk.User({
-          id: talkUser[0]?.Volunteer?.id,
+        const currentUser = new Talk.User({
+          id: `volunteer-${talkUser[0]?.Volunteer?.id}`,
           name: talkUser[0]?.Volunteer?.fullName,
           email: talkUser[0]?.Volunteer?.email,
           photoUrl: talkUser[0]?.Volunteer?.imageUrl,
@@ -21,16 +21,14 @@ import { useEffect, useState, useRef } from 'react';
           role: 'default',
         });
   
-        const currentUser = new Talk.User({
-          id: talkUser[0]?.Orphan?.id,
+        const otherUser = new Talk.User({
+          id: `orphan-${talkUser[0]?.Orphan?.id}`,
           name: talkUser[0]?.Orphan?.fullName,  
           email: talkUser[0]?.Orphan?.email,
           photoUrl: talkUser[0]?.Orphan?.imageUrl,
           welcomeMessage: `Hello, ${talkUser[0]?.Orphan?.fullName}`,
           role: 'default',
         });
-
-        
 
         const session = new Talk.Session({
           appId: 'tdQXKoKQ',
@@ -52,8 +50,8 @@ import { useEffect, useState, useRef } from 'react';
         return () => session.destroy()
 
       } else if (localStorage.getItem('role') === 'orphan') {
-        const otherUser = new Talk.User({
-          id: talkUser[0]?.Orphan?.id,
+        const currentUser = new Talk.User({
+          id: `orphan-${talkUser[0]?.Orphan?.id}`,
           name: talkUser[0]?.Orphan?.fullName,  
           email: talkUser[0]?.Orphan?.email,
           photoUrl: talkUser[0]?.Orphan?.imageUrl,
@@ -61,8 +59,8 @@ import { useEffect, useState, useRef } from 'react';
           role: 'default',
         });
   
-        const currentUser = new Talk.User({
-          id: talkUser[0]?.Volunteer?.id,
+        const otherUser = new Talk.User({
+          id: `volunteer-${talkUser[0]?.Volunteer?.id}`,
           name: talkUser[0]?.Volunteer?.fullName,
           email: talkUser[0]?.Volunteer?.email,
           photoUrl: talkUser[0]?.Volunteer?.imageUrl,
