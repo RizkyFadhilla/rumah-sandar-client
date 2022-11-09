@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import {
+  checkLoginUserData,
   checkLoginUserMatch,
   fetchClassCategories,
   requestMatchOrphan,
@@ -45,9 +46,13 @@ const HeaderNavbar = () => {
   function logoutHandler(e) {
     e.preventDefault();
 
-    localStorage.clear();
-    dispatch(fetchClassCategories());
-    navigate("/");
+    localStorage.clear()
+    dispatch(fetchClassCategories())
+    .then(()=>{
+      return dispatch(checkLoginUserData())
+    }).then(()=>{
+      return navigate("/");
+    })
 
     toast("Akun kamu berhasil keluar!", {
       position: "top-center",
@@ -61,7 +66,9 @@ const HeaderNavbar = () => {
     });
   }
 
-  
+  useEffect(()=>{
+    dispatch(checkLoginUserData())
+  },[])
   // const access_token = loginUser?.access_token
   // const role = loginUser.sendData?.role
   // const isMacthed = loginUser.sendData?.matchStatus

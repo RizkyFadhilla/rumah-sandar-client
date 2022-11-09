@@ -12,16 +12,17 @@ import { checkLoginUserData } from "../redux/user";
 
 const LandingPage = () => {
   let dispatch = useDispatch();
-  let { loginUserDataNow } = useSelector((state) => state.user);
+  let { loginUserDataNow,checkLoginUserDataLoading } = useSelector((state) => state.user);
   useEffect(() => {
     dispatch(checkLoginUserData());
   }, []);
+  console.log(loginUserDataNow)
   return (
     <>
       <HeaderNavbar />
-      {loginUserDataNow.role === "orphan" && <ContentLandingPageOrphan />}
-      {loginUserDataNow.role === "volunteer" && <ContentLandingPage />}
-      {localStorage.getItem("role") === "orphan" && <CardMaterial />}
+      {(loginUserDataNow && loginUserDataNow?.role === "orphan") && <ContentLandingPageOrphan />}
+      {(!loginUserDataNow || loginUserDataNow?.role === "volunteer") && <ContentLandingPage />}
+      {loginUserDataNow?.role === "orphan" && <CardMaterial />}
       <CardContent />
       <Footer />
     </>
