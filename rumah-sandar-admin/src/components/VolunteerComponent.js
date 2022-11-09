@@ -21,6 +21,7 @@ const VolunteerComponent = (data) => {
         <td>{data.data.email}</td>
         <td>Verified</td>
         <td></td>
+        <cardDetail  data={data.data}/>
       </tr>
     );
   } else {

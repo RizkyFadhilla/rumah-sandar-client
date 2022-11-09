@@ -1,77 +1,82 @@
-import { createBrowserRouter, redirect } from 'react-router-dom';
-import Class from '../pages/Class';
-import LandingPage from '../pages/LandingPages';
-import Layout from '../pages/Layout';
-import Login from '../pages/Login';
-import LoginVolunteer from '../pages/LoginVolunteer';
-import OrphansList from '../pages/OrphansList';
-import PagePanti from '../pages/PagePanti';
-import Register from '../pages/Register';
-import RegisterAdik from '../pages/RegisterAdik';
-import Schedule from '../pages/Schedule';
+import { createBrowserRouter, redirect } from "react-router-dom";
+import Class from "../pages/Class";
+import LandingPage from "../pages/LandingPages";
+import Layout from "../pages/Layout";
+import Login from "../pages/Login";
+import LoginVolunteer from "../pages/LoginVolunteer";
+import OrphansList from "../pages/OrphansList";
+import PagePanti from "../pages/PagePanti";
+import Register from "../pages/Register";
+import RegisterAdik from "../pages/RegisterAdik";
+import Schedule from "../pages/Schedule";
+import PdfReader from "../pages/PdfReader";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <LandingPage />,
   },
   {
-    path: '/orphanages',
+    path: "/orphanages",
     element: <PagePanti />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
     loader: () => {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem("access_token");
       if (token) {
-        throw redirect('/');
+        throw redirect("/");
       }
     },
   },
   {
-    path: '/loginVolunteer',
+    path: "/loginVolunteer",
     element: <LoginVolunteer />,
     loader: () => {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem("access_token");
       if (token) {
-        throw redirect('/');
+        throw redirect("/");
       }
     },
   },
   {
-    path: '/register',
+    path: "/pdf",
+    element: <PdfReader />,
+  },
+  {
+    path: "/register",
     element: <Register />,
   },
   {
-    path: '/register-adik',
+    path: "/register-adik",
     element: <RegisterAdik />,
   },
   {
     element: <Layout />,
     loader: () => {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem("access_token");
       if (!token) {
-        throw redirect('/login');
+        throw redirect("/login");
       }
     },
     children: [
       {
-        path: '/orphansList',
+        path: "/orphansList",
         element: <OrphansList />,
         loader: () => {
-          const isMatch = localStorage.getItem('isMatch');
+          const isMatch = localStorage.getItem("isMatch");
           if (isMatch) {
-            throw redirect('/');
+            throw redirect("/");
           }
         },
       },
       {
-        path: '/schedule',
+        path: "/schedule",
         element: <Schedule />,
       },
       {
-        path: '/class',
+        path: "/class",
         element: <Class />,
       },
     ],
