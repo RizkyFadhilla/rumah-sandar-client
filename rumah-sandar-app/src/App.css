@@ -202,3 +202,31 @@ body {
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e3f2fd !important;
 }
+
+.slick-next:before{
+  color: #b2bec3;
+  margin: 7px;
+  font-size: 35px;
+}
+.slick-prev:before{
+  color: #b2bec3;
+  font-size: 35px;
+}
+.slick-dots{
+  width: 104%;
+  margin-bottom: 5px;
+}
+
+.slick-next:before{
+  color: #b2bec3;
+  margin: 7px;
+  font-size: 35px;
+}
+.slick-prev:before{
+  color: #b2bec3;
+  font-size: 35px;
+}
+.slick-dots{
+  width: 104%;
+  margin-bottom: 5px;
+}
