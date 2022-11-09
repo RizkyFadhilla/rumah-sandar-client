@@ -9,7 +9,6 @@ import PagePanti from "../pages/PagePanti";
 import Register from "../pages/Register";
 import RegisterAdik from "../pages/RegisterAdik";
 import Schedule from "../pages/Schedule";
-import PdfReader from "../pages/PdfReader";
 
 const router = createBrowserRouter([
   {
@@ -39,10 +38,6 @@ const router = createBrowserRouter([
         throw redirect("/");
       }
     },
-  },
-  {
-    path: "/pdf",
-    element: <PdfReader />,
   },
   {
     path: "/register",
