@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { submitRegisterVolunteer } from '../redux/user';
 import { useDispatch } from 'react-redux';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const Register = () => {
   const [isChecked, setChecked] = useState(false);
@@ -48,7 +48,7 @@ const Register = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
+    });
     dispatch(submitRegisterVolunteer(formData)).then(() => navigate('/'));
   }
 
@@ -174,24 +174,28 @@ const Register = () => {
           <Modal.Title>Syarat dan Ketentuan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-          specimen book.
-          <p>
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-            more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-          </p>
-          <h5>S&K</h5>
+          <h5>Syarat umum</h5>
           <ul>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
+            <li>Tingkat pendidikan minimal sedang bersekolah SMA</li>
+            <li>Berkomitmen menjalankan tugas selama masa volunteer</li>
+            <li>Masa volunteer dihitung 3 bulan dari tanggal mulai</li>
+            <li>Kelas dilaksanakan seminggu sekali</li>
+            <li>Memiliki tanggung jawab dan kerjasama tim yang baik</li>
           </ul>
+
+          <h5>Alur menjadi relawan</h5>
+          <ol>
+            <li>Registrasi akun relawan dan tunggu verifikasi oleh admin</li>
+            <li>Login dan lihat daftar adik asuh</li>
+            <li>Pilih adik asuh yang belum memiliki pasangan kakak asuh</li>
+            <li>Tentukan tanggal dan waktu untuk mengajar</li>
+            <li>Mulai kelas di waktu yang telah ditentukan</li>
+          </ol>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
-            Dimengerti
+            Saya mengerti
           </Button>
         </Modal.Footer>
       </Modal>
