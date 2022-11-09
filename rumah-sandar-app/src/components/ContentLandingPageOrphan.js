@@ -8,6 +8,7 @@ import {
 } from "../redux/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import CardMatch from "./CardMatch";
 
 const ContentLandingPageOrphan = () => {
   let dispatch = useDispatch();
@@ -121,6 +122,8 @@ const ContentLandingPageOrphan = () => {
           </Col>
         </Row>
       </Container>
+
+      <CardMatch />
     </>
   );
 };
