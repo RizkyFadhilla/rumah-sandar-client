@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         loader: () => {
             const token = localStorage.getItem('access_token');
             if (token) {
-              throw redirect('/');
+              throw redirect('/table-volunteer');
             }
           },
     },
