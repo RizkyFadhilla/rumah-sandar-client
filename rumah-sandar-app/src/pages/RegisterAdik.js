@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {toast} from 'react-toastify'
 import {
   Container,
   Form,
@@ -12,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ArrowBarRight, ArrowBarLeft } from "react-bootstrap-icons";
 import { fetchOrphanages, submitRegisterOrphan } from "../redux/user";
+import {unwrapResult} from '@reduxjs/toolkit'
 
 const RegisterAdik = () => {
   const dispatch = useDispatch();
@@ -72,8 +74,23 @@ const RegisterAdik = () => {
     formData.append("fullName", registerForm.fullName);
     formData.append("OrphanageId", registerForm.OrphanageId);
     formData.append("imageUrl", imageUrl);
-    dispatch(submitRegisterOrphan(formData)).unwrap().then(() => navigate("/")).catch((error) => {
-      console.log(error)
+    dispatch(submitRegisterOrphan(formData))
+    .then(unwrapResult)
+    .then(() => {
+      navigate("/")
+      toast('Kamu berhasil Register!, Tunggu Konfirmasi admin yaa', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    })
+    .catch((err) => {
+      console.log(err + 'dikomponen');
     })
   }
 
@@ -87,7 +104,7 @@ const RegisterAdik = () => {
           <Form onSubmit={handleSubmit}>
             {/* EMAIL ADDRESS */}
             <Form.Group className="mb-3">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Alamat Email</Form.Label>
               <Form.Control
                 // value={registerForm.email}
                 // onChange={handleChange}
@@ -96,13 +113,13 @@ const RegisterAdik = () => {
                 }}
                 name="email"
                 type="email"
-                placeholder="Enter email"
+                placeholder="Masukan email"
               />
             </Form.Group>
 
             {/* USERNAME*/}
             <Form.Group className="mb-3">
-              <Form.Label>Fullname</Form.Label>
+              <Form.Label>Nama Lengkap</Form.Label>
               <Form.Control
                 // value={registerForm.fullName}
                 // onChange={handleChange}
@@ -114,13 +131,14 @@ const RegisterAdik = () => {
                 }}
                 name="fullName"
                 type="text"
-                placeholder="Enter username"
+
+                placeholder="Nama Lengkap"
               />
             </Form.Group>
 
             {/* PASSWORD */}
             <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Kata Sandi</Form.Label>
               <Form.Control
                 // value={registerForm.password}
                 // onChange={handleChange}
@@ -132,13 +150,13 @@ const RegisterAdik = () => {
                 }}
                 name="password"
                 type="password"
-                placeholder="Enter password"
+                placeholder="Masukan sandi"
               />
             </Form.Group>
 
             {/* IMAGE URL */}
             <Form.Group className="mb-3">
-              <Form.Label>Image</Form.Label>
+              <Form.Label>Gambar</Form.Label>
               <Form.Control
                 // value={imageUrl}
                 // onChange={handleChange}
@@ -150,7 +168,7 @@ const RegisterAdik = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Oprhanages</Form.Label>
+              <Form.Label>Panti Asuhan</Form.Label>
               <Form.Select
                 // onChange={handleChange}
                 // value={registerForm.OrphanageId}
@@ -163,6 +181,7 @@ const RegisterAdik = () => {
                 name="OrphanageId"
                 aria-label="Default select example"
               >
+                <option disabled selected >Pilih Satu</option>
                 {dataOrphanages?.map((orphanage) => {
                   return (
                     <option value={orphanage.id} key={orphanage.id}>
@@ -172,16 +191,16 @@ const RegisterAdik = () => {
                 })}
               </Form.Select>
             </Form.Group>
-
-            <Button variant="primary" type="submit" className="me-3">
-              Submit <ArrowBarRight />
-            </Button>
             <Button
               variant="secondary"
               type="submit"
+              className="me-3"
               onClick={() => navigate("/")}
             >
-              Back <ArrowBarLeft />
+              Kembali
+            </Button>
+            <Button variant="primary" type="submit">
+              Daftar
             </Button>
           </Form>
         </Card.Body>
