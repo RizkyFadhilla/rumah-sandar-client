@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { URL } from "../url";
+import {toast} from 'react-toastify'
+
 
 //create slice -> kita bisa define state, reducers, dan actions di satu tempat
 
@@ -57,6 +59,7 @@ export const submitLoginVolunteer = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
+      
     }
   }
 );
@@ -214,8 +217,10 @@ export const notMatchedOrphan = createAsyncThunk(
 export const submitRegisterOrphan = createAsyncThunk(
   "submitFormRegisterOrphan",
   async (input) => {
+
     try {
       console.log(input, `<<<< di store`);
+
       const response = await fetch(
         `${URL}/orphan/register`,
         // "http://localhost:3000/orphan/register",
@@ -228,15 +233,32 @@ export const submitRegisterOrphan = createAsyncThunk(
         }
       );
 
+  
       if (!response.ok) {
         throw await response.text();
       }
-
+  
       const data = await response.json();
       return data;
+      
     } catch (error) {
-      console.log(error);
+      const err = JSON.parse(error)
+      toast(`${err.message}`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+
+      return error
     }
+    
+
   }
 );
 
