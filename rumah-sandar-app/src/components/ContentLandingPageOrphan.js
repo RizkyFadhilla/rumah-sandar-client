@@ -45,6 +45,7 @@ const ContentLandingPageOrphan = () => {
         dispatch(checkLoginUserMatch());
       })
       .catch((error) => {
+        console.log(error);
         return toast.error(`${error.message}`, {
           position: "top-center",
           autoClose: 5000,
@@ -60,9 +61,9 @@ const ContentLandingPageOrphan = () => {
   if (checkLoginUserLoading) {
     <h1>Mohon Di tunggu</h1>;
   }
-  if (checkLoginUserMatchData.length > 0) {
-    noMatch = false;
-  }
+  // if (checkLoginUserMatchData.length > 0) {
+  //   noMatch = false;
+  // }
 
   return (
     <>

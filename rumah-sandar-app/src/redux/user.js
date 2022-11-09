@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { URL } from "../url";
-import {toast} from 'react-toastify'
-
+import { toast } from "react-toastify";
 
 //create slice -> kita bisa define state, reducers, dan actions di satu tempat
 
@@ -63,7 +62,6 @@ export const submitLoginVolunteer = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
-      
     }
   }
 );
@@ -71,7 +69,7 @@ export const submitLoginVolunteer = createAsyncThunk(
 //UNTUK NAMPILIN DATA DAFTAR SCHEDULE/KELAS-KELASNYA DI HALAMAN SCHEDULE
 export const classUser = createAsyncThunk("getUserClass", async () => {
   try {
-    console.log('masuk class user store gak')
+    console.log("masuk class user store gak");
     const response = await fetch(`${URL}/classes`, {
       method: "GET",
       headers: {
@@ -221,7 +219,6 @@ export const notMatchedOrphan = createAsyncThunk(
 export const submitRegisterOrphan = createAsyncThunk(
   "submitFormRegisterOrphan",
   async (input) => {
-
     try {
       console.log(input, `<<<< di store`);
 
@@ -237,16 +234,14 @@ export const submitRegisterOrphan = createAsyncThunk(
         }
       );
 
-  
       if (!response.ok) {
         throw await response.text();
       }
-  
+
       const data = await response.json();
       return data;
-      
     } catch (error) {
-      const err = JSON.parse(error)
+      const err = JSON.parse(error);
       toast(`${err.message}`, {
         position: "top-center",
         autoClose: 3000,
@@ -256,13 +251,10 @@ export const submitRegisterOrphan = createAsyncThunk(
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
 
-
-      return error
+      return error;
     }
-    
-
   }
 );
 
@@ -331,16 +323,16 @@ export const requestMatchOrphan = createAsyncThunk("requestMatch", async () => {
         },
       }
     );
-
+    console.log();
     if (!response.ok) {
-      throw await response.text();
+      throw await response.json()
     }
     const data = await response.json();
     console.log(data);
 
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 });
 
@@ -375,26 +367,25 @@ export const setDateMatch = createAsyncThunk(
   }
 );
 
-export const getTalkUser = createAsyncThunk('getTalkUser',
-async() => {
+export const getTalkUser = createAsyncThunk("getTalkUser", async () => {
   try {
-    console.log('masuk gettalkuser actionya')
+    console.log("masuk gettalkuser actionya");
     let response = await fetch(`${URL}/checkUser/studypair`, {
-      method : 'GET',
+      method: "GET",
       headers: {
         access_token: localStorage.getItem("access_token"),
-      }
-    })
+      },
+    });
     if (!response.ok) {
       throw await response.text();
-    }   
+    }
     const data = await response.json();
-    console.log(data, 'ini return data action get talknya')
+    console.log(data, "ini return data action get talknya");
     return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 
 export const checkLoginUserMatch = createAsyncThunk(
   "checkLoginUserMatch",
