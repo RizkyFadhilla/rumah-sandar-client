@@ -1,8 +1,10 @@
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchVolunteer, patchVolunteer } from "../redux/user";
 
 const VolunteerComponent = (data) => {
+  const navigate = useNavigate()
   let dispatch = useDispatch();
   function clickHandler(e, id) {
     e.preventDefault();
@@ -32,8 +34,15 @@ const VolunteerComponent = (data) => {
           <Button
             onClick={(e) => clickHandler(e, data.data.id)}
             variant="primary"
+            className="me-3"
           >
             Approve
+          </Button>
+          <Button
+            onClick={() => navigate(`/detail-volunteer/` + data.data.id)}
+            variant="warning"
+          >
+            Detail
           </Button>
         </td>
       </tr>
