@@ -1,18 +1,14 @@
-import { Container, Card, Button, Row, Col, Image } from "react-bootstrap";
-import { useEffect } from "react";
-import Slider from "react-slick";
-import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
+import { Container, Card, Button, Row, Col, Image } from 'react-bootstrap';
+import { useEffect } from 'react';
+import Slider from 'react-slick';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
 
-import {
-  fetchDonation,
-  fetchClassCategories,
-  checkLoginUserData,
-} from "../redux/user";
+import { fetchDonation, fetchClassCategories, checkLoginUserData } from '../redux/user';
 
 // import DetailDonation from "./DonationDetailPage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const CardContent = () => {
   const navigate = useNavigate();
@@ -28,42 +24,40 @@ const CardContent = () => {
     console.log(index, condition);
     e.preventDefault();
     if (index === 0) {
-      if (condition === "open") {
+      if (condition === 'open') {
         setShow1(true);
       } else {
         setShow1(false);
       }
     } else if (index == 1) {
-      if (condition == "open") {
+      if (condition == 'open') {
         setShow2(true);
       } else {
         setShow2(false);
       }
     } else if (index == 2) {
-      if (condition == "open") {
+      if (condition == 'open') {
         setShow3(true);
       } else {
         setShow3(false);
       }
     } else if (index == 3) {
-      if (condition == "open") {
+      if (condition == 'open') {
         setShow4(true);
       } else {
         setShow4(false);
       }
     } else if (index == 4) {
-      if (condition == "open") {
+      if (condition == 'open') {
         setShow5(true);
       } else {
         setShow5(false);
       }
     }
   }
-  const { dataDonation, dataClassCategories, loginUserDataNow } = useSelector(
-    (state) => {
-      return state.user;
-    }
-  );
+  const { dataDonation, dataClassCategories, loginUserDataNow } = useSelector((state) => {
+    return state.user;
+  });
 
   useEffect(() => {
     dispatch(fetchDonation())
@@ -76,10 +70,10 @@ const CardContent = () => {
   }, []);
 
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString("id-ID", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
+    return new Date(date).toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
     });
   };
 
@@ -88,155 +82,171 @@ const CardContent = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
   };
 
   if (!dataDonation) {
     <h1>Loading</h1>;
   }
+  let linkDonation1 = `https://invoice-staging.xendit.co/donation/` + dataDonation[0]?.on_demand_link;
+  let linkDonation2 = `https://invoice-staging.xendit.co/donation/` + dataDonation[1]?.on_demand_link;
+  let linkDonation3 = `https://invoice-staging.xendit.co/donation/` + dataDonation[2]?.on_demand_link;
+  let linkDonation4 = `https://invoice-staging.xendit.co/donation/` + dataDonation[3]?.on_demand_link;
+  let linkDonation5 = `https://invoice-staging.xendit.co/donation/` + dataDonation[4]?.on_demand_link;
   return (
     <>
-      {loginUserDataNow?.role !== "orphan" && (
+      {loginUserDataNow?.role !== 'orphan' && (
         <Container className="content-donasi mt-5 shadow">
           <h2 className="text-center mb-4">
             <b>Donasi</b>
           </h2>
           <Slider {...settings} className="ms-3 me-5">
             {dataDonation?.map((element, index) => {
-              let linkDonation = `https://invoice-staging.xendit.co/donation/${element.on_demand_link}`;
               return (
                 <div>
-                  <Card style={{ width: "18rem" }} className="text-center ms-5">
-                    <Card.Img
-                      variant="top"
-                      src={element.imgUrl}
-                      style={{ objectFit: "cover", height: "250px" }}
-                    />
+                  <Card style={{ width: '18rem' }} className="text-center ms-5">
+                    <Card.Img variant="top" src={element.imgUrl} style={{ objectFit: 'cover', height: '250px' }} />
                     <Card.Body className="">
                       <Card.Title>{element.name}</Card.Title>
                       <Row>
                         <Col>
                           <Card.Text>
-                            <b>Total saat ini </b><br></br>Rp.{element.totalAmount}
+                            <b>Total saat ini </b>
+                            <br></br>Rp.{element.totalAmount}
                           </Card.Text>
                         </Col>
                         <Col>
-                          <p><b>Sampai dengan<br></br></b>{formatDate(element.validUntil)}</p>
+                          <p>
+                            <b>
+                              Sampai dengan<br></br>
+                            </b>
+                            {formatDate(element.validUntil)}
+                          </p>
                         </Col>
                       </Row>
-                      <Card.Link href={linkDonation}>Donasi</Card.Link>
-                      <Card.Link
-                        onClick={(e) => clickHandler(e, index, "open")}
-                      >
-                        Lihat detail
-                      </Card.Link>
+                      <Button onClick={(e) => clickHandler(e, index, 'open')}> Lihat Detail Donasi</Button>
                     </Card.Body>
                   </Card>
                 </div>
               );
             })}
           </Slider>
-          <Modal show={show1} onHide={(e) => clickHandler(e, 0, "close")}>
+          <Modal show={show1} onHide={(e) => clickHandler(e, 0, 'close')}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Donasi</Modal.Title>
             </Modal.Header>
-            <Modal.Body>satuuuuuuuuuuuuuuuuuu</Modal.Body>
+            <Modal.Body>
+              <b>Donasi Untuk: </b>
+              {dataDonation[0]?.name}
+              <br></br>
+              <b>Total Donasi: </b>
+              {dataDonation[0]?.totalAmount}
+              <br></br>
+              <b>Sampai Dengan: </b>
+              {formatDate(dataDonation[0]?.validUntil)}
+            </Modal.Body>
             <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={(e) => clickHandler(e, 0, "close")}
-              >
-                Close
+              <Button variant="secondary" onClick={(e) => clickHandler(e, 0, 'close')}>
+                Kembali
               </Button>
-              <Button
-                variant="primary"
-                onClick={(e) => clickHandler(e, 0, "close")}
-              >
-                Save Changes
+              <Button variant="primary" href={linkDonation1}>
+                Donasi
               </Button>
             </Modal.Footer>
           </Modal>
           {/* card 2 */}
-          <Modal show={show2} onHide={(e) => clickHandler(e, 1, "close")}>
+          <Modal show={show2} onHide={(e) => clickHandler(e, 1, 'close')}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Donasi</Modal.Title>
             </Modal.Header>
-            <Modal.Body>duaaaaaaaaaaaa</Modal.Body>
+            <Modal.Body>
+              <b>Donasi Untuk: </b>
+              {dataDonation[1]?.name}
+              <br></br>
+              <b>Total Donasi: </b>
+              {dataDonation[1]?.totalAmount}
+              <br></br>
+              <b>Sampai Dengan: </b>
+              {formatDate(dataDonation[1]?.validUntil)}
+            </Modal.Body>
             <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={(e) => clickHandler(e, 1, "close")}
-              >
-                Close
+              <Button variant="secondary" onClick={(e) => clickHandler(e, 1, 'close')}>
+                Kembali
               </Button>
-              <Button
-                variant="primary"
-                onClick={(e) => clickHandler(e, 1, "close")}
-              >
-                Save Changes
+              <Button variant="primary" href={linkDonation2}>
+                Donasi
               </Button>
             </Modal.Footer>
           </Modal>
           {/* card 3 */}
-          <Modal show={show3} onHide={(e) => clickHandler(e, 2, "close")}>
+          <Modal show={show3} onHide={(e) => clickHandler(e, 2, 'close')}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Donasi</Modal.Title>
             </Modal.Header>
-            <Modal.Body>tiga</Modal.Body>
+            <Modal.Body>
+            <b>Donasi Untuk: </b>
+              {dataDonation[2]?.name}
+              <br></br>
+              <b>Total Donasi: </b>
+              {dataDonation[2]?.totalAmount}
+              <br></br>
+              <b>Sampai Dengan: </b>
+              {formatDate(dataDonation[2]?.validUntil)}
+            </Modal.Body>
             <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={(e) => clickHandler(e, 2, "close")}
-              >
-                Close
+              <Button variant="secondary" onClick={(e) => clickHandler(e, 2, 'close')}>
+                Kembali
               </Button>
-              <Button
-                variant="primary"
-                onClick={(e) => clickHandler(e, 2, "close")}
-              >
-                Save Changes
+              <Button variant="primary" href={linkDonation3}>
+                Donasi
               </Button>
             </Modal.Footer>
           </Modal>
           {/* card 4 */}
-          <Modal show={show4} onHide={(e) => clickHandler(e, 3, "close")}>
+          <Modal show={show4} onHide={(e) => clickHandler(e, 3, 'close')}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Donasi</Modal.Title>
             </Modal.Header>
-            <Modal.Body>empat</Modal.Body>
+            <Modal.Body>
+            <b>Donasi Untuk: </b>
+              {dataDonation[3]?.name}
+              <br></br>
+              <b>Total Donasi: </b>
+              {dataDonation[3]?.totalAmount}
+              <br></br>
+              <b>Sampai Dengan: </b>
+              {formatDate(dataDonation[3]?.validUntil)}
+            </Modal.Body>
             <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={(e) => clickHandler(e, 3, "close")}
-              >
-                Close
+              <Button variant="secondary" onClick={(e) => clickHandler(e, 3, 'close')}>
+                Kembali
               </Button>
-              <Button
-                variant="primary"
-                onClick={(e) => clickHandler(e, 3, "close")}
-              >
-                Save Changes
+              <Button variant="primary" href={linkDonation4}>
+                Donasi
               </Button>
             </Modal.Footer>
           </Modal>
           {/* card 5 */}
-          <Modal show={show5} onHide={(e) => clickHandler(e, 4, "close")}>
+          <Modal show={show5} onHide={(e) => clickHandler(e, 4, 'close')}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Donasi</Modal.Title>
             </Modal.Header>
-            <Modal.Body>lima</Modal.Body>
+            <Modal.Body>
+            <b>Donasi Untuk: </b>
+              {dataDonation[4]?.name}
+              <br></br>
+              <b>Total Donasi: </b>
+              {dataDonation[4]?.totalAmount}
+              <br></br>
+              <b>Sampai Dengan: </b>
+              {formatDate(dataDonation[4]?.validUntil)}
+            </Modal.Body>
             <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={(e) => clickHandler(e, 4, "close")}
-              >
-                Close
+              <Button variant="secondary" onClick={(e) => clickHandler(e, 4, 'close')}>
+                Kembali
               </Button>
-              <Button
-                variant="primary"
-                onClick={(e) => clickHandler(e, 4, "close")}
-              >
-                Save Changes
+              <Button variant="primary" href={linkDonation5}>
+                Donasi
               </Button>
             </Modal.Footer>
           </Modal>

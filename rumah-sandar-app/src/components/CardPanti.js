@@ -14,7 +14,7 @@ const CardPanti = () => {
 
   return (
     <Container className="content-panti mt-5 shadow mb-5">
-      <h2 className="text-center mb-4">
+      <h2 className="text-center mb-4 mt-3">
         <b>Panti Asuhan</b>
       </h2>
       <Row className="ms-5">
