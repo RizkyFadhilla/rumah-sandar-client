@@ -32,7 +32,6 @@ const VolunteerComponent = (data) => {
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
         <td>Verified</td>
-        <td></td>
         <td>{data.data.matchStatus}</td>
         <td>
           <Button onClick={() => navigate(`/detail-volunteer/` + data.data.id)} variant="warning">
@@ -51,6 +50,7 @@ const VolunteerComponent = (data) => {
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
         <td>Not Verified</td>
+        <td>{data.data.matchStatus}</td>
         <td>
           <Button onClick={() => navigate(`/detail-volunteer/` + data.data.id)} variant="warning" className="me-3">
             Detail
@@ -61,7 +61,6 @@ const VolunteerComponent = (data) => {
             Approve
           </Button>
         </td>
-        <td>{data.data.matchStatus}</td>
       </tr>
     );
   }

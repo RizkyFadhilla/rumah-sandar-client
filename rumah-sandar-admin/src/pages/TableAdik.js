@@ -31,7 +31,6 @@ const TableAdik = () => {
               <th>Email</th>
               <th>Status</th>
               <th>Nama Panti</th>
-              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
