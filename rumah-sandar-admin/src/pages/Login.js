@@ -4,7 +4,7 @@ import Logo from "../assets/logo-rumah-sandar.png";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { submitLoginAdmin } from "../redux/user";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 const Login = () => {
   let [loginForm, setLoginForm] = useState({
     email: "",
@@ -14,20 +14,35 @@ const Login = () => {
   let navigate = useNavigate();
   function submitHandler(e) {
     e.preventDefault();
-    dispatch(submitLoginAdmin(loginForm)).then(() => {
-      navigate("/table-volunteer")
-
-      toast('Kamu berhasil login!', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+    dispatch(submitLoginAdmin(loginForm))
+      .unwrap()
+      .then((result) => {
+        toast.success("Kamu berhasil login!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
         });
-    });
+      })
+      .then(() => {
+        navigate("/table-volunteer");
+      })
+      .catch((error) => {
+        return toast.error(`${error.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   }
 
   return (

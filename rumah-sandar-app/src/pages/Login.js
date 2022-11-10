@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { Container, Form, Button, Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { submitLoginOrphan } from '../redux/user';
-import { ArrowRightSquare, ArrowLeftSquare } from 'react-bootstrap-icons';
-import {toast} from 'react-toastify'
+import { useState } from "react";
+import { Container, Form, Button, Card } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { submitLoginOrphan } from "../redux/user";
+import { ArrowRightSquare, ArrowLeftSquare } from "react-bootstrap-icons";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   function changeHandler(e) {
@@ -30,30 +30,35 @@ const Login = () => {
   }
 
   async function submitHandler(e) {
-    try {
-      e.preventDefault();
+    e.preventDefault();
 
-      dispatch(submitLoginOrphan(loginForm))
-      .then(()=>  navigate('/'))
-      .then(() => {
-        toast('Akun kamu berhasil masuk!', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+    dispatch(submitLoginOrphan(loginForm))
+      .unwrap()
+      .then((result) => {
+        return toast("Akun kamu berhasil masuk!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
         });
-
       })
-
-      
-    
-    } catch (error) {
-      console.log(error);
-    }
+      .then(() => navigate("/"))
+      .catch((error) => {
+        return toast.error(`${error.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   }
 
   return (
@@ -71,12 +76,20 @@ const Login = () => {
               <Form.Label>Kata Sandi</Form.Label>
               <Form.Control type="password" placeholder="Masukan kata sandi" name="password" value={loginForm.password} onChange={changeHandler} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
-            <Button className="me-3" variant="secondary" type="submit" onClick={() => navigate('/')}>
-              Back 
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicCheckbox"
+            ></Form.Group>
+            <Button
+              className="me-3"
+              variant="secondary"
+              type="submit"
+              onClick={() => navigate("/")}
+            >
+              Back
             </Button>
-            <Button variant="primary" type="submit" >
-              Login 
+            <Button variant="primary" type="submit">
+              Login
             </Button>
           </Form>
         </Card.Body>

@@ -28,7 +28,7 @@ export const submitLoginAdmin = createAsyncThunk(
       );
 
       if (!response.ok) {
-        throw await response.text();
+        throw await response.json();
       }
 
       const data = await response.json();
@@ -39,7 +39,7 @@ export const submitLoginAdmin = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 );
