@@ -26,18 +26,18 @@ export default function CardMaterial() {
   return (
     <>
       {localStorage.getItem("role") === "orphan" && (
-        <Container className="content-donasi mt-5 p-5">
+        <Container className="content-material mt-5 p-5">
           <h2
-            className="mb-4"
+            className="mb-4 text-center"
           >Materi Pembelajaran</h2>
-          <Slider {...settings}>
+          <Slider {...settings} className="ms-3 me-5" >
             {dataClassCategories?.map((e) => {
               return (
                 <div>
                   <Card style={{
                     width: "18rem",
                   }}
-                    className="text-center">
+                    className="text-center ms-5">
                     <Card.Img variant="top" src={e.imgUrl} style={{ objectFit: "cover", height: "250px" }} />
                     <Card.Body>
                       <Card.Title

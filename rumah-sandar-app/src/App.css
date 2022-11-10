@@ -23,6 +23,13 @@ body {
   border: 1px silver solid;
 }
 
+.content-material{
+  background-color: #ffffff;
+  border-radius: 15px;
+  /* padding: 20px !important; */
+  border: 1px silver solid; 
+}
+
 .content-panti{
   /* background-color: #ffbf69; */
   background-color: #ffffff;
