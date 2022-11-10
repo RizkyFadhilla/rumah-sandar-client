@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Footer from "../components/Footer";
 import { checkLoginUserData } from "../redux/user";
+import CardMatch from "../components/CardMatch";
+import CardAbout from "../components/CardAbout";
 
 const LandingPage = () => {
   let dispatch = useDispatch();
@@ -20,10 +22,11 @@ const LandingPage = () => {
   return (
     <>
       <HeaderNavbar />
-      {(loginUserDataNow && loginUserDataNow?.role === "orphan") && <ContentLandingPageOrphan />}
+      {(loginUserDataNow && loginUserDataNow?.role === "orphan") && <ContentLandingPageOrphan /> && <CardMatch />}
       {(!loginUserDataNow || loginUserDataNow?.role === "volunteer") && <ContentLandingPage />}
       {loginUserDataNow?.role === "orphan" && <CardMaterial />}
 
+      <CardAbout />
       <CardContent />
       <Footer />
     </>

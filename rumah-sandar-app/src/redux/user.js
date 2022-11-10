@@ -239,27 +239,16 @@ export const submitRegisterOrphan = createAsyncThunk(
 
   
       if (!response.ok) {
-        throw await response.text();
+        throw await response.json();
       }
   
       const data = await response.json();
       return data;
       
     } catch (error) {
-      const err = JSON.parse(error)
-      toast(`${err.message}`, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
+      
+        throw error
 
-
-      return error
     }
     
 

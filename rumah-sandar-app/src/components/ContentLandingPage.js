@@ -12,45 +12,52 @@ const ContentLandingPage = () => {
     <>
       <Container className="content-landing mt-5 shadow">
         <Row>
-          <Col className='col-8 mt-5' style={{ paddingLeft: "40px", paddingRight: "10px" }}>
-            <h3><b>Selamat Datang di Rumah Sandar</b></h3>
-            <h6><em>Tempat belajar untuk adik-adik yang berada di bawah naungan yayasan panti asuhan di seluruh Indonesia.</em></h6>
+          <Col className="col-8 mt-5" style={{ paddingLeft: "40px", paddingRight: "10px" }}>
+            <h3 className="mb-3">
+              <b>Tentang Rumah Sandar</b>
+            </h3>
+            <h6>
+              <em>
+                Komunitas belajar online <i>non profitable</i>, khusus untuk adik-adik yang berada di bawah naungan
+                yayasan panti asuhan di Indonesia.
+              </em>
+            </h6>
             <br></br>
             <p>
-              Rumah Sandar adalah komunitas e-learning nirlaba untuk anak-anak
-              yang terdaftar di panti asuhan.<br></br>Merupakan wadah untuk
-              menjembatani para relawan muda di Indonesia untuk melakukan
-              bimbingan non formal <br></br> kepada anak yatim. Sesuai dengan
-              namanya, Rumah Sandar adalah tempat bersandarnya anak-anak yatim,
-              tidak hanya untuk pelengkap pendidikan mereka, tetapi juga untuk
-              mendapatkan harapan untuk meraih masa depan yang cerah terlepas
-              dari situasi mereka.
+              Bukan hanya untuk belajar, sesuai dengan namanya, Rumah Sandar adalah tempat bernaung yang bisa diandalkan, dimana adik-adik asuh akan merasa nyaman. Tidak hanya untuk pelengkap pendidikan mereka, tapi juga untuk
+              mendapatkan harapan untuk meraih masa depan yang cerah terlepas dari situasi apapun.
+            </p>
+            <p>
+              Rumah Sandar tidak memungut biaya apapun kepada adik asuh dan yayasan panti asuhan, namun, kami tetap mengedepankan kualitas pembelajaran, sehingga pembelajaran akan dilakukan secara intensif (<i>one-on-one</i>).
             </p>
           </Col>
           <Col className="col-4" style={{ paddingRight: "20px" }}>
             <Image src={Logo} width={"350"} />
           </Col>
-          <div>
-            Ajak teman untuk jadi relawan, bagikan Informasi tentang Rumah Sandar:<br></br>
-            <TwitterShareButton url={shareUrl}>
-              <TwitterIcon size={30} round />
-            </TwitterShareButton>
 
-            <FacebookShareButton url={shareUrl}>
-              <FacebookIcon size={30} round />
-            </FacebookShareButton>
+          <Container className="text-center">
+            <hr></hr>
+            <div>
+              <p className="mb-3">
+                Bagikan informasi tentang Rumah Sandar
+              </p>
+            </div>
+            <div>
+              <TwitterShareButton url={shareUrl}>
+                <TwitterIcon size={30} round className="me-3" />
+              </TwitterShareButton>
 
-            <WhatsappShareButton url={shareUrl}
-              // quote={title} 
-              separator=":: ">
-              <WhatsappIcon size={30} round />
-            </WhatsappShareButton>
+              <FacebookShareButton url={shareUrl}>
+                <FacebookIcon size={30} round className="me-3" />
+              </FacebookShareButton>
 
-
-
-
-
-          </div>
+              <WhatsappShareButton url={shareUrl}
+                // quote={title} 
+                separator=":: ">
+                <WhatsappIcon size={30} round className="me-3" />
+              </WhatsappShareButton>
+            </div>
+          </Container>
         </Row>
       </Container>
     </>
