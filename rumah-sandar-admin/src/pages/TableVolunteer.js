@@ -19,17 +19,16 @@ const TableVolunteer = () => {
   return (
     <>
       <Container className="mt-5">
-        <h3>Daftar Semua Relawan</h3>
+        <h3 className="text-center">Daftar Semua Relawan</h3>
         <Table striped hover className="styled-table">
           <thead>
             <tr>
-              <th>No</th>
+              <th className="text-center">No</th>
               <th>Nama</th>
               <th>Email</th>
-              <th>Status</th>
-              <th>Status Match</th>
+              <th>Jadwal Kelas</th>
               <th>Detail</th>
-              <th>Approve</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>

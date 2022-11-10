@@ -77,7 +77,7 @@ const DetailVolunteer = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Card style={{ width: "18rem" }} className="shadow">
+          <Card style={{ width: "18rem", marginLeft: 90 }} className="shadow">
             <Card.Body>
               <Card.Img
                 src={detail[0]?.curriculumVitae}
