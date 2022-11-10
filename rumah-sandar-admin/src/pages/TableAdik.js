@@ -20,17 +20,16 @@ const TableAdik = () => {
   console.log(dataOrphan)
   return (
     <>
-
-      <Container className="mt-4">
+      <Container className="mt-5">
         <h3 className="text-center">Daftar Semua Adik Asuh</h3>
         <Table striped hover className="styled-table">
           <thead>
             <tr>
-              <th>No</th>
+              <th className='text-center'>No</th>
               <th>Nama</th>
               <th>Email</th>
-              <th>Status</th>
               <th>Nama Panti</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>

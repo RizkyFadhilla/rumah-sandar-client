@@ -28,29 +28,32 @@ const VolunteerComponent = (data) => {
   if (data.data.verified) {
     return (
       <tr>
-        <td>{number}</td>
+        <td className='text-center'>{number}</td>
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
-        <td>Verified</td>
-        <td>{data.data.matchStatus}</td>
+        {data.data.matchStatus === "notMatch" &&
+        <td>Belum Terjadwal</td>}
+        {data.data.matchStatus === "alreadyMatch" &&
+        <td style={{ color: "blue" }}>Sudah Terjadwal</td>}
         <td>
           <Button onClick={() => navigate(`/detail-volunteer/` + data.data.id)} variant="warning">
             Detail
           </Button>
         </td>
         <td>
-          Approved
+          Terverifikasi
         </td>
       </tr>
     );
   } else {
     return (
       <tr>
-        <td>{number}</td>
+        <td className='text-center'>{number}</td>
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
-        <td>Not Verified</td>
-        <td>{data.data.matchStatus}</td>
+        {data.data.matchStatus === "notMatch" &&
+        <td>Belum Terjadwal</td>}
+        {/* <td>{data.data.matchStatus}</td> */}
         <td>
           <Button onClick={() => navigate(`/detail-volunteer/` + data.data.id)} variant="warning" className="me-3">
             Detail
@@ -58,7 +61,7 @@ const VolunteerComponent = (data) => {
         </td>
         <td>
           <Button onClick={(e) => clickHandler(e, data.data.id)} variant="primary">
-            Approve
+            Verifikasi
           </Button>
         </td>
       </tr>
