@@ -14,16 +14,23 @@ import CardAbout from "../components/CardAbout";
 
 const LandingPage = () => {
   let dispatch = useDispatch();
-  let { loginUserDataNow, checkLoginUserDataLoading } = useSelector((state) => state.user);
+  let { loginUserDataNow, checkLoginUserDataLoading } = useSelector(
+    (state) => state.user
+  );
   useEffect(() => {
     dispatch(checkLoginUserData());
   }, []);
-  console.log(loginUserDataNow)
+  console.log(loginUserDataNow);
+  console.log(loginUserDataNow?.role);
   return (
     <>
       <HeaderNavbar />
-      {(loginUserDataNow && loginUserDataNow?.role === "orphan") && <ContentLandingPageOrphan /> && <CardMatch />}
-      {(!loginUserDataNow || loginUserDataNow?.role === "volunteer") && <ContentLandingPage />}
+      {loginUserDataNow && loginUserDataNow?.role === "orphan" && (
+        <ContentLandingPageOrphan />
+      )}
+      {(!loginUserDataNow || loginUserDataNow?.role === "volunteer") && (
+        <ContentLandingPage />
+      )}
       {loginUserDataNow?.role === "orphan" && <CardMaterial />}
 
       <CardAbout />
