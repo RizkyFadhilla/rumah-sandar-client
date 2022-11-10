@@ -2,6 +2,8 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchVolunteer, patchVolunteer } from '../redux/user';
+import {toast} from 'react-toastify'
+
 
 const VolunteerComponent = (data) => {
   const navigate = useNavigate();
@@ -9,6 +11,16 @@ const VolunteerComponent = (data) => {
   function clickHandler(e, id) {
     e.preventDefault();
     dispatch(patchVolunteer(id)).then(() => {
+      toast("Mengubah Status",{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        })
       dispatch(fetchVolunteer());
     });
   }

@@ -110,7 +110,7 @@ const RegisterAdik = () => {
   return (
     <Container className="mt-5">
       <Card>
-        <Card.Body>
+        <Card.Body style={{padding: 40}}>
           <h3 className="text-center">Daftar sebagai adik asuh</h3>
           <Form onSubmit={handleSubmit}>
             {/* EMAIL ADDRESS */}
@@ -124,7 +124,7 @@ const RegisterAdik = () => {
                 }}
                 name="email"
                 type="email"
-                placeholder="Masukan email"
+                placeholder="masukan email"
               />
             </Form.Group>
 
@@ -143,7 +143,7 @@ const RegisterAdik = () => {
                 name="fullName"
                 type="text"
 
-                placeholder="Nama Lengkap"
+                placeholder="nama lengkap"
               />
             </Form.Group>
 
@@ -161,13 +161,13 @@ const RegisterAdik = () => {
                 }}
                 name="password"
                 type="password"
-                placeholder="Masukan sandi"
+                placeholder="masukan sandi"
               />
             </Form.Group>
 
             {/* IMAGE URL */}
             <Form.Group className="mb-3">
-              <Form.Label>Gambar</Form.Label>
+              <Form.Label>Foto</Form.Label>
               <Form.Control
                 // value={imageUrl}
                 // onChange={handleChange}
@@ -192,7 +192,7 @@ const RegisterAdik = () => {
                 name="OrphanageId"
                 aria-label="Default select example"
               >
-                <option disabled selected >Pilih Satu</option>
+                <option disabled selected >pilih satu</option>
                 {dataOrphanages?.map((orphanage) => {
                   return (
                     <option value={orphanage.id} key={orphanage.id}>

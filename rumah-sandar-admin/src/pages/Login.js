@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Container, Form } from "react-bootstrap";
-import { ArrowBarRight } from "react-bootstrap-icons";
 import Logo from "../assets/logo-rumah-sandar.png";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
