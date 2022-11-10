@@ -71,11 +71,11 @@ const CardContent = () => {
                       <Row>
                         <Col>
                           <Card.Text>
-                            Total: Rp.5000 {element.totalAmount}
+                            <b>Total saat ini </b><br></br>Rp.{element.totalAmount}
                           </Card.Text>
                         </Col>
                         <Col>
-                          <p>{formatDate(element.validUntil)}</p>
+                          <p><b>Sampai dengan<br></br></b>{formatDate(element.validUntil)}</p>
                         </Col>
                       </Row>
                       <Card.Link href={linkDonation}>Donasi</Card.Link>
