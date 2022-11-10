@@ -147,6 +147,9 @@ const HeaderNavbar = () => {
           )}
           {access_token && (
             <NavDropdown title={username} id="navbarScrollingDropdown">
+              <NavDropdown.Item href="" onClick={() => navigate('/detail-user')}>
+                Profil
+              </NavDropdown.Item>
               <NavDropdown.Item href="" onClick={logoutHandler}>
                 Keluar
               </NavDropdown.Item>

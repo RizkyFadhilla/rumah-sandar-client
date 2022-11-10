@@ -31,7 +31,7 @@ const ContentLandingPage = () => {
               Rumah Sandar tidak memungut biaya apapun kepada adik asuh dan yayasan panti asuhan, namun, kami tetap mengedepankan kualitas pembelajaran, sehingga pembelajaran akan dilakukan secara intensif (<i>one-on-one</i>).
             </p>
           </Col>
-          <Col className="col-4">
+          <Col className="col-4" style={{ paddingRight: "20px" }}>
             <Image src={Logo} width={"350"} />
           </Col>
 
