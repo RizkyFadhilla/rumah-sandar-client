@@ -13,7 +13,7 @@ const CardPanti = () => {
   }, []);
 
   return (
-    <Container className="content-panti mt-5 shadow" style={{ justifyContent: "center", alignItems: "center" }}>
+    <Container className="content-panti mt-5 shadow">
       <h2 className="text-center">
         <b>Panti Asuhan</b>
       </h2>
@@ -29,13 +29,17 @@ const CardPanti = () => {
       >
         {dataOrphanages.map((e) => {
           return (
-            <Card style={{ width: '18rem' }} className="text-center ms-5 mb-4">
-              <Card.Img variant="top" src={e.imageUrl} style={{ objectFit: 'cover', height: '250px' }} />
-              <Card.Body>
-                <Card.Title>{e.name}</Card.Title>
-                <Card.Text>{e.personInCharge}</Card.Text>
-              </Card.Body>
-            </Card>
+            <Row>
+              <Col className='col-6'>
+                <Card style={{ width: '18rem' }} className="text-center mb-4">
+                  <Card.Img variant="top" src={e.imageUrl} style={{ objectFit: 'cover', height: '250px' }} />
+                  <Card.Body>
+                    <Card.Title>{e.name}</Card.Title>
+                    <Card.Text>{e.personInCharge}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
           );
         })}
       </div>

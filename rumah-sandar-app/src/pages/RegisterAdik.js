@@ -13,7 +13,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ArrowBarRight, ArrowBarLeft } from "react-bootstrap-icons";
 import { fetchOrphanages, submitRegisterOrphan } from "../redux/user";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 const RegisterAdik = () => {
   const dispatch = useDispatch();
@@ -77,7 +76,7 @@ const RegisterAdik = () => {
     dispatch(submitRegisterOrphan(formData))
       .unwrap()
       .then((result) => {
-        return toast("Akunmu sudah terdaftar, silahkan tunggu verifikasi ya!", {
+        return toast("Kamu berhasil Register!, Tunggu Konfirmasi admin yaa", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -88,7 +87,9 @@ const RegisterAdik = () => {
           theme: "light",
         });
       })
-      .then(() => navigate("/"))
+      .then(() => {
+        navigate("/");
+      })
       .catch((error) => {
         return toast.error(`${error.message}`, {
           position: "top-center",
@@ -99,16 +100,16 @@ const RegisterAdik = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-        });
-      });
+        })
+      })
   }
 
-  // console.log(registerForm);
+  console.log(dataOrphanages)
 
   return (
     <Container className="mt-5">
       <Card>
-        <Card.Body>
+        <Card.Body style={{ padding: 40 }}>
           <h3 className="text-center">Daftar sebagai adik asuh</h3>
           <Form onSubmit={handleSubmit}>
             {/* EMAIL ADDRESS */}
@@ -122,7 +123,7 @@ const RegisterAdik = () => {
                 }}
                 name="email"
                 type="email"
-                placeholder="Masukan email"
+                placeholder="masukan email"
               />
             </Form.Group>
 
@@ -158,13 +159,13 @@ const RegisterAdik = () => {
                 }}
                 name="password"
                 type="password"
-                placeholder="Masukan sandi"
+                placeholder="masukan sandi"
               />
             </Form.Group>
 
             {/* IMAGE URL */}
             <Form.Group className="mb-3">
-              <Form.Label>Gambar</Form.Label>
+              <Form.Label>Foto</Form.Label>
               <Form.Control
                 // value={imageUrl}
                 // onChange={handleChange}

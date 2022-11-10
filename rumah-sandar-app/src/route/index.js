@@ -1,5 +1,4 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import DetailDonation from "../components/DonationDetailPage";
 import Class from "../pages/Class";
 import LandingPage from "../pages/LandingPages";
 import Layout from "../pages/Layout";
@@ -10,6 +9,8 @@ import PagePanti from "../pages/PagePanti";
 import Register from "../pages/Register";
 import RegisterAdik from "../pages/RegisterAdik";
 import Schedule from "../pages/Schedule";
+import DetailDonation from "../components/DonationDetailPage";
+import DetailUserLogin from '../pages/DetailUserLogin';
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
         path: "/class",
         element: <Class />,
       },
+      {
+        path: "/detail-user",
+        element: <DetailUserLogin/>
+      }
     ],
   },
 ]);

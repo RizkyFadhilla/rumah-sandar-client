@@ -22,15 +22,16 @@ const TableAdik = () => {
     <>
 
       <Container className="mt-4">
-        <h3 className="text-center">Table Adik</h3>
+        <h3 className="text-center">Daftar Semua Adik Asuh</h3>
         <Table striped hover className="styled-table">
           <thead>
             <tr>
               <th>No</th>
-              <th>Name</th>
+              <th>Nama</th>
               <th>Email</th>
               <th>Status</th>
-              <th>Action</th>
+              <th>Nama Panti</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>

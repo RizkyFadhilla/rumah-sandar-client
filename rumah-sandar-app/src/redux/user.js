@@ -241,7 +241,9 @@ export const submitRegisterOrphan = createAsyncThunk(
       const data = await response.json();
       return data;
     } catch (error) {
-      throw error;
+      
+        throw error
+
     }
   }
 );
