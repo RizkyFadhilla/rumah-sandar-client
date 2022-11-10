@@ -27,7 +27,7 @@ export default function OrphansList() {
   }
   console.log(dataOrphan);
   return (
-    <Container>
+    <Container style={{height: '100vh'}}>
       <CardNarasi />
       <Table striped bordered hover size="sm" className="text-center mt-5">
         <thead>

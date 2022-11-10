@@ -75,7 +75,7 @@ export default function Schedule() {
             }}
           >
             <div>
-              <h2 style={{ textAlign: "center" }}>DETAIL JADWAL KELAS</h2>
+              <h2 style={{ textAlign: "center" }}>JADWAL KELAS</h2>
             </div>
             {userSchedule[0]?.Classes?.map((el, index) => {
               if (el.date > today) {
@@ -146,8 +146,17 @@ export default function Schedule() {
               }}
             />
             <div style={{ marginTop: 20, textAlign: "center" }}>
+              {todayClass?.length === 0  && 
+                <Alert variant="primary" style={{ margin: 10 }}>
+                  Tombol menuju ruang kelas akan muncul jika hari ini kamu
+                  memiliki jadwal kelas, mohon ditunggu.
+                </Alert>
+              }
+
               {classSchedulesFormatted.map((schedule) => {
                 if (schedule == today) {
+                  console.log(schedule, "INI SCHEDULE");
+                  console.log(today, "INI TODAYNYA");
                   return (
                     <>
                       <Alert variant="primary" style={{ margin: 10 }}>
@@ -155,7 +164,7 @@ export default function Schedule() {
                         tombol dibawah ini!
                       </Alert>
                       <Button
-                        className="btn btn-outline-primary mt-2"
+                        className="outline-primary mt-2"
                         onClick={() =>
                           navigate("/class", { state: todayClass })
                         }
