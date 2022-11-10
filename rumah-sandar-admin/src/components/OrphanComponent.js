@@ -5,6 +5,7 @@ import {fetchOrphan, patchOrphan } from "../redux/user"
 import {toast} from 'react-toastify'
 
 const OrphanComponent = (data) => {
+  console.log(data);
   let dispatch = useDispatch()
   function clickHandler(e, id){
     e.preventDefault()
@@ -32,7 +33,7 @@ const OrphanComponent = (data) => {
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
         <td>Verified</td>
-        {/* <td>{data.data.Orphanage.name}</td> */}
+        <td>{data.data.Orphanage.name}</td>
         <td>Approved</td>
       </tr>
     );
@@ -43,7 +44,7 @@ const OrphanComponent = (data) => {
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
         <td>Not Verified</td>
-        {/* <td>{data.data.Orphanage.name}</td> */}
+        <td>{data.data.Orphanage.name}</td>
         <td>
           <Button
            onClick={(e) => clickHandler(e, data.data.id)}

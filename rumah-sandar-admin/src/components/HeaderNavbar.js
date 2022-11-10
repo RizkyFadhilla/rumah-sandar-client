@@ -30,9 +30,9 @@ const HeaderNavbar = () => {
       <Container>
         <Navbar.Brand href="#home">Rumah Sandar - Admin Panel</Navbar.Brand>
         <Nav className="">
-          <Nav.Link href="" onClick={() => navigate('/table-volunteer')}>Table Pengajar</Nav.Link>
-          <Nav.Link href="" onClick={() => navigate('/table-adik')}>Table Adik</Nav.Link>
-          <Nav.Link href="" onClick={logoutHandler}>Logout</Nav.Link>
+          <Nav.Link href="" onClick={() => navigate('/table-volunteer')}>Daftar Relawan</Nav.Link>
+          <Nav.Link href="" onClick={() => navigate('/table-adik')}>Daftar Adik Asuh</Nav.Link>
+          <Nav.Link href="" onClick={logoutHandler}>Keluar</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
