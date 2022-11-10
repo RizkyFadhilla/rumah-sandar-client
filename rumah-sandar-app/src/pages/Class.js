@@ -15,7 +15,7 @@ export default function Class() {
     return  state.user
   })
 
-  const today = location.state[0]?.date.substring(0,10)
+  const today = location?.state[0]?.date.substring(0,10)
 
     const [Joined, setJoined] = useState(false)
     
@@ -24,6 +24,7 @@ export default function Class() {
         dispatch(getTalkUser())
     }, [])
 
+    console.log(location.state[0]?.ClassCategory?.name, 'INI MASUK GAK')
   return (
     <Container>
       <div className="row mt-4" style={{height: 650}}>

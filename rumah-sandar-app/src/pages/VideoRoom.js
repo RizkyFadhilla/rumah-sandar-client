@@ -8,7 +8,7 @@ import {XCircle} from 'react-bootstrap-icons'
 
 const APP_ID = "78fd29108df5426ca80b601699bb8434";
 const TOKEN =
-  "007eJxTYDB11A3YWm3ION2cU+TVPZWCRbm7KuRZK0772hUcWbtyb5MCg7lFWoqRpaGBRUqaqYmRWXKihUGSmYGhmaVlUpKFibGJqkh2ckMgI4O7WiAzIwMEgvisDM45icXFDAwAYMEbgA==";
+  "007eJxTYNikecLvSG0qqxLXp/ubL7ewcOw24rkYG5ZY9tT0d9bcQCUFBnOLtBQjS0MDi5Q0UxMjs+REC4MkMwNDM0vLpCQLE2MTlaac5IZARobvuVmsjAwQCOKzMjjnJBYXMzAAAPi5Hfo=";
 const CHANNEL = "Class";
 
 //untuk konek ke roomnya
