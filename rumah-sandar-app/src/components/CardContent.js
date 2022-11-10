@@ -79,7 +79,13 @@ const CardContent = () => {
                         </Col>
                       </Row>
                       <Card.Link href={linkDonation}>Donasi</Card.Link>
-                      <Card.Link href="#">Lihat detail</Card.Link>
+                      <Card.Link
+                        onClick={() =>
+                          navigate("detail-donation/" + element.id)
+                        }
+                      >
+                        Lihat detail
+                      </Card.Link>
                     </Card.Body>
                   </Card>
                 </div>
