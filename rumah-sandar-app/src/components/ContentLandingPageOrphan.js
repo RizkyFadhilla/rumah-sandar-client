@@ -1,10 +1,9 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import Logo from "../assets/content.png";
-import { ToastContainer, toast } from "react-toastify";
+
 import {
+  checkLoginUserData,
   checkLoginUserMatch,
-  fetchClassCategories,
-  requestMatchOrphan,
 } from "../redux/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -13,65 +12,33 @@ import CardMatch from "./CardMatch";
 const ContentLandingPageOrphan = () => {
   let dispatch = useDispatch();
   let noMatch = true;
-  const { loginUser, checkLoginUserMatchData, checkLoginUserLoading } =
-    useSelector((state) => {
-      return state.user;
-    });
+  const {
+    checkLoginUserMatchData,
+    loginUserDataNow,
+    checkLoginUserLoading,
+  } = useSelector((state) => {
+    return state.user;
+  });
 
   useEffect(() => {
-    dispatch(checkLoginUserMatch());
+    dispatch(checkLoginUserMatch()).then(() => {
+      return checkLoginUserData();
+    });
   }, []);
-  function requestMatch(e) {
-    e.preventDefault();
-
-    dispatch(requestMatchOrphan())
-      .unwrap()
-      .then((result) => {
-        toast.success(
-          `Request Berhasil, Silahkan menunggu kakak Pengajar, untuk infonya akan kami kirim via email`,
-          {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          }
-        );
-        return result;
-      })
-      .then((result) => {
-        dispatch(checkLoginUserMatch());
-      })
-      .catch((error) => {
-        return toast.error(`${error.message}`, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      });
-  }
+  
   if (checkLoginUserLoading) {
     <h1>Mohon Di tunggu</h1>;
   }
   if (checkLoginUserMatchData.length > 0) {
     noMatch = false;
-  }
-
+  } 
   return (
     <>
       <Container className="content-landing mt-5 shadow">
         <Row>
           <Col className="col-8 mt-5">
             <h3>
-              <b>Selamat Datang Orphan di Rumah Sandar</b>
+              <b>Selamat Datang {loginUserDataNow.fullName} di Rumah Sandar</b>
             </h3>
             <h6>
               <em>
@@ -89,31 +56,6 @@ const ContentLandingPageOrphan = () => {
               tidak hanya untuk pelengkap pendidikan mereka, tetapi juga untuk
               mendapatkan harapan untuk meraih masa depan yang cerah terlepas
               dari situasi mereka. <br></br>
-              {noMatch && (
-                <>
-                  <p>
-                    bagi adik-adik yang ingin mendapatkan pembinaan pembelajaran
-                    dari relawan kami, bisa memencet tombol di samping ini :{" "}
-                    <span>
-                      <button
-                        className="btn btn-primary ms-2"
-                        onClick={requestMatch}
-                      >
-                        ajukan pembinaan
-                      </button>
-                    </span>
-                  </p>
-                </>
-              )}
-              {!noMatch && (
-                <>
-                  <p>
-                    Adik telah mengajukan pembinaan, mohon menunggu hingga ada
-                    balasan dari para pembina kami, untuk info jadwal
-                    pembelajaran akan kami kirimkan via email
-                  </p>
-                </>
-              )}
             </p>
           </Col>
           <Col className="col-4">
@@ -121,8 +63,7 @@ const ContentLandingPageOrphan = () => {
           </Col>
         </Row>
       </Container>
-
-      <CardMatch />
+      {noMatch && <CardMatch />}
     </>
   );
 };

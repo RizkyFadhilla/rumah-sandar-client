@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 import {
   Container,
   Form,
@@ -74,43 +74,42 @@ const RegisterAdik = () => {
     formData.append("OrphanageId", registerForm.OrphanageId);
     formData.append("imageUrl", imageUrl);
     dispatch(submitRegisterOrphan(formData))
-    .unwrap()
-    .then(() => {
-      navigate("/")
-      toast('Kamu berhasil Register!, Tunggu Konfirmasi admin yaa', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+      .unwrap()
+      .then((result) => {
+        return toast("Kamu berhasil Register!, Tunggu Konfirmasi admin yaa", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
         });
-    })
-    .catch((err) => {
-      // console.log(err + 'dikomponen');
-      // throw err
-      toast(`${err.message}`, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-
-    })
+      })
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        return toast.error(`${error.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      })
   }
 
-  console.log(dataOrphanages);
+  console.log(dataOrphanages)
 
   return (
     <Container className="mt-5">
       <Card>
-        <Card.Body style={{padding: 40}}>
+        <Card.Body style={{ padding: 40 }}>
           <h3 className="text-center">Daftar sebagai adik asuh</h3>
           <Form onSubmit={handleSubmit}>
             {/* EMAIL ADDRESS */}
@@ -142,8 +141,7 @@ const RegisterAdik = () => {
                 }}
                 name="fullName"
                 type="text"
-
-                placeholder="nama lengkap"
+                placeholder="Nama Lengkap"
               />
             </Form.Group>
 
@@ -192,7 +190,9 @@ const RegisterAdik = () => {
                 name="OrphanageId"
                 aria-label="Default select example"
               >
-                <option disabled selected >pilih satu</option>
+                <option disabled selected>
+                  Pilih Satu
+                </option>
                 {dataOrphanages?.map((orphanage) => {
                   return (
                     <option value={orphanage.id} key={orphanage.id}>

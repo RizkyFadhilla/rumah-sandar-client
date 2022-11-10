@@ -1,14 +1,15 @@
-import { createBrowserRouter, redirect } from 'react-router-dom';
-import Class from '../pages/Class';
-import LandingPage from '../pages/LandingPages';
-import Layout from '../pages/Layout';
-import Login from '../pages/Login';
-import LoginVolunteer from '../pages/LoginVolunteer';
-import OrphansList from '../pages/OrphansList';
-import PagePanti from '../pages/PagePanti';
-import Register from '../pages/Register';
-import RegisterAdik from '../pages/RegisterAdik';
-import Schedule from '../pages/Schedule';
+import { createBrowserRouter, redirect } from "react-router-dom";
+import Class from "../pages/Class";
+import LandingPage from "../pages/LandingPages";
+import Layout from "../pages/Layout";
+import Login from "../pages/Login";
+import LoginVolunteer from "../pages/LoginVolunteer";
+import OrphansList from "../pages/OrphansList";
+import PagePanti from "../pages/PagePanti";
+import Register from "../pages/Register";
+import RegisterAdik from "../pages/RegisterAdik";
+import Schedule from "../pages/Schedule";
+import DetailDonation from "../components/DonationDetailPage";
 import DetailUserLogin from '../pages/DetailUserLogin';
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/orphanages",
     element: <PagePanti />,
+  },
+  {
+    path: "/detail-donation/:id",
+    element: <DetailDonation />,
   },
   {
     path: "/login",
