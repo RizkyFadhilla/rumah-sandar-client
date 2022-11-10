@@ -9,80 +9,75 @@ import PagePanti from '../pages/PagePanti';
 import Register from '../pages/Register';
 import RegisterAdik from '../pages/RegisterAdik';
 import Schedule from '../pages/Schedule';
-import DetailOrphan from '../pages/DetailOrphan'
-import DetailVolunteer from '../pages/DetailVolunteer';
+import DetailUserLogin from '../pages/DetailUserLogin';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <LandingPage />,
   },
   {
-    path: '/orphanages',
+    path: "/orphanages",
     element: <PagePanti />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
     loader: () => {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem("access_token");
       if (token) {
-        throw redirect('/');
+        throw redirect("/");
       }
     },
   },
   {
-    path: '/loginVolunteer',
+    path: "/loginVolunteer",
     element: <LoginVolunteer />,
     loader: () => {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem("access_token");
       if (token) {
-        throw redirect('/');
+        throw redirect("/");
       }
     },
   },
   {
-    path: '/register',
+    path: "/register",
     element: <Register />,
   },
   {
-    path: '/register-adik',
+    path: "/register-adik",
     element: <RegisterAdik />,
   },
   {
     element: <Layout />,
     loader: () => {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem("access_token");
       if (!token) {
-        throw redirect('/login');
+        throw redirect("/login");
       }
     },
     children: [
       {
-        path: '/orphansList',
+        path: "/orphansList",
         element: <OrphansList />,
         loader: () => {
-          const isMatch = localStorage.getItem('isMatch');
+          const isMatch = localStorage.getItem("isMatch");
           if (isMatch) {
-            throw redirect('/');
+            throw redirect("/");
           }
         },
       },
       {
-        path: '/schedule',
+        path: "/schedule",
         element: <Schedule />,
       },
       {
-        path: '/class',
+        path: "/class",
         element: <Class />,
       },
       {
-        path: "/detail-orphan/:id",
-        element: <DetailOrphan/>
-      },
-      {
-        path: "/detail-volunteer/:id",
-        element: <DetailVolunteer/>
+        path: "/detail-user",
+        element: <DetailUserLogin/>
       }
     ],
   },

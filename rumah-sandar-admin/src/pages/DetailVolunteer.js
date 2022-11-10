@@ -18,7 +18,7 @@ const DetailVolunteer = () => {
 
   return (
     <Container className="mt-5 text-center col-3">
-      <Card style={{ width: '18rem' }} className="shadow">
+      <Card style={{ width: '20rem' }} className="shadow">
         <Card.Header style={{ backgroundColor: '#ffbe76', color: 'white' }}>
           <b>Detail Pengajar</b>
         </Card.Header>

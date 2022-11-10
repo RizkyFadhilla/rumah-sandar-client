@@ -8,16 +8,19 @@ const TableAdik = () => {
   let { dataOrphan, isLoading } = useSelector((state) => {
     return state.user;
   });
+
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchOrphan());
   }, []);
+
   if (isLoading) {
     <h1>Please Wait</h1>;
   }
 
   return (
     <>
+
       <Container className="mt-4">
         <h3 className="text-center">Table Adik</h3>
         <Table striped hover className="styled-table">
@@ -32,7 +35,15 @@ const TableAdik = () => {
           </thead>
           <tbody>
             {dataOrphan.map((el, index) => {
-              return <OrphanComponent data={el} index={index} status={el.verified} key={el.id} />;
+
+              return (
+                <OrphanComponent
+                  data={el}
+                  index={index}
+                  status={el.verified}
+                  key={el.id}
+                />
+              );
             })}
           </tbody>
         </Table>
