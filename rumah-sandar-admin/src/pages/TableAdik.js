@@ -17,7 +17,7 @@ const TableAdik = () => {
   if (isLoading) {
     <h1>Please Wait</h1>;
   }
-
+  console.log(dataOrphan)
   return (
     <>
 

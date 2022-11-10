@@ -29,6 +29,14 @@ const CardContent = () => {
       });
   }, []);
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -44,7 +52,7 @@ const CardContent = () => {
     <>
       {loginUserDataNow?.role !== "orphan" && (
         <Container className="content-donasi mt-5 shadow">
-          <h2 className="text-center">
+          <h2 className="text-center mb-4">
             <b>Donasi</b>
           </h2>
           <Slider {...settings} className="ms-3 me-5">
@@ -60,16 +68,18 @@ const CardContent = () => {
                     />
                     <Card.Body className="">
                       <Card.Title>{element.name}</Card.Title>
-                      <Card.Text>{element.on_demand_link}</Card.Text>
-                      <Button
-                        variant="primary"
-                        // href={linkDonation}
-                        onClick={() =>
-                          navigate("/detail-donation/" + element.id)
-                        }
-                      >
-                        detail
-                      </Button>
+                      <Row>
+                        <Col>
+                          <Card.Text>
+                            Total: Rp.5000 {element.totalAmount}
+                          </Card.Text>
+                        </Col>
+                        <Col>
+                          <p>{formatDate(element.validUntil)}</p>
+                        </Col>
+                      </Row>
+                      <Card.Link href={linkDonation}>Donasi</Card.Link>
+                      <Card.Link href="#">Lihat detail</Card.Link>
                     </Card.Body>
                   </Card>
                 </div>
