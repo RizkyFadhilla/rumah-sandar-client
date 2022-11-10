@@ -88,5 +88,5 @@ import { useEffect, useState, useRef } from 'react';
     }
   }, [talkLoaded]);
 
-  return <div style={{height: '600px'}} ref={chatboxEl} />;
+  return <div style={{height: '625px'}} ref={chatboxEl} />;
 }
