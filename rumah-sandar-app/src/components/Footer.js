@@ -1,10 +1,12 @@
-import { Card } from 'react-bootstrap';
-
 const Footer = () => {
   return (
-    <Card className='mt-5'>
-      <Card.Body className='text-center'>&copy; Copyrights Rumah Sandar 2022</Card.Body>
-    </Card>
+    <footer className='flex-shrink-0 py-4 text-white-50 mt-5' style={{ backgroundColor: "white" }}>
+      <div className='container text-center'>
+        <small style={{ color: "black" }}>
+          &copy; Copyright 2022 Rumah Sandar
+        </small>
+      </div>
+    </footer>
   );
 };
 

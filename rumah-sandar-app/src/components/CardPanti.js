@@ -13,36 +13,25 @@ const CardPanti = () => {
   }, []);
 
   return (
-    <Container className="content-panti mt-5 shadow">
-      <h2 className="text-center">
+    <Container className="content-panti mt-5 shadow mb-5">
+      <h2 className="text-center mb-4 mt-3">
         <b>Panti Asuhan</b>
       </h2>
-      <div
-        style={{
-          borderRadius: 10,
-          marginTop: 30,
-          alignItems: 'center',
-          backgroundColor: 'white',
-          maxHeight: 590,
-          overflowY: 'scroll',
-        }}
-      >
+      <Row className="ms-5">
         {dataOrphanages.map((e) => {
           return (
-            <Row>
-              <Col className='col-6'>
-                <Card style={{ width: '18rem' }} className="text-center mb-4">
-                  <Card.Img variant="top" src={e.imageUrl} style={{ objectFit: 'cover', height: '250px' }} />
-                  <Card.Body>
-                    <Card.Title>{e.name}</Card.Title>
-                    <Card.Text>{e.personInCharge}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
+            <Col className="col-4">
+              <Card style={{ width: '18rem' }} className="text-center mb-4">
+                <Card.Img variant="top" src={e.imageUrl} style={{ objectFit: 'cover', height: '250px' }} />
+                <Card.Body>
+                  <Card.Title>{e.name}</Card.Title>
+                  <Card.Text>{e.personInCharge}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
           );
         })}
-      </div>
+      </Row>
     </Container>
   );
 };
