@@ -48,7 +48,7 @@ export const submitLoginVolunteer = createAsyncThunk(
       );
 
       if (!response.ok) {
-        throw await response.text();
+        throw await response.json();
       }
 
       const data = await response.json();
@@ -61,7 +61,7 @@ export const submitLoginVolunteer = createAsyncThunk(
       console.log(data, "ini data response login");
       return data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 );
@@ -109,7 +109,7 @@ export const submitLoginOrphan = createAsyncThunk(
       console.log(response, "ini response login adik");
 
       if (!response.ok) {
-        throw await response.text();
+        throw await response.json();
       }
 
       const data = await response.json();
@@ -122,7 +122,7 @@ export const submitLoginOrphan = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 );

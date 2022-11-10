@@ -1,4 +1,5 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
+import DetailDonation from "../components/DonationDetailPage";
 import Class from "../pages/Class";
 import LandingPage from "../pages/LandingPages";
 import Layout from "../pages/Layout";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/orphanages",
     element: <PagePanti />,
+  },
+  {
+    path: "/detail-donation/:id",
+    element: <DetailDonation />,
   },
   {
     path: "/login",

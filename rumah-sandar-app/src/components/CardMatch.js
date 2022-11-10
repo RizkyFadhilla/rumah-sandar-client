@@ -24,7 +24,6 @@ const CardMatch = () => {
             theme: "light",
           }
         );
-        return result;
       })
       .then((result) => {
         dispatch(checkLoginUserMatch());
