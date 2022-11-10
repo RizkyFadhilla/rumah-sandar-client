@@ -29,26 +29,24 @@ const OrphanComponent = (data) => {
   if (data.data.verified) {
     return (
       <tr>
-        <td>{number}</td>
+        <td className="text-center">{number}</td>
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
-        <td>Verified</td>
         <td>{data.data.Orphanage.name}</td>
-        <td>Approved</td>
+        <td>Terverifikasi</td>
       </tr>
     );
   } else {
     return (
       <tr>
-        <td>{number}</td>
+        <td className="text-center">{number}</td>
         <td>{data.data.fullName}</td>
         <td>{data.data.email}</td>
-        <td>Not Verified</td>
         <td>{data.data.Orphanage.name}</td>
         <td>
           <Button
            onClick={(e) => clickHandler(e, data.data.id)}
-           variant="primary">Approve</Button>
+           variant="primary">Verifikasi</Button>
         </td>
       </tr>
     );
