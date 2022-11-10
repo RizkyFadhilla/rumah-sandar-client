@@ -58,7 +58,7 @@ const CardMatch = () => {
         </p>
 
         <button className="btn btn-primary ms-2" onClick={(e) => requestMatch(e)}>
-          Sini
+          Ajukan Bimbingan
         </button>
       </Container>
     </>

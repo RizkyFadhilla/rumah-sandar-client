@@ -30,7 +30,7 @@ export default function OrphansList() {
     <Container style={{height: '100vh'}}>
       <CardNarasi />
       <Table striped bordered hover size="sm" className="text-center mt-5">
-        <thead>
+        <thead style={{backgroundColor:'brown', color: 'white'}}>
           <tr>
             <th>No</th>
             <th>Nama</th>
@@ -44,14 +44,16 @@ export default function OrphansList() {
         <tbody>
           {dataOrphan?.map((el, index) => {
             return (
-              <tr key={index}>
-                <td>{index + 1}</td>
+              <tr key={index} >
+
+                <td >{index + 1}</td>
                 <td>{el.Orphan?.fullName}</td>
                 <td>{el.Orphan?.email}</td>
                 <td> <Image
+                style={{margin: 10}}
                 src={el.Orphan?.imageUrl}
-                width={"40"}
-                height={"40"}
+                width={"50"}
+                height={"50"}
                 roundedCircle={true}
                 alt={el.Orphan?.name}
               />
@@ -62,7 +64,7 @@ export default function OrphansList() {
 
                 <td>
                   {/* <Button onClick={() => setLgShow(true)}>Pilih</Button> */}
-                  <Button onClick={() => patchOrphan(el.id)}>Jadwalkan</Button>
+                  <Button style={{margin:10, textAlign:'center'}} variant='warning' size="sm" onClick={() => patchOrphan(el.id)}>Jadwalkan</Button>
                 </td>
               </tr>
             );
