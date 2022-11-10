@@ -33,11 +33,12 @@ export default function OrphansList() {
         <thead>
           <tr>
             <th>No</th>
-            <th>Nama Adik</th>
+            <th>Nama</th>
             <th>Email</th>
-            <th>Photo</th>
+            <th>Foto</th>
+            <th>Nama Panti</th>
             <th>Alamat Panti</th>
-            <th>Action</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -49,19 +50,19 @@ export default function OrphansList() {
                 <td>{el.Orphan?.email}</td>
                 <td> <Image
                 src={el.Orphan?.imageUrl}
-                width={"60"}
-                height={"60"}
+                width={"40"}
+                height={"40"}
                 roundedCircle={true}
                 alt={el.Orphan?.name}
               />
                 </td>
+                <td>{el.Orphan?.Orphanage?.name}</td>
                 <td>{el.Orphan?.Orphanage?.address}</td>
-
-
+                
 
                 <td>
                   {/* <Button onClick={() => setLgShow(true)}>Pilih</Button> */}
-                  <Button onClick={() => patchOrphan(el.id)}>Pilih</Button>
+                  <Button onClick={() => patchOrphan(el.id)}>Jadwalkan</Button>
                 </td>
               </tr>
             );

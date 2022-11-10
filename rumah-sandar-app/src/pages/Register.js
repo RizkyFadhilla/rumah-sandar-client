@@ -55,7 +55,7 @@ const Register = () => {
   return (
     <Container className="mt-5">
       <Card>
-        <Card.Body>
+        <Card.Body style={{padding: 40}}>
           <h3 className="text-center">Daftar sebagai Pengajar</h3>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
@@ -66,7 +66,7 @@ const Register = () => {
                 }}
                 name="email"
                 type="email"
-                placeholder="Masukan email"
+                placeholder="masukan email"
               />
             </Form.Group>
 
@@ -81,12 +81,12 @@ const Register = () => {
                   });
                 }}
                 name="fullName"
-                placeholder="Masukan nama lengkap"
+                placeholder="masukan nama lengkap"
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Kata Sandi</Form.Label>
               <Form.Control
                 onChange={(e) => {
                   setRegisterForm({
@@ -96,11 +96,11 @@ const Register = () => {
                 }}
                 name="password"
                 type="password"
-                placeholder="Masukan password"
+                placeholder="masukan password"
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>linkedinUrl</Form.Label>
+              <Form.Label>linkedin Url</Form.Label>
               <Form.Control
                 type="url"
                 onChange={(e) => {
@@ -110,12 +110,12 @@ const Register = () => {
                   });
                 }}
                 name="linkedinUrl"
-                placeholder="Masukan linkedin Url"
+                placeholder="masukan linkedin Url"
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Image</Form.Label>
+              <Form.Label>Foto</Form.Label>
               <Form.Control name="imageUrl" type="file" onChange={(e) => setImageUrl(e.target.files[0])} />
             </Form.Group>
 
@@ -135,10 +135,10 @@ const Register = () => {
                   });
                 }}
                 name="lastEducation"
-                placeholder="Masukan Pendidikan Terakhir"
+                placeholder="masukan pendidikan terakhir"
               >
                 <option selected disabled>
-                  Select
+                  pilih satu
                 </option>
                 <option value="SMA">SMA</option>
                 <option value="Diploma 3">Diploma 3</option>
